@@ -24,5 +24,13 @@
   "bugs": {
     "url": "https://github.com/voytecu314/Wave2Me-DCI-FinalProject/issues"
   },
-  "homepage": "https://github.com/voytecu314/Wave2Me-DCI-FinalProject#readme"
+  "homepage": "https://github.com/voytecu314/Wave2Me-DCI-FinalProject#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.4.2"
+  }
 }
