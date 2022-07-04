@@ -1,0 +1,28 @@
+{
+  "name": "wave2me",
+  "version": "1.0.0",
+  "description": "DCI FINAL PROJECT",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voytecu314/Wave2Me-DCI-FinalProject.git"
+  },
+  "keywords": [
+    "sign",
+    "language",
+    "final",
+    "project",
+    "wave",
+    "2",
+    "me"
+  ],
+  "author": "Final Project Group: Vonn Anne Wojtek Allan Egle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/voytecu314/Wave2Me-DCI-FinalProject/issues"
+  },
+  "homepage": "https://github.com/voytecu314/Wave2Me-DCI-FinalProject#readme"
+}
