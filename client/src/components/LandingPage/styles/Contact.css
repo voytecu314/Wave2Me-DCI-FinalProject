@@ -16,6 +16,14 @@
     gap: 5%;
 }
 
+#contact-form > input, #contact-form textarea {
+    color: #404756;
+}
+
+#contact-form > input {
+    font-weight: 600;   
+}
+
 #button-contact {
     margin: 3%;
     padding: .7rem .7rem;
