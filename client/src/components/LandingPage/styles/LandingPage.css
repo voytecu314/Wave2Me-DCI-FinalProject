@@ -1,0 +1,122 @@
+#landing-page {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: #5F77A5;
+}
+
+.header-text,.wave-font,.hands {
+    display: block;
+    text-align: center;
+    margin: 20px;
+}
+
+.wave-font {
+    font-size: 60px;
+    font-family: 'Playfair Display SC', serif;
+    text-shadow: 3px 6px rgba(0,0,0,0.1);
+    letter-spacing: -6px;
+    font-weight: 400;
+
+}
+
+.header-text {
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 17px;
+}
+
+.landing-image {
+    border-radius: 50%;
+    height: 250px;
+}
+
+.landing-form,.donate {
+    text-align: center;
+}
+
+#insert-details {
+    margin: 21px auto;
+    max-width: 485px;
+    padding: 0 25px;
+}
+
+#midlane1,#midlane2 {
+    margin: 1%;
+    padding: .7rem 1.5rem;
+    font-size: 1rem;
+    background: #5F77A5;
+    color: #f8f8f8;;
+    box-shadow: 0px 1px rgba(30,30,30,0.5);
+    text-shadow: 3px 6px rgba(0,0,0,0.2);
+    border-inline: 0;
+    border-top: 0;
+    border-bottom: 0;
+    text-align: center;
+}
+
+#midlane1:hover,#midlane2:hover {
+    margin: 1.2%;
+    padding: .9rem 1.8rem;
+    font-size: 1.2rem;
+    background: #5F77A5;
+    color: #f8f8f8;;
+    box-shadow: 0px 2px rgba(30,30,30,0.5);
+    text-shadow: 3px 6px rgba(0,0,0,0.2);
+    text-align: center;
+    border-inline: 0;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+#button-submit,.donate1 {
+    margin: 3%;
+    padding: .7rem .7rem;
+    font-size: 1rem;
+    background: #5F77A5;
+    border-radius: 10px;
+    box-shadow: 0px 5px rgba(30,30,30,0.5);
+}
+
+#button-submit:hover,.donate1:hover {
+    margin: 2%;
+    padding: 1rem 1rem;
+    font-size: 1.2rem;
+    background: #5F77A5;
+    border-radius: 10px;
+    box-shadow: 0px 10px rgba(30,30,30,0.5);
+}
+
+footer {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foot {
+    padding: 1%;
+    margin: 1%;
+    text-decoration: none;
+}
+
+/* li,a {
+    text-decoration: none;
+    list-style-type: none;
+    display: inline-block;
+} */
+
+/* #contact, #about {
+    display: block;
+    margin: auto;
+} */
+
+
+/* .back-home {
+    color: black;
+} */

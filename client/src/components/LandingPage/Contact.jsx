@@ -1,4 +1,4 @@
-import React from 'react'
+import './styles/Contact.css';
 import { Link } from 'react-router-dom'
 
 const Contact = () => {
@@ -17,7 +17,7 @@ const Contact = () => {
 </main>
     <hr />
   <footer>
-        <Link  to='/'><h2 className='black1'>Back Home: <span>&#9166;</span> </h2></Link>
+        <Link  to='/'><h2 className='back-home'>Back Home: <span>&#9166;</span> </h2></Link>
   </footer>
     
     </>
