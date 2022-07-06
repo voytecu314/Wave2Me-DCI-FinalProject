@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const AboutUs = () => {
   return (
-    <>
+    <div id="about-us">
     <main class="about">
         <h3>Thank you for visiting our website and also for downloading our app, you're the reason we made this. This app is designed,created and developed by kind hearted W2M members for beautiful people like you.
             The app is our solution to what we consider a "good" problem: People want to understand,connect,express emotions or feelings and to learn more, and since not everyone has access to classes, by adding W2M to their language list,we wanted to take this into our hands and teach you Wave2Me sign language as if we're there with you in person.
@@ -20,7 +20,7 @@ const AboutUs = () => {
         
         <Link  to='/'><h2 className='black1'>Back Home: <span>&#9166;</span></h2></Link>
     </footer>
-    </>
+    </div>
   )
 }
 

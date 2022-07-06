@@ -12,27 +12,26 @@ const LandingPage = ({setLandingModal}) => {
   return (
     <div id="landing-page">
     <header>
-        <h5>
+        <h5 className='header-text'>
             LEARN EASILY CONVERSATIONAL SIGN LANGUAGE WITH YOUR LOVED ONES...
         </h5>
-        <h1>WAVE2ME</h1>
+        <h1 className='wave-font'>WAVE2ME</h1>
     </header>
     <main>
         <Logo/>
         <br /><br /><br />
-        <section>
+        <section id='insert-details'>
             <div>
-                <form onSubmit={submitHandler}>
-                    <input id='midlane' type="email" name='email' placeholder='Email'/>
+                <form className='landing-form' onSubmit={submitHandler}>
+                    <input id='midlane1' type="email" name='email' placeholder='Email'/>
                     <br />
-                    <input id='midlane' type="password" name='password' placeholder='Password'/>
+                    <input id='midlane2' type="password" name='password' placeholder='Password'/>
                     <br />
-                    <input id='midlane' type="submit"/>
+                    <input id='button-submit' type="submit"/>
                 </form>
             </div>
         </section>
     </main>
-    <hr />
     <br /><br /><br /><br />
     <section className="donate">
         <button className="donate1">Donate Us</button>
