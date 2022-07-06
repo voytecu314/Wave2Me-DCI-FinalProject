@@ -17,7 +17,7 @@ const Contact = () => {
 </main>
     <hr />
   <footer>
-        <Link  to='/'><h2 className='black1'>Back Home: <span>&#9166;</span> </h2></Link>
+        <Link  to='/'><h2 className='back-home'>Back Home: <span>&#9166;</span> </h2></Link>
   </footer>
     
     </>
