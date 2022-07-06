@@ -1,10 +1,9 @@
 import './styles/AboutUs.css'
-import { Link } from 'react-router-dom'
 
-const AboutUs = () => {
+const AboutUs = ({setAbout}) => {
   return (
     <div id="about-us">
-    <main class="about">
+    <main>
         <h3>Thank you for visiting our website and also for downloading our app, you're the reason we made this. This app is designed,created and developed by kind hearted W2M members for beautiful people like you.
             The app is our solution to what we consider a "good" problem: People want to understand,connect,express emotions or feelings and to learn more, and since not everyone has access to classes, by adding W2M to their language list,we wanted to take this into our hands and teach you Wave2Me sign language as if we're there with you in person.
             Our goal is to give you the tools, such as everyday greetings or phrases , ways to pick-up and keep a conversation going, and where/how you can start making connections between iconic signs to meaning, so you can hit the ground running and start talking with deaf people . We know for all of its complexities like any other language , one app is never enough to master a language, however this is an opportunity for you to start the shift from vocal to a visual language.
@@ -18,7 +17,7 @@ const AboutUs = () => {
     <hr />
     <footer>
         
-        <Link  to='/'><h2 className='black1'>Back Home: <span>&#9166;</span></h2></Link>
+        <h2 className='black1' onClick={()=>setAbout(false)}>Back Home: <span>&#9166;</span></h2>
     </footer>
     </div>
   )
