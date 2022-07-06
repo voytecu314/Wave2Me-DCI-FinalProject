@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../assets/w2m.jpg'
+import logo from '../../assets/w2m.jpg';
 
 const Logo = () => {
   return (

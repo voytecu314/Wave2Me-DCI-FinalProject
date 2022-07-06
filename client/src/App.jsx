@@ -1,22 +1,26 @@
 import {HashRouter as Router, Routes, Route} from 'react-router-dom'
-import Header from './components/Header';
-import Home from './components/LandingPage/Home';
-import AboutUs from './components/LandingPage/AboutUs';
-import Contacts from './components/LandingPage/Contact'
-import Footer from './components/Footer';
+import LandingPage from './components/LandingPage/LandingPage.jsx';
+import Header from './components/Header/Header.jsx';
+import Home from './components/Home/Home.jsx';
+import Footer from './components/Footer/Footer.jsx';
 import './app.css'
+import Blog from './components/Blog/Blog.jsx';
+import { useState } from 'react';
 
 function App() {
+  const [landingModal, setLandingModal] = useState(true);
   return (
     <Router>
+      {landingModal && <LandingPage setLandingModal={setLandingModal}/>}
       <main>
-        <Header />
+        <Header setLandingModal={setLandingModal}/>
+
           <Routes>
-            <Route path='/' element={<Home/>} />
-            <Route path='/contact' element={<Contacts/>} />
-            <Route path='/about-us' element={<AboutUs/>} />
+            <Route path='/' element={<Home />} />
+            <Route path='/blog' element={<Blog />} />
           </Routes>
-          <Footer/>
+          
+        <Footer/>
       </main>
 
     </Router>
