@@ -1,4 +1,43 @@
 #footer {
-    border: 1px solid white;
-    height: 10vh;
+    margin-top: 10%;
+    height: 10%;
+    background-color: #404756;
+    text-align: center;
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 500;
+   
 }
+
+.foot {
+    display: flex;
+    justify-content: space-around;
+}
+
+.foot a {
+    font-size: 4rem;
+    margin: 2% 5%;
+    color: white;
+}
+
+@media screen and (min-width: 769px) and (max-width:1023px){
+    .foot a {
+        font-size: 5rem;
+        margin: 2% 5%;
+        color: white;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+        footer {
+            margin-top: 5%;
+        }
+    
+    
+        .foot a {
+            font-size: 6rem;
+            margin: 2% 5%;
+            color: white;
+          
+         }
+        
+    }

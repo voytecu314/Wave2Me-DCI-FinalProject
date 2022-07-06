@@ -1,15 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
 
 * {
-    box-sizing: border-box;
     color: #fff;
-    margin: 0;
+}
+
+*::before, *::after, *, body {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
 }
 
 body {
     background-color: #5F77A5;
     display: block;
     margin: auto;
+}
+
+:root {
+    font-size: 62.5%;
+  }
+
+#root {
+    position: relative;
+    display: block;
+    width: 100%;
+    /* background-color: rgba(0, 0, 0, 0.384); */
+    color: white; 
+}
+
+#root::after {
+    content: "";
+/*     background: url(../asset/pexels-hasan-albari-1229861\ \(1\).jpg);
+ */    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: scroll;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 1;
+    z-index: -1;
 }
 
 

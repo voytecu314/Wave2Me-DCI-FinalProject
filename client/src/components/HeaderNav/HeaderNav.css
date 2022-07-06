@@ -1,0 +1,200 @@
+.navbar {
+    display: grid;
+    grid-template-columns: 40% 50%;
+    grid-template-rows: 10%;
+    justify-content: space-between;
+    width: 100%;
+    align-content: center;
+    background-color: #404756;
+    text-align: center;
+    font-size: 1.6rem;
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 500;
+    position: sticky;
+    top: 0%;
+    z-index: 5; 
+  }
+
+  .navbar div {
+      width: 100%;
+      height: 7vh;
+  }
+
+  .navbar-brand {
+    font-size: 1.6rem;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+  }
+
+  .toggler {
+      width:  100%;
+      display: grid;
+      font-weight: bolder;
+      color: white;
+      position: relative;
+      padding: 1%;
+
+  }
+
+  .toggler:hover {
+    transform: scale(1.5);
+    transition: all 200ms;
+  }
+
+  
+
+  #toggle {
+      display: none;
+  }
+
+.nav-menu {
+    width: 100%;
+}
+
+  .nav-menu ul {
+    position: absolute;
+    left: 0%;
+    width: 100%;
+    display: none;
+    z-index: 4;
+     
+  }
+
+  .nav-menu ul li {
+    list-style-type: none;
+    border-bottom: 1px dotted black;
+    margin: 1% 0;
+    padding: 1%;
+  }
+  
+  .nav-menu ul li:last-of-type {
+    border-bottom: none;
+  }
+
+  .navbar ul li a {
+    text-decoration: none;
+    color: black;
+    
+}
+
+.navbar a:hover {
+  border-bottom: 2px solid rgb(223, 217, 217);
+
+}
+
+  #toggle:checked ~ .nav-menu ul {
+      display: block;
+      background-color: white;
+      color: black;
+      
+  }
+
+
+  @media screen and (min-width: 769px) and (max-width:1023px){
+
+   
+
+   
+
+    #toggle {
+        display: none;
+    }
+    .toggler {
+        display: none;
+    }
+  
+  
+    .navbar {
+        display: grid;
+        grid-template-columns: 30%  60%;
+        grid-template-rows: 20%;
+        justify-content: space-between;
+        align-content: center;
+        text-align: center;
+        font-size: 1.6rem;
+        z-index: 5; 
+      }
+    
+      .navbar div {
+          width: 100%;
+          height: 7vh;
+      }
+
+      .nav-menu ul{
+        display: flex;
+        justify-content: space-around;
+        position: relative;
+        font-size: 1.6rem;
+    }
+
+    .nav-menu ul li {
+        border: none;
+
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      
+  }
+    
+      .navbar-brand {
+        font-size: 2rem;
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+
+   
+
+   
+
+        #toggle {
+            display: none;
+        }
+        .toggler {
+            display: none;
+        }
+      
+      
+        .navbar {
+            display: grid;
+            grid-template-columns: 30%  60%;
+            grid-template-rows: 20%;
+            justify-content: space-between;
+            align-content: center;
+            text-align: center;
+            font-size: 1.6rem;
+            z-index: 5; 
+          }
+    
+          .navbar a {
+            text-decoration: none;
+            color: white;
+            
+        }
+        
+          .navbar div {
+              width: 100%;
+              height: 8vh;
+          }
+    
+          .nav-menu ul{
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            font-size: 2rem;
+        }
+    
+        .nav-menu ul li {
+            border: none;
+            margin: 0% 5%;
+    
+        }
+        
+          .navbar-brand {
+            font-size: 2.5rem;
+            
+          }    
+        }
