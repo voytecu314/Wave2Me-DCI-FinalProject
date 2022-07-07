@@ -10,6 +10,11 @@
     z-index: 200;
 }
 
+#content-about-us {
+    width: 70vw;
+}
+
 .back-home {
     cursor: pointer;
 }
+
