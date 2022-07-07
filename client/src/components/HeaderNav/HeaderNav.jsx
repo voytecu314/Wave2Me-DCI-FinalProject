@@ -4,21 +4,21 @@ import './HeaderNav.css';
 const HeaderNav = ({setLandingModal}) => {
 
   return (
-    <nav class="navbar">
+    <nav className="navbar">
         <div>
-            <span class="navbar-brand">Welcome user!</span>
+            <span className="navbar-brand">Welcome user!</span>
         </div>
             
         
         
-        <div class="list">
-            <label class="toggler" for="toggle"> 
-                <span class="material-icons"> menu</span>
+        <div className="list">
+            <label className="toggler" htmlFor="toggle"> 
+                <span className="material-icons"> menu</span>
             </label>
 
             <input type="checkbox" name="toggle" id="toggle" />
 
-            <div class="nav-menu">    
+            <div className="nav-menu">    
                 <ul>
                   <li>
                     <Link to="/">Home</Link>
@@ -30,7 +30,10 @@ const HeaderNav = ({setLandingModal}) => {
                     <Link to="/blog">Blog</Link>
                   </li>
                   <li>
-                    <Link to="/" onClick={()=>setLandingModal(true)}>Logout</Link>
+                    <Link to="/" onClick={()=>{
+                                              localStorage.removeItem('W2M-JWT-Token');
+                                              setLandingModal(true)
+                                              }}>Logout</Link>
                   </li>
                 </ul>
             </div>
