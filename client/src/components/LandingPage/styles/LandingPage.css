@@ -1,6 +1,7 @@
 #landing-page {
     position: absolute;
     width: 100vw;
+    height: 120vh;
     top: 0;
     left: 0;
     z-index: 100;
@@ -48,9 +49,9 @@
 #midlane1,#midlane2 {
     margin: 1%;
     padding: .7rem 1.5rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     background: #5F77A5;
-    color: #f8f8f8;;
+    color: #f8f8f8;
     box-shadow: 0px 1px rgba(30,30,30,0.5);
     text-shadow: 3px 6px rgba(0,0,0,0.2);
     border-inline: 0;
@@ -62,7 +63,7 @@
 #midlane1:hover,#midlane2:hover {
     margin: 1.2%;
     padding: .9rem 1.8rem;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     background: #5F77A5;
     color: #f8f8f8;;
     box-shadow: 0px 2px rgba(30,30,30,0.5);
@@ -76,19 +77,23 @@
 #button-submit,.donate1 {
     margin: 3%;
     padding: .7rem .7rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     background: #5F77A5;
     border-radius: 10px;
-    box-shadow: 0px 5px rgba(30,30,30,0.5);
+    box-shadow: 0px 2px  rgba(30,30,30,0.5);
+    text-shadow: 2px 4px rgba(0,0,0,0.2);
+    border-inline: 0;
+    border-top: 0;
+    border-bottom: 0;
 }
 
 #button-submit:hover,.donate1:hover {
     margin: 2%;
     padding: 1rem 1rem;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     background: #5F77A5;
     border-radius: 10px;
-    box-shadow: 0px 10px rgba(30,30,30,0.5);
+    box-shadow: 0px 4px rgba(30,30,30,0.5);
 }
 
 .ftr {

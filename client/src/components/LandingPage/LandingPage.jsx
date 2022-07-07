@@ -35,14 +35,17 @@ const LandingPage = ({setLandingModal}) => {
                     <input id='midlane2' type="password" name='password' placeholder='Password'/>
                     <br />
                     <input id='button-submit' type="submit" value="Login" />
+                    <button id='button-submit'><i class="fab fa-google" target="_blank" rel="noreferrer"></i>oogle</button>
+                    <br />
+                    <input id='button-submit' type="submit" value="SignUp" />
                 </form>
             </div>
         </section>
     </main>
     <br /><br /><br /><br />
-    <section className="donate">
+    {/* <section className="donate">
         <button className="donate1">Donate</button>
-      </section>
+      </section> */}
        <div className='ftr'> 
             <span className='foot' onClick={()=>setAbout(true)} >About Us</span>
             <span className='foot' onClick={()=>setContact(true)} >Contact</span>
