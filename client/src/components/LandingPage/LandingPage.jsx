@@ -27,7 +27,7 @@ const LandingPage = ({setLandingModal}) => {
                     <br />
                     <input id='midlane2' type="password" name='password' placeholder='Password'/>
                     <br />
-                    <input id='button-submit' type="submit"/>
+                    <input id='button-submit' type="submit" value='Login'/>
                 </form>
             </div>
         </section>
