@@ -1,0 +1,38 @@
+#contact {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 80vh;
+    background-color: #5F77A5;
+    top: 0;
+    left: 0;
+    z-index: 200;
+}
+
+#contact-form {
+    display: grid;
+    place-items: center;
+    gap: 5%;
+}
+
+#contact-form > input, #contact-form textarea {
+    color: #404756;
+}
+
+#contact-form > input {
+    font-weight: 600;   
+}
+
+#button-contact {
+    margin: 3%;
+    padding: .7rem .7rem;
+    font-size: 1rem;
+    background: #5F77A5;
+    border-radius: 10px;
+    box-shadow: 0px 5px rgba(30,30,30,0.5);
+}
+
+.back-home {
+    cursor: pointer;
+}

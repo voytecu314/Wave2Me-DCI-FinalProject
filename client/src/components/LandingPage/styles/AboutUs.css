@@ -1,0 +1,15 @@
+#about-us {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 80vh;
+    background-color: #5F77A5;
+    top: 0;
+    left: 0;
+    z-index: 200;
+}
+
+.back-home {
+    cursor: pointer;
+}

@@ -1,26 +1,33 @@
 import './styles/Contact.css';
-import { Link } from 'react-router-dom'
 
-const Contact = () => {
+const Contact = ({setContact}) => {
+
   return (
-    <>
-
-<main className='contact'>
-
-  <h2>Allan</h2>
-  <h2>Anne</h2>
-  <h2>Egle</h2>
-  <h2>Wojteck</h2>
-  <h2>Vonn</h2>
-
-<br /><br /><br /><br />
-</main>
-    <hr />
-  <footer>
-        <Link  to='/'><h2 className='back-home'>Back Home: <span>&#9166;</span> </h2></Link>
-  </footer>
+    <div id="contact">
+      <form id="contact-form">
+        <input
+          type='text'
+          placeholder='FirstName'
+        />
+           <input
+          type='text'
+          placeholder='LastName'
+        />
+        <input
+          type='email'
+          placeholder='Email'
+        />
+        <div>
+          <textarea id="textarea" cols="30" rows="10" placeholder='Please input your message'/>
+        </div>
+        
+        <button id="button-contact">Send</button>
+      </form>
+  
+        <h2 className='back-home' onClick={()=>setContact(false)}>Back Home: <span className='back-home'>&#9166;</span> </h2>
+  
     
-    </>
+    </div>
   )
 }
 
