@@ -1,9 +1,20 @@
 #about-us {
+    display: grid;
+    place-items: center;
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     background-color: #5F77A5;
     top: 0;
     left: 0;
     z-index: 200;
 }
+
+#content-about-us {
+    width: 70vw;
+}
+
+.back-home {
+    cursor: pointer;
+}
+

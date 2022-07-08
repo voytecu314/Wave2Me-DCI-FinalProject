@@ -4,17 +4,17 @@ import logo from '../../assets/w2m.jpg';
 const Home = () => {
   return (
     <div>
-      <div class="head-div">
-            <div class="img-container">
-                <img class="my-img" src={logo} alt="Anne" />
+      <div className="head-div">
+            <div className="img-container">
+                <img className="my-img" src={logo} alt="Anne" />
             </div>
              
-            <h1 class="heading">
+            <h1 className="heading">
               WAVE <br/> 2 ME
             </h1>
             <hr/>
           
-          <div class="text">
+          <div className="text">
             <p>
             LEARN EASILY CONVERSATIONAL SIGN LANGUAGE WITH YOUR LOVED ONES...
             </p>
