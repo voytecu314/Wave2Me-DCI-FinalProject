@@ -27,8 +27,7 @@ mongoose
   )
   .catch((err) => console.log(err));
 
-//To handle errors after initial connection was established
-mongoose.connection.on('disconnected', () => { console. log('DB-> lost connection'); }); 
+mongoose.connection.on(`disconnected`, () => {console.log("DB disconnected");})
 
 //http://localhost:5000/
 app.get('/', (req,res) => {
