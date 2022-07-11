@@ -1,0 +1,10 @@
+#search-container {
+    width: 50vw;
+    margin: auto;
+}
+
+#search-container > input {
+    display: block;
+    width: 25vw;
+    margin: 25px auto;
+}
