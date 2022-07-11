@@ -1,4 +1,4 @@
-import './styles/Contact.css';
+import './styles/SignUp.css';
 
 const SignUp = ({setSignUp, setLandingModal}) => {
 
@@ -24,21 +24,25 @@ const SignUp = ({setSignUp, setLandingModal}) => {
     <div id="contact">
       <form id="contact-form">
            <input
+          className='same-input'
           type='text'
           placeholder='Name'
           name="name"
         />
         <input
+          className='same-input'
           type='email'
           placeholder='Email'
           name="email"
         /> 
         <input
+        className='same-input'
         type='password'
         placeholder='Password'
         name="password"
       />
         <input
+          className='same-input'
           type='password'
           placeholder='Confirm password'
           name="confirm_password"
