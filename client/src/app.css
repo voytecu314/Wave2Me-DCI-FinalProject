@@ -41,4 +41,9 @@ body {
     z-index: -1;
 }
 
+::placeholder {
+    color: rgba(245, 243, 243,0.5);
+    font-weight: 400;
+}
+
 
