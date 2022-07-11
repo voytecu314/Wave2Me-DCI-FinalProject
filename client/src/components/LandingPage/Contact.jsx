@@ -31,4 +31,4 @@ const Contact = ({setContact}) => {
   )
 }
 
-export default Contact
+export default Contact;
