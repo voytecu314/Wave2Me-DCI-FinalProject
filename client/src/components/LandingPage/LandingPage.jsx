@@ -63,6 +63,10 @@ const LandingPage = ({setLandingModal}) => {
     {about && <AboutUs setAbout={setAbout}/>}
     {contact && <Contact setContact={setContact} setLandingModal={setLandingModal}/>}
     {signup && <SignUp setSignUp={setSignUp} setLandingModal={setLandingModal}/>}
+    <section className='welcome-moving'>
+    
+    </section>
+    <br /><br /><br /><br /><br />
         <Logo/>
         <br /><br /><br />
         <section id='insert-details'>

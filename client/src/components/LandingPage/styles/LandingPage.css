@@ -33,7 +33,7 @@
 
 .landing-image {
     border-radius: 50%;
-    height: 250px;
+    height: 150px;
 }
 
 .landing-form,.donate {
@@ -103,6 +103,14 @@
     font-weight: 900;
     text-decoration: none;
     cursor: pointer;
+}
+
+.welcome-moving {
+    border: 1px black solid;
+    height: 200px;
+    width: 80vw;
+    display: block;
+    margin: auto;
 }
 
 /* li,a {
