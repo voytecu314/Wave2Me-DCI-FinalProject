@@ -20,10 +20,7 @@ const LandingPage = ({setLandingModal}) => {
             }
 
             fetch('http://localhost:5000/islogged', fetchOptions)
-            .then(res=>{
-                        console.log(res.headers); console.log(res);
-                        return res.json();
-                        })
+            .then(res=>res.json())
             .then(data=>{ 
                 data.token_error === 'jwt expired' && localStorage.removeItem('W2M-JWT-Token');
                 setLandingModal(!data.auth)})
