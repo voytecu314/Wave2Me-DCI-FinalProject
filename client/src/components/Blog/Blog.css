@@ -1,0 +1,42 @@
+#blog-grid-container {
+    display: grid;
+    width: 90vw;
+    margin: 1% auto;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+}
+
+#blog-grid-item {
+    width: 100%;
+    margin: 5%;
+    padding: 1%;
+    text-align: justify;
+}
+
+#blog-grid-item > * {
+    margin-bottom: 1%;
+
+}
+
+#blog-grid-item > h1 {
+    text-align: center;
+}
+
+#blog-grid-item > h2 {
+    margin-top: 1%
+}
+
+#blog-grid-item > img {
+    width: 100%;
+    display: block;
+    margin: auto;
+}
+
+@media only screen and (max-width: 700px) {
+
+    #blog-grid-container {
+        grid-template-columns: 1fr;
+    }
+    
+}
