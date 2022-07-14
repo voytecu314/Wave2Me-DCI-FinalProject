@@ -66,10 +66,6 @@ const LandingPage = ({setLandingModal}) => {
     {about && <AboutUs setAbout={setAbout}/>}
     {contact && <Contact setContact={setContact} setLandingModal={setLandingModal}/>}
     {signup && <SignUp setSignUp={setSignUp} setLandingModal={setLandingModal}/>}
-    <section className='welcome-moving'>
-    
-    </section>
-    <br /><br /><br /><br /><br />
         <Logo/>
         <br /><br /><br />
         <section id='insert-details'>
@@ -79,10 +75,10 @@ const LandingPage = ({setLandingModal}) => {
                     <br />
                     <input id='midlane2' type="password" name='password' placeholder='Password'/>
                     <br />
-                    <input id='button-submit' type="submit" value="Login" />
-                    <button id='button-submit' type="button"><i className="fab fa-google"/>oogle</button>
+                    <input id='button-submit1' type="submit" value="Login" />
+                    <button id='button-submit2' type="button"><i className="fab fa-google"/>oogle</button>
                     <br />
-                <button id='button-submit' type="button" onClick={()=>setSignUp(true)} >SignUp</button>
+                <button id='button-submit3' type="button" onClick={()=>setSignUp(true)} >SignUp</button>
                 </form>
                 
             </div>
