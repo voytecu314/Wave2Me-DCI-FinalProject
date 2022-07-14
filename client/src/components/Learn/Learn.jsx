@@ -13,16 +13,13 @@ const Learn = () => {
   }
 
   return (
-    <div>
-             
-            <h1 className="heading">
-              LEARN-SIGN-LANGUAGE
-            </h1>
-
+    <div id="learn-container">
+        <div id="first-page">
+            <span>{'Learn >>'}</span>
             <div id="search-container">
               <input
               type='text'
-              placeholder='Search here'
+              placeholder='Search sign videos here'
               onChange={handleChange}
               value={searchInput} />
             </div>
@@ -30,14 +27,25 @@ const Learn = () => {
             <div className="img-container">
                 <video controls src={banana}></video> 
             </div>
-           
+            <div className="img-container">
+                <video controls src={banana}></video> 
+            </div>
             
             <hr/>
           
           <div className="text">
             <h5>Word of the day: "banana"</h5>
           </div>
-    
+        </div>
+        <div id="second-page">
+
+        </div>
+        <div id="third-page">
+          
+        </div>
+        <div id="fourth-page">
+          
+        </div>
     </div>
   )
 }

@@ -17,7 +17,7 @@ const Blog = () => {
 
   return (<div id="blog-grid-container">
 
-        {data.articles.map((article, index)=><div id="blog-grid-item">
+        {data.articles.map((article, index)=><div id="blog-grid-item" key={index}>
                                                 <h1>{article.title}</h1>
                                                 <img src={article.urlToImage} 
                                                      alt={`illustration to article from ${article.source.name}`}/>
@@ -25,7 +25,7 @@ const Blog = () => {
                                                 <p style={{fontSize: '1.5rem'}}>{article.content}</p>
                                                 <a href={article.url} target='_blank' rel="noreferrer">Read more...</a></div>)}
 
-  </div>)
+                                              </div>)
 }
 
 export default Blog;
