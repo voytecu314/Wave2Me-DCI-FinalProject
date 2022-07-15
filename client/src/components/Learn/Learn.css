@@ -22,7 +22,6 @@
 #favorites-modal, #work-on-it-modal, #another-modal {
     position: absolute;
     top: 0;
-    border: 1px solid black;
     height: 10%;
     transition: all .75s;
 }
@@ -40,4 +39,11 @@
 #another-modal {
     width: 91%;
     background-color: #d9a21b;
+}
+
+.modal-icons {
+    margin-top: .9%;
+    font-size: 1.6rem;
+    cursor:pointer;
+    pointer-events: auto;
 }

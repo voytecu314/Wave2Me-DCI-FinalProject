@@ -17,6 +17,25 @@ const Learn = () => {
     favoritesRef.current.style.left = modalsPosition.favorites+'%';
     workOnItRef.current.style.left = modalsPosition.workOnIt+'%';
     anotherRef.current.style.left = modalsPosition.another+'%';
+
+    if(modalsPosition.favorites >= 90) {
+      favoritesRef.current.style.height = '0';
+      } else {
+        favoritesRef.current.style.height = '120%';
+      }
+    
+    if(modalsPosition.workOnIt >= 90) {
+      workOnItRef.current.style.height = '0';
+      } else {
+        workOnItRef.current.style.height = '120%';
+      }
+
+    if(modalsPosition.another >= 90) {
+      anotherRef.current.style.height = '0';
+      } else {
+        anotherRef.current.style.height = '120%';
+      }
+
   },[modalsPosition]);
 
   const resizeModal = (modal_name) => {
@@ -65,11 +84,24 @@ const Learn = () => {
             <h5>Word of the day: "banana"</h5>
           </div>
         </div>
-        <div id="favorites-modal" onClick={(e)=>resizeModal('favorites')} ref={favoritesRef}>
+        <div id="favorites-modal" ref={favoritesRef}>
+          <div className="dummy-margin-top" style={{height: '15px'}}></div>
+          <div className='modal-icons' onClick={(e)=>resizeModal('favorites')}>
+            {modalsPosition.favorites>10 ? <i className="fa fa-arrow-left"></i> : <i className="fa fa-arrow-right"></i>}
+           {'    '} <i className="fa fa-heart"></i>
+          </div>
         </div>
-        <div id="work-on-it-modal" ref={workOnItRef} onClick={(e)=>resizeModal('workOnIt')}>
+        <div id="work-on-it-modal" ref={workOnItRef}>
+          <div className="dummy-margin-top" style={{height: '15px'}}></div>
+          <div onClick={(e)=>resizeModal('workOnIt')} className='modal-icons'>
+          {modalsPosition.workOnIt>10 ? <i className="fa fa-arrow-left"></i> : <i className="fa fa-arrow-right"></i>}
+           {'    '}<i className='fas fa-business-time'></i></div>
         </div>
-        <div id="another-modal" ref={anotherRef} onClick={(e)=>resizeModal('another')}>
+        <div id="another-modal" ref={anotherRef}>
+          <div className="dummy-margin-top" style={{height: '15px'}}></div>
+          <div onClick={(e)=>resizeModal('another')} className='modal-icons'>
+            {modalsPosition.another>10 ? <i className="fa fa-arrow-left"></i> : <i className="fa fa-arrow-right"></i>}
+           {'    '}<i className="fa fa-play-circle-o"></i></div>
         </div>
     </div>
   )
