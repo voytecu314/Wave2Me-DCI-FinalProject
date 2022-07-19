@@ -1,4 +1,4 @@
-import express from  'express';
+﻿import express from  'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from  'mongoose';
@@ -27,7 +27,7 @@ mongoose
       )
     )
   )
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err.message));
 
 mongoose.connection.on(`disconnected`, () => {console.log("DB disconnected");})
 

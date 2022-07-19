@@ -87,14 +87,16 @@ const Learn = () => {
         <div id="favorites-modal" ref={favoritesRef}>
           <div className="dummy-margin-top" style={{height: '15px'}}></div>
           <div className='modal-icons' onClick={(e)=>resizeModal('favorites')}>
-            {modalsPosition.favorites>10 ? <i className="fa fa-arrow-left"></i> : <i className="fa fa-arrow-right"></i>}
+            {modalsPosition.favorites>10 ? <i className="fa fa-arrow-left"></i> : modalsPosition.workOnIt>10 ? <i className="fa fa-arrow-right"></i> : 
+			<span style={{marginRight: '1%'}}></span> }
            {'    '} <i className="fa fa-heart"></i>
           </div>
         </div>
         <div id="work-on-it-modal" ref={workOnItRef}>
           <div className="dummy-margin-top" style={{height: '15px'}}></div>
           <div onClick={(e)=>resizeModal('workOnIt')} className='modal-icons'>
-          {modalsPosition.workOnIt>10 ? <i className="fa fa-arrow-left"></i> : <i className="fa fa-arrow-right"></i>}
+          {modalsPosition.workOnIt>10 ? <i className="fa fa-arrow-left"></i> : modalsPosition.another>10 ? <i className="fa fa-arrow-right"></i> : 
+			<span style={{marginRight: '1%'}}></span>}
            {'    '}<i className='fas fa-business-time'></i></div>
         </div>
         <div id="another-modal" ref={anotherRef}>
