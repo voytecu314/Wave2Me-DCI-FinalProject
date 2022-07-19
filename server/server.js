@@ -4,6 +4,7 @@ import cors from 'cors';
 import mongoose from  'mongoose';
 import loginRoutes from './routes/loginRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
+import videosRoutes from './routes/videosRoutes.js';
 
 const app = express();
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(cors());
 //ROUTES
 app.use('/', loginRoutes);
 app.use('/', blogRoutes);
+app.use('/', videosRoutes);
 
 mongoose
   .connect(process.env.CONNECTION_URL)
