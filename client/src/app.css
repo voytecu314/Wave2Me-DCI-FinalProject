@@ -41,42 +41,35 @@ body {
     z-index: -1;
 }
 
+.wave-font {
+    font-size: 60px;
+    font-family: 'Playfair Display SC', serif;
+    text-shadow: 2.5px 2.5px rgba(0,0,0,0.1);
+    letter-spacing: -6px;
+    font-weight: 400;
+}
+
 button {
     margin: 3%;
     padding: .7rem .7rem;
-    font-size: 1.5rem;
-    background: #5F77A5;
     border-radius: 10px;
-    box-shadow: 0px 2px rgba(30,30,30,0.5);
-    text-shadow: 2.5px 5px rgba(0,0,0,0.2);
-    border-inline: 0;
-    border-top: 0;
-    border-bottom: 0;
+    filter: drop-shadow(3px 3px 3px rgba(30,30,30,0.4));
 }
 
 button:hover {
-    margin: 4%;
-    padding: .9rem 1rem;
-    font-size: 1.7rem;
-    background: #5F77A5;
     color: #f8f8f8;;
-    box-shadow: 0px 2px rgba(30,30,30,0.5);
+    filter: drop-shadow(0px 2px rgba(30,30,30,0.5));
     text-shadow: 3px 6px rgba(0,0,0,0.2);
+    border: 1px solid rgba(245, 243, 243,0.5);
     text-align: center;
-    border-inline: 0;
     border-top: 0;
-    border-bottom: 0;
 }
 
 input {
     margin: 1%;
-    padding: .7rem 1.5rem;
-    font-size: 1.5rem;
-    background: #5F77A5;
-    box-shadow: 0px 1px rgba(30,30,30,0.5);
-    text-shadow: 3px 6px rgba(0,0,0,0.2);
+    padding: .7rem 1.7rem;
+    filter: drop-shadow(0px 2px 0px rgba(30,30,30,0.3));
     border-inline: 0;
-    border-top: 0;
     border-bottom: 0;
     text-align: center;
 }
@@ -84,9 +77,22 @@ input {
 input:hover {
     margin: 1.2%;
     padding: .9rem 1.8rem;
-    font-size: 1.7rem;
-    box-shadow: 0px 2px rgba(30,30,30,0.5);
+    filter: drop-shadow(0px 2px 0px rgba(30,30,30,0.3));
     text-shadow: 3px 6px rgba(0,0,0,0.2);
+}
+
+.back-home {
+    padding: .7rem .7rem;
+    border-radius: 15px;
+    box-shadow: 0px 4px rgba(30,30,30,0.5);
+}
+
+.back-home:hover {
+    color: #96ecbd;
+    background-color:  rgba(30,30,30,0.5);
+    filter: drop-shadow(2px 2px 1px rgba(30,30,30,0.5));
+    border: 1px solid rgba(245, 243, 243,0.5);
+    border-top: 0;
 }
 
 ::placeholder {
@@ -94,4 +100,19 @@ input:hover {
     font-weight: 400;
 }
 
+.back-home, input, button {
+    font-size: 1.5rem;
+    text-shadow: 1.5px 2.5px rgba(0,0,0,0.3);
+    background: #5F77A5;
+    border-top: 0;
+}
+.back-home,button {
+    border: 1px solid rgba(245, 243, 243,0.5);
+    border-top: 0;
+    cursor: pointer;
+}
+
+.back-home:hover, button:hover, input:hover {
+    font-size: 1.7rem;
+}
 

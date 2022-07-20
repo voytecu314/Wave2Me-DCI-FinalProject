@@ -55,7 +55,7 @@ const LandingPage = ({setLandingModal}) => {
     <div id="landing-page">
     <header>
         <h5 className='header-text'>
-            LEARN EASILY CONVERSATIONAL SIGN LANGUAGE WITH YOUR LOVED ONES...
+            LEARN EASILY CONVERSATIONAL <strong>SIGN LANGUAGE</strong>  WITH YOUR LOVED ONES...
         </h5>
         <h1 className='wave-font'>WAVE2ME</h1>
     </header>

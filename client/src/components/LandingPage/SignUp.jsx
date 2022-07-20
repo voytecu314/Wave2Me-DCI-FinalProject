@@ -50,7 +50,7 @@ const SignUp = ({setSignUp, setLandingModal}) => {
       </form>
       <button id="button-contact" onClick={signUpHandler}>SignUp</button>
   
-        <h2 className='back-home' onClick={()=>setSignUp(false)}>Back Home: <span className='back-home'>&#9166;</span> </h2>
+        <h2 className='back-home' onClick={()=>setSignUp(false)}>Go Back</h2>
   
     
     </div>

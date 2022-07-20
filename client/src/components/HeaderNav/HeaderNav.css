@@ -75,7 +75,6 @@
   .navbar ul li a {
     text-decoration: none;
     color: black;
-    
 }
 
 .navbar a:hover {
@@ -130,6 +129,7 @@
 
     .nav-menu ul li {
         border: none;
+        
 
     }
 
@@ -190,6 +190,7 @@
         .nav-menu ul li {
             border: none;
             margin: 0% 5%;
+            
     
         }
         

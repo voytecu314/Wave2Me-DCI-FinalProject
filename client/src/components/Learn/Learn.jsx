@@ -1,5 +1,7 @@
 import './Learn.css';
 import banana from '../../assets/banana.mp4'
+import anne from '../../assets/anne.mp4'
+import anne2 from '../../assets/anne2.mp4'
 import { useState } from 'react';
 //import {useEffect} from 'react';
 
@@ -29,6 +31,12 @@ const Learn = () => {
             </div>
             <div className="img-container">
                 <video controls src={banana}></video> 
+            </div>
+            <div className="img-container">
+                <video controls src={anne}></video> 
+            </div>
+            <div className="img-container">
+                <video controls src={anne2}></video> 
             </div>
             
             <hr/>
