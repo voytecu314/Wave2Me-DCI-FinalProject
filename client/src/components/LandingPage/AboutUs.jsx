@@ -15,7 +15,7 @@ const AboutUs = ({setAbout}) => {
     </main>
     <footer>
         
-        <h2 className='black1' onClick={()=>setAbout(false)}>Back Home: <span className="back-home">&#9166;</span></h2>
+        <h2 className='back-home' onClick={()=>setAbout(false)}>Go Back</h2>
     </footer>
     </div>
   )

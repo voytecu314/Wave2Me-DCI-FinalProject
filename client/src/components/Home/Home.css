@@ -19,12 +19,14 @@
     0% {
         border: 4px solid black;
         box-shadow: 0 0 5px white;
+        /* filter: drop-shadow(16px 16px 10px white); */
         transform: rotate(30deg);
     }
 
     50% {
         border: 8px solid rgb(39, 38, 38);
         box-shadow: 0 0 50px white;
+        /* filter: drop-shadow(16px 16px 10px white); */
         
         
     }
@@ -33,6 +35,7 @@
         border: 4px solid black;
         box-shadow: 0 0 5px white;
         transform: rotate(-10deg);
+        /* filter: drop-shadow(16px 16px 10px white); */
     }
 }
 
