@@ -7,6 +7,7 @@ const HeaderNav = ({setLandingModal}) => {
     <nav className="navbar">
         <div>
             <span className="navbar-brand">Welcome user!</span>
+            
         </div>
             
         

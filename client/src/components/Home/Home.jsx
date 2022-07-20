@@ -9,14 +9,16 @@ const Home = () => {
                 <img className="my-img" src={logo} alt="Anne" />
             </div>
              
-            <h1 className="heading">
-              WAVE <br/> 2 ME
+            <h1 className="wave-font">
+              WAVE <br/> 2 
+              <br />
+              ME
             </h1>
             <hr/>
           
           <div className="text">
             <p>
-            LEARN EASILY CONVERSATIONAL SIGN LANGUAGE WITH YOUR LOVED ONES...
+            LEARN EASILY CONVERSATIONAL <strong>SIGN LANGUAGE</strong>  WITH YOUR LOVED ONES...
             </p>
           </div>
         </div>

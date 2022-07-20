@@ -21,22 +21,44 @@
 
 #blog-grid-item > h1 {
     text-align: center;
+    font-size: 3rem;
 }
 
-#blog-grid-item > h2 {
-    margin-top: 1%
+#blog-grid-item > h1,#blog-grid-item > h2,#blog-grid-item > p,#blog-grid-item > a {
+    margin: 2%
 }
 
 #blog-grid-item > img {
-    width: 100%;
+    width: 600px;
+    height: 400px;
     display: block;
     margin: auto;
+    border-radius: 15px;
+    filter: drop-shadow(8px 8px 5px rgba(30,30,30,0.5));
+}
+
+a {
+    color: #f9f871;
+}
+
+.language {
+    width: 96%;
+    font-size: 1.7rem;
+    text-align: end;
+    margin-top: 2rem;
 }
 
 @media only screen and (max-width: 700px) {
 
     #blog-grid-container {
         grid-template-columns: 1fr;
+    }
+
+    #blog-grid-item > img {
+        width: 350px;
+        height: 200px;
+        display: block;
+        margin: auto;
     }
     
 }

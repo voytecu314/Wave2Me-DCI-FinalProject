@@ -24,7 +24,7 @@ const Contact = ({setContact}) => {
         <button id="button-contact">Send</button>
       </form>
   
-        <h2 className='back-home' onClick={()=>setContact(false)}>Back Home: <span className='back-home'>&#9166;</span> </h2>
+        <h2 className='back-home' onClick={()=>setContact(false)}>Go Back</h2>
   
     
     </div>

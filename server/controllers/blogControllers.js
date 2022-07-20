@@ -4,7 +4,8 @@ import blogModel from "../models/blogModel.js";
 
 dotenv.config();
 
-const NEWS_API_URL = `https://newsapi.org/v2/everything?q=deaf&language=en&pageSize=100&sortBy=publishedAt&page=1&searchIn=title&apiKey=${process.env.NEWS_API_KEY}`;
+
+const NEWS_API_URL = `https://newsapi.org/v2/everything?q=deaf&language=&pageSize=100&sortBy=publishedAt&page=1&searchIn=title&apiKey=${process.env.NEWS_API_KEY}`;
 
 export const refreshBlogs = async (req, res) => {
 
