@@ -1,9 +1,10 @@
-import express from  'express';
+﻿import express from  'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from  'mongoose';
 import loginRoutes from './routes/loginRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
+import videosRoutes from './routes/videosRoutes.js';
 
 const app = express();
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(cors());
 //ROUTES
 app.use('/', loginRoutes);
 app.use('/', blogRoutes);
+app.use('/', videosRoutes);
 
 mongoose
   .connect(process.env.CONNECTION_URL)
@@ -27,7 +29,7 @@ mongoose
       )
     )
   )
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err.message));
 
 mongoose.connection.on(`disconnected`, () => {console.log("DB disconnected");})
 

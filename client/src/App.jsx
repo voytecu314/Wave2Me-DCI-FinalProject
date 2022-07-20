@@ -12,8 +12,9 @@ function App() {
   const [landingModal, setLandingModal] = useState(true);
   return (
     <Router>
-      {landingModal && <LandingPage setLandingModal={setLandingModal}/>}
+      {landingModal ? <LandingPage setLandingModal={setLandingModal}/> :
       
+	  <>
         <HeaderNav setLandingModal={setLandingModal}/>
 
           <Routes>
@@ -23,7 +24,8 @@ function App() {
           </Routes>
           
         <Footer/>
-      
+	  </>
+      }
 
     </Router>
   );

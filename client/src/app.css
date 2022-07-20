@@ -102,10 +102,13 @@ input:hover {
 
 .back-home, input, button {
     font-size: 1.5rem;
-    text-shadow: 1.5px 2.5px rgba(0,0,0,0.3);
     background: #5F77A5;
     border-top: 0;
 }
+.back-home, button {
+    text-shadow: 1.5px 2.5px rgba(0,0,0,0.3);
+}
+
 .back-home,button {
     border: 1px solid rgba(245, 243, 243,0.5);
     border-top: 0;
