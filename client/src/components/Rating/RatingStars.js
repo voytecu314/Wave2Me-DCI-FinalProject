@@ -19,14 +19,17 @@ const RatingStars = () => {
             <div className="stars">
                 {
                     GRADES.map((grade, index) => (
-                        <Star 
+                      
+                         <Star 
                             index={index} 
                             key={grade} 
                             changeGradeIndex={changeGradeIndex}
                             style={ gradeIndex > index ? activeStar : {}}
                         />
                     ))
+                   
                 }
+                 {console.log(GRADES)}
             </div>
         </div>
     );
