@@ -90,7 +90,7 @@ const [videoOfTheDay, setVideoOfTheDay] = useState({title: 'Loading...', data: u
             </div>
             
             <div className="img-container">
-                <video controls src={videoOfTheDay.data} width="1000" type="video/mp4" controls autoPlay loop>
+                <video src={videoOfTheDay.data} width="1000" type="video/mp4" controls autoPlay loop>
 					Your browser does not support the video tag.</video> 
             </div>
             
