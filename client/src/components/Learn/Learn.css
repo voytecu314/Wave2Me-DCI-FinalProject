@@ -8,8 +8,30 @@
 }
 
 #search-container {
+	display: grid;
+	place-items: center;
     width: 50vw;
     margin: 3% auto;
+}
+
+#search-div {
+	display: flex; 
+	gap: 2%
+}
+
+#search-btn {
+	display: grid;
+	place-items: center;
+	font-size: 1.7rem;
+	}
+	
+#search-vid-icon { 
+	cursor: pointer;
+	color: darkgray;
+}	
+
+#search-vid-icon:hover {
+	color: white;
 }
 
 #search-container > input {
