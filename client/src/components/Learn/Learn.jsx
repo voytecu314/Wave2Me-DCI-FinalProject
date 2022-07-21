@@ -8,11 +8,62 @@ const Learn = () => {
   const expandedPositions = {favorites: 0, workOnIt: 3, another: 6};
  
   const [modalsPosition, setModalsPosition] = useState(initialPositions);
-const [videoOfTheDay, setVideoOfTheDay] = useState({title: 'Loading...', data: uploadingVid});                                                                               
+  const [videoOfTheDay, setVideoOfTheDay] = useState({title: 'Loading...', data: uploadingVid});      
+  const [selectSearch, setSelectSearch] = useState('');  
+  const [submitted, setSubmitted] = useState(false); 
 
   const favoritesRef = useRef();
   const workOnItRef = useRef();
   const anotherRef = useRef();
+  
+  const onChangeHandler = (e) => {
+	  
+	  if(e.target.value) {
+	  
+		  fetch('http://localhost:5000/searchVideos', {
+			  method: 'POST',
+			  headers: {'Content-Type':'application/json'},
+			  body: JSON.stringify({ input: e.target.value })
+		  })
+		  .then(res=>res.json())
+		  .then(data=>setSelectSearch(data))
+		  .catch(console.log);
+	  
+	  }
+	  
+  }
+  
+  const submitHandler = (e) => {
+	e.preventDefault();
+	let input = '';
+	
+	switch(e.target.tagName) {
+		
+		case 'FORM': input = e.target.firstChild.firstChild.value;
+		break;
+		
+		case 'SELECT': e.target.previousSibling.firstChild.value = e.target.value;
+		return;
+		
+		case 'I': input = e.target.parentElement.previousSibling.value;
+		break;
+		
+		default: return;
+	}
+	
+	fetch('http://localhost:5000/searchVideo', {
+			  method: 'POST',
+			  headers: {'Content-Type':'application/json'},
+			  body: JSON.stringify({ input })
+		  })
+		  .then(res=>res.json())
+  .then(video=>{
+				setVideoOfTheDay({title:video.title,data:video.data});
+				setSubmitted(true);
+				})
+		  .catch(console.log);
+	
+  }
 
   useEffect(()=>{
     favoritesRef.current.style.left = modalsPosition.favorites+'%';
@@ -79,14 +130,28 @@ const [videoOfTheDay, setVideoOfTheDay] = useState({title: 'Loading...', data: u
   return (
     <div id="learn-container">
         <div id="first-page">
-            <div id="search-container">
-              <input
-              type='text'
-              placeholder='Search sign videos here' />
-            </div>
+            <form id="search-container" onSubmit={submitHandler}>
+				<div id='search-div'>
+				  <input
+				  onChange={onChangeHandler} 
+				  type='text'
+				  name='search' 
+				  placeholder='Search sign videos here' /> 
+				  <span id='search-btn'>
+					<i  id='search-vid-icon'
+						className="fas fa-search" 
+						onClick={submitHandler}>
+					</i>
+				  </span>
+				</div>
+				 {selectSearch.length>0 && <select style={{color:'black'}}  onChange={submitHandler}>
+						<option value=''></option>
+						{selectSearch.map((video,i)=><option key={i} style={{color:'black'}} value={video.title}>{video.title}</option>)}
+				 </select>}
+            </form>
 			
 			<div className="text">
-				<h5>Word of the day: {videoOfTheDay.title.toUpperCase()}</h5>
+				<h5> {submitted ? videoOfTheDay.title.toUpperCase() : 'Word of the day: '+videoOfTheDay.title.toUpperCase()}</h5>
             </div>
             
             <div className="img-container">

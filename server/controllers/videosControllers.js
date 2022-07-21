@@ -19,3 +19,30 @@ export const videoOfTheDayController = async (req, res) => {
 
 }
 
+export const searchVideos = async (req, res) => {
+	try {
+		
+		res.status(200).json(await videosModel.find({ title: {$regex: req.body.input+'.*'} }).select('-data'));
+		
+	
+	} catch(error) {
+		
+		console,log('Find videos - searchVideos controller:',error);
+		res.status(500).json(error);
+	
+	}
+}
+
+export const searchVideo = async (req, res) => {
+	try {
+		
+		res.status(200).json(await videosModel.findOne({ title: {$regex: req.body.input+'.*'} }));
+		
+	
+	} catch(error) {
+		
+		console,log('Find video - searchVideo controller:',error);
+		res.status(500).json(error);
+	
+	}
+}
