@@ -17,7 +17,7 @@ const SignUp = ({setSignUp, setLandingModal}) => {
                         data.jwt_payload?.auth && setLandingModal(!data.jwt_payload.auth); 
                         localStorage.setItem('W2M-JWT-Token',data.token);
                                     })
-        .catch(err=>console.log('signup error', err.message));
+        .catch(err=>console.log('signup error from frontend', err));
         }
 
   return (

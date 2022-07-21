@@ -1,6 +1,14 @@
 import mongoose from "mongoose";
 
-const userSchema = mongoose.Schema({
+//const { Schema, model } = mongoose;
+
+const dataSchema = new mongoose.Schema({
+	points: Number,
+	favorites: Array,
+	workOnIt: Array
+});
+
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -12,11 +20,15 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
-  }
+  },
+  data: { type: mongoose.Schema.Types.ObjectId, ref: 'User-Data' }
 },{
     timestamps: true
   });
 
-const userModel = mongoose.model("User", userSchema);
 
-export default userModel;
+export const userModel = mongoose.model("User", userSchema);
+export const userDataModel = mongoose.model("User-Data", dataSchema);
+
+
+//export default userModel;
