@@ -1,10 +1,10 @@
-import userModel from "../models/userModel.js";
+import {userModel} from "../models/userModel.js";
+import {userDataModel} from "../models/userModel.js";
 import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const userSignup = async (req, res) => {
-  //Code here
 
   const { name, email, password } = req.body;
 
@@ -25,12 +25,23 @@ export const userSignup = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ msg: "User Already Exists!" });
     }
-
+	
+	//Create new user empty data
+	
+	const data = new userDataModel({
+		points: 0,
+		favorites: [],
+		workOnIt: []
+	});
+	
+	await data.save();
+	
     //Create a new user
     const user = new userModel({
       name,
       email,
-      password
+      password,
+	  data: data.id
     });
 
     const salt = await bcrypt.genSalt(10);
@@ -42,6 +53,7 @@ export const userSignup = async (req, res) => {
     const payload = {
         id: user._id,
         name: user.name,
+		data: {points:data.points,favorites:data.favorites,workOnIt:data.workOnIt},
         auth: true
     };
 
@@ -50,16 +62,16 @@ export const userSignup = async (req, res) => {
       res.status(200).json({ token, jwt_payload: payload });
     });
   } catch (error) {
-    res.status(500).send(error.message);
+  res.status(500).send({srvSgnUp:error});
   }
 };
 
 export const userLogin = async (req, res) => {
-  //Code here
+  
   const { email, password } = req.body;
 
   try {
-    let user = await userModel.findOne({ email });
+    let user = await userModel.findOne({ email }).populate('data', '-__v -_id');
 
     if (!user) {
       return res.status(400).json({ msg: "User Not Exists!" });
@@ -74,6 +86,7 @@ export const userLogin = async (req, res) => {
     const payload = {
         id: user.id,
         name: user.name,
+		data: user.data,
         auth: true
     };
 
