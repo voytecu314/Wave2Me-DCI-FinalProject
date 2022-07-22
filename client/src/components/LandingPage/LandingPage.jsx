@@ -3,6 +3,7 @@ import AboutUs from './AboutUs.jsx';
 import Contact from './Contact.jsx';
 import SignUp from './SignUp.jsx';
 import Logo from './Logo.jsx';
+import Faq from './Faq.jsx';
 import './styles/LandingPage.css';
 
 const LandingPage = ({setLandingModal}) => {
@@ -50,6 +51,7 @@ const LandingPage = ({setLandingModal}) => {
     const [about, setAbout] = useState(false);
     const [contact, setContact] = useState(false);
     const [signup, setSignUp] = useState(false);
+    const [faq, setFaq] = useState(false);
 
   return (
     <div id="landing-page">
@@ -63,6 +65,7 @@ const LandingPage = ({setLandingModal}) => {
     {about && <AboutUs setAbout={setAbout}/>}
     {contact && <Contact setContact={setContact} setLandingModal={setLandingModal}/>}
     {signup && <SignUp setSignUp={setSignUp} setLandingModal={setLandingModal}/>}
+    {faq && <Faq setFaq={setFaq} setLandingModal={setLandingModal}/>}
         <Logo/>
         <br /><br /><br />
         <section id='insert-details'>
@@ -76,6 +79,7 @@ const LandingPage = ({setLandingModal}) => {
                     <button id='button-submit2' type="button"><i className="fab fa-google"/>oogle</button>
                     <br />
                 <button id='button-submit3' type="button" onClick={()=>setSignUp(true)} >SignUp</button>
+                
                 </form>
                 
             </div>
@@ -88,6 +92,7 @@ const LandingPage = ({setLandingModal}) => {
        <div className='ftr'> 
             <span className='foot' onClick={()=>setAbout(true)} >About Us</span>
             <span className='foot' onClick={()=>setContact(true)} >Contact</span>
+            <span className='foot' onClick={()=>setFaq(true)} >FAQ</span>
        </div>
         
     </div>

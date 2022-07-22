@@ -11,6 +11,7 @@ import RatingStars from './components/Rating/RatingStars.js';
 import Star from './components/Rating/Star.js';
 
 
+
 function App() {
   const [landingModal, setLandingModal] = useState(true);
   return (
