@@ -7,6 +7,10 @@ import Blog from './components/Blog/Blog.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import './app.css'
 import { useState } from 'react';
+import RatingStars from './components/Rating/RatingStars.js';
+import Star from './components/Rating/Star.js';
+
+
 
 function App() {
   const [landingModal, setLandingModal] = useState(true);
@@ -22,7 +26,8 @@ function App() {
             <Route path='/learn' element={<Learn />} />
             <Route path='/blog' element={<Blog />} />
           </Routes>
-          
+          <RatingStars />
+          <Star />
         <Footer/>
 	  </>
       }
