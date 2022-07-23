@@ -160,7 +160,9 @@ const Learn = () => {
             </div>
             
             <div id="video-likes">
-				<i className="fa fa-heart" title="Add to favorites"></i>
+				<i className="fa fa-heart" title="Add to favorites">
+          <i className="fa fa-heart" style={{position: 'absolute'}}></i>
+        </i>
 				<i className='fas fa-business-time' title="Work on it later"></i>
 			</div>
           
