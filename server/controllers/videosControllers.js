@@ -6,6 +6,7 @@ export const videoOfTheDayController = async (req, res) => {
 	try {
 	
 		const videosTitles = await videosModel.find().select('-data');
+		//now just random video - change to video of the day
 		const titleOfTheDay = videosTitles[Math.floor(Math.random()*videosTitles.length)]
 		const videoOfTheDay = await videosModel.findById(titleOfTheDay.id)
 		
@@ -22,7 +23,7 @@ export const videoOfTheDayController = async (req, res) => {
 export const searchVideos = async (req, res) => {
 	try {
 		
-		res.status(200).json(await videosModel.find({ title: {$regex: req.body.input+'.*'} }).select('-data'));
+		res.status(200).json(await videosModel.find({ title: {$regex: '^'+req.body.input, $options: 'i'} }).select('-data'));
 		
 	
 	} catch(error) {
@@ -36,7 +37,7 @@ export const searchVideos = async (req, res) => {
 export const searchVideo = async (req, res) => {
 	try {
 		
-		res.status(200).json(await videosModel.findOne({ title: {$regex: req.body.input+'.*'} }));
+		res.status(200).json(await videosModel.findOne({ title: req.body.input }));
 		
 	
 	} catch(error) {

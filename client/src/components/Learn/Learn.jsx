@@ -49,7 +49,7 @@ const Learn = () => {
 			  body: JSON.stringify({ input: e.target.value })
 		  })
 		  .then(res=>res.json())
-		  .then(data=>setSelectSearch(data))
+		  .then(data=>{setSelectSearch(data);console.log(data);})
 		  .catch(console.log);
 	  
 	  }
@@ -58,18 +58,20 @@ const Learn = () => {
   
   const submitHandler = (e) => {
 	e.preventDefault();
-	let input = '';
+  let input = '';
 	
 	switch(e.target.tagName) {
 		
 		case 'FORM': input = e.target.firstChild.firstChild.value;
-		break;
+		             setVideoOfTheDay({title: 'Loading...', data: uploadingVid});
+	  break;
 		
 		case 'SELECT': e.target.previousSibling.firstChild.value = e.target.value;
 		return;
 		
 		case 'I': input = e.target.parentElement.previousSibling.value;
-		break;
+		          setVideoOfTheDay({title: 'Loading...', data: uploadingVid});
+	  break;
 		
 		default: return;
 	}
