@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Star = (props) => {
-console.log(props);
+
     const changeGrade = (e) => {
         props.changeGradeIndex(e.target.value);
     }

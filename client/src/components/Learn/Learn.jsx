@@ -49,7 +49,7 @@ const Learn = () => {
 			  body: JSON.stringify({ input: e.target.value })
 		  })
 		  .then(res=>res.json())
-		  .then(data=>{setSelectSearch(data);console.log(data);})
+		  .then(data=>setSelectSearch(data))
 		  .catch(console.log);
 	  
 	  }

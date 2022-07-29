@@ -8,6 +8,8 @@ const Footer = () => {
       
       <a href="mailto:anmomoan@gmail.com"><i className="fas fa-envelope-square coloring"><h4 className='logo-text'>email</h4></i></a>
       <a href="https://github.com/voytecu314/Wave2Me-DCI-FinalProject" target="_blank" rel="noreferrer"><i className="fab fa-github coloring"><h4 className='logo-text'>github</h4></i></a>
+      <a href="http://localhost:3000/#/rate-us"><i className="fa fa-star-o"><h4 className='logo-text'>rate us</h4></i></a>
+  
     </div>
     
       <div>

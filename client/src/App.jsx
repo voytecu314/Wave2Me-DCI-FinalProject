@@ -8,7 +8,6 @@ import Footer from './components/Footer/Footer.jsx';
 import './app.css'
 import { useState } from 'react';
 import RatingStars from './components/Rating/RatingStars.js';
-import Star from './components/Rating/Star.js';
 
 
 
@@ -25,9 +24,9 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/learn' element={<Learn />} />
             <Route path='/blog' element={<Blog />} />
+            <Route path='/rate-us' element={<RatingStars />} />
           </Routes>
-          <RatingStars />
-          <Star />
+      
         <Footer/>
 	  </>
       }
