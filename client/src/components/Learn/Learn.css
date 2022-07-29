@@ -81,6 +81,13 @@
 	font-size: 2rem;
 	}
 
+#flying-icon {
+	position: absolute;
+	top:0;
+	left: 0;
+	cursor: pointer;
+	transition: top 1.5s ease-out,transform 4s,color .5s ease-in;
+}
 
  @media screen and (max-width: 1024px){ 
 	#favorites-modal, #work-on-it-modal, #another-modal{

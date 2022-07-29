@@ -10,12 +10,35 @@ const Learn = () => {
   const [modalsPosition, setModalsPosition] = useState(initialPositions);
   const [videoOfTheDay, setVideoOfTheDay] = useState({title: 'Loading...', data: uploadingVid});      
   const [selectSearch, setSelectSearch] = useState('');  
-  const [submitted, setSubmitted] = useState(false); 
+  const [submitted, setSubmitted] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);  
 
   const favoritesRef = useRef();
   const workOnItRef = useRef();
   const anotherRef = useRef();
-  
+  const heartRef = useRef();
+   
+  const likeVideo = () =>{
+    heartRef.current.parentElement.style.color=isLiked?'white':'#7f6ea6';
+    heartRef.current.style.color='#7f6ea6';
+    heartRef.current.style.top='-4500%';
+    heartRef.current.style.transform="rotate(720deg) translate(300%)";
+    heartRef.current.style.opacity='1';
+    setIsLiked(!isLiked);
+    }
+    
+  useEffect(()=> {
+    
+    const reset = setTimeout(() => {
+      heartRef.current.style.color=isLiked?'#7f6ea6':'white';
+      heartRef.current.style.opacity='0';
+      heartRef.current.style.top='0';
+      heartRef.current.style.transform="initial";
+    }, 1000);
+
+    return ()=>clearTimeout(reset);
+  },[isLiked]);
+
   const onChangeHandler = (e) => {
 	  
 	  if(e.target.value) {
@@ -131,40 +154,41 @@ const Learn = () => {
     <div id="learn-container">
         <div id="first-page">
             <form id="search-container" onSubmit={submitHandler}>
-				<div id='search-div'>
-				  <input
-				  onChange={onChangeHandler} 
-				  type='text'
-				  name='search' 
-				  placeholder='Search sign videos here' /> 
-				  <span id='search-btn'>
-					<i  id='search-vid-icon'
-						className="fas fa-search" 
-						onClick={submitHandler}>
-					</i>
-				  </span>
-				</div>
-				 {selectSearch.length>0 && <select style={{color:'black'}}  onChange={submitHandler}>
-						<option value=''></option>
-						{selectSearch.map((video,i)=><option key={i} style={{color:'black'}} value={video.title}>{video.title}</option>)}
-				 </select>}
+              <div id='search-div'>
+                <input
+                onChange={onChangeHandler} 
+                type='text'
+                name='search' 
+                placeholder='Search sign videos here' /> 
+                <span id='search-btn'>
+                <i  id='search-vid-icon'
+                  className="fas fa-search" 
+                  onClick={submitHandler}>
+                </i>
+                </span>
+              </div>
+              {selectSearch.length>0 && <select style={{color:'black'}}  onChange={submitHandler}>
+                  <option value=''></option>
+                  {selectSearch.map((video,i)=><option key={i} style={{color:'black'}} value={video.title}>{video.title}</option>)}
+              </select>}
             </form>
 			
-			<div className="text">
-				<h5> {submitted ? videoOfTheDay.title.toUpperCase() : 'Word of the day: '+videoOfTheDay.title.toUpperCase()}</h5>
+            <div className="text">
+              <h5> {submitted ? videoOfTheDay.title.toUpperCase() : 'Word of the day: '+videoOfTheDay.title.toUpperCase()}</h5>
             </div>
-            
+                  
             <div className="img-container">
-                <video src={videoOfTheDay.data} width="1000" type="video/mp4" controls autoPlay loop>
-					Your browser does not support the video tag.</video> 
+                      <video src={videoOfTheDay.data} width="1000" type="video/mp4" controls autoPlay loop>
+                Your browser does not support the video tag.</video> 
             </div>
             
+            {videoOfTheDay.title!=='Loading...' &&
             <div id="video-likes">
-				<i className="fa fa-heart" title="Add to favorites">
-          <i className="fa fa-heart" style={{position: 'absolute'}}></i>
-        </i>
-				<i className='fas fa-business-time' title="Work on it later"></i>
-			</div>
+              <i className="fa fa-heart" title={isLiked?"Remove like?":"Add to favorites"}style={{position:'relative'}}>
+                <i className="fa fa-heart" id="flying-icon" ref={heartRef} onClick={likeVideo}></i>
+              </i>
+              <i className='fas fa-business-time' title="Work on it later"></i>
+            </div>}
           
         </div>
         <div id="favorites-modal" ref={favoritesRef}>
