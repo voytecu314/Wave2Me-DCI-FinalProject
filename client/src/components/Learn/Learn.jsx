@@ -28,15 +28,18 @@ const Learn = () => {
     }
     
   useEffect(()=> {
-    
-    const reset = setTimeout(() => {
+
+    let reset;
+    if(heartRef.current){
+    reset = setTimeout(() => {
       heartRef.current.style.color=isLiked?'#7f6ea6':'white';
       heartRef.current.style.opacity='0';
       heartRef.current.style.top='0';
       heartRef.current.style.transform="initial";
-    }, 1000);
+    }, 1000);}
 
-    return ()=>clearTimeout(reset);
+    return ()=>{reset && clearTimeout(reset)};
+
   },[isLiked]);
 
   const onChangeHandler = (e) => {
