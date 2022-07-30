@@ -10,7 +10,7 @@ export const videoOfTheDayController = async (req, res) => {
 		const titleOfTheDay = videosTitles[Math.floor(Math.random()*videosTitles.length)]
 		const videoOfTheDay = await videosModel.findById(titleOfTheDay.id)
 		
-		res.status(200).json({title: titleOfTheDay.title, data: videoOfTheDay.data});
+		res.status(200).json({title: titleOfTheDay.title, data: videoOfTheDay.data, _id: titleOfTheDay.id});
 		
 	} catch (error) {
 			

@@ -26,7 +26,7 @@ const Learn = () => {
   const workOnVideo = () =>{
     setToWorkOnIt(!toWorkOnIt)
     workOnVideoRef.current.classList.add("shake");
-    workOnVideoRef.current.style.color=toWorkOnIt?'#9168a1':'white';
+    workOnVideoRef.current.style.color=!toWorkOnIt?'#9168a1':'white';
     setTimeout(()=>{ workOnVideoRef?.current && workOnVideoRef.current.classList.remove("shake");},1000);
   }
    
@@ -180,7 +180,8 @@ const Learn = () => {
                 onChange={onChangeHandler} 
                 type='text'
                 name='search' 
-                placeholder='Search sign videos here' /> 
+                placeholder='Search sign videos here'
+                autoFocus={true} /> 
                 <span id='search-btn'>
                 <i  id='search-vid-icon'
                   className="fas fa-search" 
@@ -195,11 +196,13 @@ const Learn = () => {
             </form>
 			
             <div className="text">
-              <h5> {submitted ? videoData.title.toUpperCase() : 'Word of the day: '+videoData.title.toUpperCase()}</h5>
+              <h5> 
+                {submitted || videoData.title==='Video not found.' ? videoData.title.toUpperCase() : 'Video of the day: '+videoData.title.toUpperCase()}
+              </h5>
             </div>
                   
             <div className="img-container">
-                      <video src={videoData.data} width="1000" type="video/mp4" controls autoPlay loop>
+                      <video src={videoData.data} width="1000" height="600" type="video/mp4" controls autoPlay loop>
                 Your browser does not support the video tag.</video> 
             </div>
             
