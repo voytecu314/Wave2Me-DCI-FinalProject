@@ -81,12 +81,34 @@
 	font-size: 2rem;
 	}
 
-#flying-icon {
+.video-icon {
 	position: absolute;
 	top:0;
 	left: 0;
 	cursor: pointer;
-	transition: top 1.5s ease-out,transform 4s,color .5s ease-in;
+	transition: top 1.5s ease-in,transform 4s,color .5s ease-in;
+}
+
+.shake {
+	cursor: none;
+	animation: shake .3s;
+}
+
+@keyframes shake {
+	25% {
+		transform: rotate(-15deg);
+		font-size: 2.5rem;
+	}
+	50% {
+		transform: rotate(15deg);
+	}
+	75% {
+		transform: rotate(-15deg);
+	}
+	100% {
+		transform: rotate(15deg);
+		font-size: 2.5rem;
+	}
 }
 
  @media screen and (max-width: 1024px){ 

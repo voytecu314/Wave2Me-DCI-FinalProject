@@ -1,27 +1,39 @@
 import './Learn.css';
-import uploadingVid from '../../assets/uploading_bar.mp4'
+import uploadingVid from '../../assets/uploading_bar.mp4';
+import notFound from '../../assets/404pagenotfound.mp4';
+import decodeJWTPayload from '../../helpers/decodeJWTPayload';
 import { useState, useRef, useEffect } from 'react';
 
 
-const Learn = () => {
+const Learn = () => { 
   const initialPositions = {favorites: 90, workOnIt: 93.3, another: 96.6};
   const expandedPositions = {favorites: 0, workOnIt: 3, another: 6};
  
+  const [userData, setUserData] = useState(decodeJWTPayload());
   const [modalsPosition, setModalsPosition] = useState(initialPositions);
-  const [videoOfTheDay, setVideoOfTheDay] = useState({title: 'Loading...', data: uploadingVid});      
+  const [videoData, setVideoData] = useState({title: 'Loading...', data: uploadingVid, videoID: null});      
   const [selectSearch, setSelectSearch] = useState('');  
   const [submitted, setSubmitted] = useState(false);
   const [isLiked, setIsLiked] = useState(false);  
+  const [toWorkOnIt, setToWorkOnIt] = useState(false);  
 
   const favoritesRef = useRef();
   const workOnItRef = useRef();
   const anotherRef = useRef();
   const heartRef = useRef();
+  const workOnVideoRef = useRef();
+
+  const workOnVideo = () =>{
+    setToWorkOnIt(!toWorkOnIt)
+    workOnVideoRef.current.classList.add("shake");
+    workOnVideoRef.current.style.color=toWorkOnIt?'#9168a1':'white';
+    setTimeout(()=>{ workOnVideoRef?.current && workOnVideoRef.current.classList.remove("shake");},1000);
+  }
    
   const likeVideo = () =>{
     heartRef.current.parentElement.style.color=isLiked?'white':'#7f6ea6';
     heartRef.current.style.color='#7f6ea6';
-    heartRef.current.style.top='-4500%';
+    heartRef.current.style.top='-5000%';
     heartRef.current.style.transform="rotate(720deg) translate(300%)";
     heartRef.current.style.opacity='1';
     setIsLiked(!isLiked);
@@ -29,16 +41,16 @@ const Learn = () => {
     
   useEffect(()=> {
 
-    let reset;
+    let resetHeart;
     if(heartRef.current){
-    reset = setTimeout(() => {
+    resetHeart = setTimeout(() => {
       heartRef.current.style.color=isLiked?'#7f6ea6':'white';
       heartRef.current.style.opacity='0';
       heartRef.current.style.top='0';
       heartRef.current.style.transform="initial";
     }, 1000);}
 
-    return ()=>{reset && clearTimeout(reset)};
+    return ()=>{resetHeart && clearTimeout(resetHeart)};
 
   },[isLiked]);
 
@@ -66,14 +78,14 @@ const Learn = () => {
 	switch(e.target.tagName) {
 		
 		case 'FORM': input = e.target.firstChild.firstChild.value;
-		             setVideoOfTheDay({title: 'Loading...', data: uploadingVid});
+		             input && setVideoData({title: 'Loading...', data: uploadingVid});
 	  break;
 		
 		case 'SELECT': e.target.previousSibling.firstChild.value = e.target.value;
 		return;
 		
 		case 'I': input = e.target.parentElement.previousSibling.value;
-		          setVideoOfTheDay({title: 'Loading...', data: uploadingVid});
+		          input && setVideoData({title: 'Loading...', data: uploadingVid});
 	  break;
 		
 		default: return;
@@ -86,8 +98,12 @@ const Learn = () => {
 		  })
 		  .then(res=>res.json())
   .then(video=>{
-				setVideoOfTheDay({title:video.title,data:video.data});
+				if(video){
+        setVideoData({title:video.title,data:video.data, videoID: video._id});
+        setIsLiked(userData.favorites.includes(video._id));
+        setToWorkOnIt(userData.workOnIt.includes(video._id));
 				setSubmitted(true);
+          } else {setVideoData({title:'Video not found.',data:notFound, videoID: null});}
 				})
 		  .catch(console.log);
 	
@@ -123,7 +139,7 @@ const Learn = () => {
 	fetch('http://localhost:5000/video-of-the-day')
 	.then(res=>res.json())
 	.then(video=>{
-			setVideoOfTheDay({title: video.title, data: video.data});
+			setVideoData({title: video.title, data: video.data, videoID: video._id});
 		})
 		.catch(console.log);
 	  
@@ -179,20 +195,22 @@ const Learn = () => {
             </form>
 			
             <div className="text">
-              <h5> {submitted ? videoOfTheDay.title.toUpperCase() : 'Word of the day: '+videoOfTheDay.title.toUpperCase()}</h5>
+              <h5> {submitted ? videoData.title.toUpperCase() : 'Word of the day: '+videoData.title.toUpperCase()}</h5>
             </div>
                   
             <div className="img-container">
-                      <video src={videoOfTheDay.data} width="1000" type="video/mp4" controls autoPlay loop>
+                      <video src={videoData.data} width="1000" type="video/mp4" controls autoPlay loop>
                 Your browser does not support the video tag.</video> 
             </div>
             
-            {videoOfTheDay.title!=='Loading...' &&
+            {videoData.videoID &&
             <div id="video-likes">
-              <i className="fa fa-heart" title={isLiked?"Remove like?":"Add to favorites"}style={{position:'relative'}}>
-                <i className="fa fa-heart" id="flying-icon" ref={heartRef} onClick={likeVideo}></i>
+              <i className="fa fa-heart" title={isLiked?"Remove like?":"Add to favorites"} style={{position:'relative'}}>
+                <i className="fa fa-heart video-icon" ref={heartRef} onClick={likeVideo}></i>
               </i>
-              <i className='fas fa-business-time' title="Work on it later"></i>
+              <i className='fas fa-business-time' title="Work on it later" style={{position:'relative'}}>
+                <i className='fas fa-business-time video-icon' ref={workOnVideoRef} onClick={workOnVideo}></i>
+              </i>
             </div>}
           
         </div>
