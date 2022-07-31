@@ -5,14 +5,17 @@ import Home from './components/Home/Home.jsx';
 import Learn from './components/Learn/Learn.jsx';
 import Blog from './components/Blog/Blog.jsx';
 import Footer from './components/Footer/Footer.jsx';
-import './app.css'
-import { useState } from 'react';
 import RatingStars from './components/Rating/RatingStars.js';
+import './app.css'
+import { useContext } from 'react';
+import MyContext from './context/MyContext.js';
 
 
 
 function App() {
-  const [landingModal, setLandingModal] = useState(true);
+
+  const {landingModal, setLandingModal} = useContext(MyContext);
+
   return (
     <Router>
       {landingModal ? <LandingPage setLandingModal={setLandingModal}/> :

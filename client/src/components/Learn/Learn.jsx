@@ -1,27 +1,32 @@
 import './Learn.css';
+import jwtProblem from './jwtProblem.jsx';
 import uploadingVid from '../../assets/uploading_bar.mp4';
 import notFound from '../../assets/404pagenotfound.mp4';
-import decodeJWTPayload from '../../helpers/decodeJWTPayload';
-import { useState, useRef, useEffect } from 'react';
+import decodeJWTPayload from '../../helpers/decodeJWTPayload.js';
+import { useState, useRef, useEffect, useContext } from 'react';
+import MyContext from '../../context/MyContext.js';
 
 
-const Learn = () => { 
+const Learn = () => {
+
+  const {landingModal, setLandingModal} = useContext(MyContext);
+ 
   const initialPositions = {favorites: 90, workOnIt: 93.3, another: 96.6};
   const expandedPositions = {favorites: 0, workOnIt: 3, another: 6};
  
-  const [userData, setUserData] = useState(decodeJWTPayload());
+  const [userData, setUserData] = useState({favorites: [], workOnIt: [], points: 0, dataID: null}); console.log(userData);
   const [modalsPosition, setModalsPosition] = useState(initialPositions);
   const [videoData, setVideoData] = useState({title: 'Loading...', data: uploadingVid, videoID: null});      
   const [selectSearch, setSelectSearch] = useState('');  
   const [submitted, setSubmitted] = useState(false);
   const [isLiked, setIsLiked] = useState(false);  
-  const [toWorkOnIt, setToWorkOnIt] = useState(false);  
+  const [toWorkOnIt, setToWorkOnIt] = useState(false);
 
   const favoritesRef = useRef();
   const workOnItRef = useRef();
   const anotherRef = useRef();
   const heartRef = useRef();
-  const workOnVideoRef = useRef();
+  const workOnVideoRef = useRef(); 
 
   const workOnVideo = () =>{
     setToWorkOnIt(!toWorkOnIt)
@@ -133,8 +138,29 @@ const Learn = () => {
       }
 
   },[modalsPosition]);
-  
-  useEffect(()=>{
+
+  useEffect(()=>{console.log('Effect!on mount');
+
+  const userDataID = decodeJWTPayload().dataID;
+
+ 
+    const fetchOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json',
+            token: localStorage.getItem('W2M-JWT-Token')
+        },
+        body: JSON.stringify({dataID: userDataID})
+    }
+
+    fetch('http://localhost:5000/get-user-data', fetchOptions)
+    .then(res=>res.json())
+    .then(data=>{ 
+                data.token_error || !localStorage.getItem('W2M-JWT-Token') ? 
+                setUserData({favorites: [], workOnIt: [], points: 0, dataID: null}) || setLandingModal(true) || console.log(landingModal):
+                setUserData(data)})
+    .catch(err=>console.log('fetch error',err.message));
+
 	  
 	fetch('http://localhost:5000/video-of-the-day')
 	.then(res=>res.json())
@@ -166,12 +192,12 @@ const Learn = () => {
       break;
       default: return;
     }
-
-
-
   }
 
-  return (
+  if(!localStorage.getItem('W2M-JWT-Token')) setLandingModal(true);
+  console.log({landingModal});
+
+  return ( landingModal ? <jwtProblem /> :
     <div id="learn-container">
         <div id="first-page">
             <form id="search-container" onSubmit={submitHandler}>

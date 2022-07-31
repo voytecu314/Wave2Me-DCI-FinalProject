@@ -13,7 +13,7 @@ const SignUp = ({setSignUp, setLandingModal}) => {
 
         fetch('http://localhost:5000/signup', fetchOptions)
         .then(res=>res.json())
-        .then(data=>{   console.log(data);
+        .then(data=>{   
                         data.jwt_payload?.auth && setLandingModal(!data.jwt_payload.auth); 
                         localStorage.setItem('W2M-JWT-Token',data.token);
                                     })

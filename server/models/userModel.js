@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  data: { type: mongoose.Schema.Types.ObjectId, ref: 'User-Data' }
+  dataID: { type: mongoose.Schema.Types.ObjectId, ref: 'User-Data' }
 },{
     timestamps: true
   });

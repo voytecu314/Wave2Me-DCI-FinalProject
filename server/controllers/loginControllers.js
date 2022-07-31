@@ -1,5 +1,4 @@
-import {userModel} from "../models/userModel.js";
-import {userDataModel} from "../models/userModel.js";
+import {userModel,userDataModel} from "../models/userModel.js";
 import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -41,7 +40,7 @@ export const userSignup = async (req, res) => {
       name,
       email,
       password,
-	  data: data.id
+	    dataID: data.id
     });
 
     const salt = await bcrypt.genSalt(10);
@@ -53,7 +52,7 @@ export const userSignup = async (req, res) => {
     const payload = {
         id: user._id,
         name: user.name,
-		data: {points:data.points,favorites:data.favorites,workOnIt:data.workOnIt},
+        dataID: data.id,
         auth: true
     };
 
@@ -71,7 +70,7 @@ export const userLogin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    let user = await userModel.findOne({ email }).populate('data', '-__v -_id');
+    let user = await userModel.findOne({ email });
 
     if (!user) {
       return res.status(400).json({ msg: "User Not Exists!" });
@@ -86,9 +85,9 @@ export const userLogin = async (req, res) => {
     const payload = {
         id: user.id,
         name: user.name,
-		data: user.data,
+		    dataID: user.dataID,
         auth: true
-    };
+    }; 
 
     jwt.sign(payload, "randomString", { expiresIn: "4h" }, (err, token) => {
       if (err) throw err;
@@ -98,7 +97,7 @@ export const userLogin = async (req, res) => {
 };
 
 export const isLogged = async (req, res) => {
-  //code here
+  
   try {
     const user = await userModel.findById(req.user.id).select("-password");
     user.auth = true;
@@ -106,4 +105,5 @@ export const isLogged = async (req, res) => {
   } catch (error) {
     res.json(error.message);
   }
+
 };
