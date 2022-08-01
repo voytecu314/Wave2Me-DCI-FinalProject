@@ -16,7 +16,7 @@ const Learn = () => {
   const initialPositions = {favorites: 90, workOnIt: 93.3, another: 96.6};
   const expandedPositions = {favorites: 0, workOnIt: 3, another: 6};
  
-  const [userData, setUserData] = useState({favorites: [], workOnIt: [], points: 0, dataID: null});console.log(userData);
+  const [userData, setUserData] = useState({favorites: [], workOnIt: [], points: 0, dataID: null});
   const [modalsPosition, setModalsPosition] = useState(initialPositions);
   const [videoData, setVideoData] = useState({title: 'Loading...', data: uploadingVid, videoID: null});      
   const [selectSearch, setSelectSearch] = useState('');  
@@ -30,12 +30,20 @@ const Learn = () => {
   const heartRef = useRef();
   const workOnVideoRef = useRef();
 
-  useEffect(()=>{
-    if(workOnVideoRef.current) workOnVideoRef.current.style.color=toWorkOnIt?'#9168a1':'white';
-    if(heartRef.current) heartRef.current.style.color=isLiked?'#7f6ea6':'white';
-    //setToWorkOnIt(userData.workOnIt.includes(videoData.videoID));
-    //setIsLiked(userData.favorites.includes(videoData.videoID));
-  },[videoData]); 
+  const addPoints = (where_from) => {
+
+    let points;
+
+    switch(where_from) {
+      case ('video'): points = 2;
+      break;
+
+      default: return 0;
+    }
+
+    updateUserData({...userData, points: userData.points+points});
+    setUserData({...userData, points: userData.points+points});
+  }
   
   const workOnVideo = () =>{
     if(userData.dataID && videoData.videoID){
@@ -76,7 +84,14 @@ const Learn = () => {
       setIsLiked(!isLiked);
     }
   }
-    
+
+  useEffect(()=>{
+    if(workOnVideoRef.current) workOnVideoRef.current.style.color=toWorkOnIt?'#9168a1':'white';
+    if(heartRef.current) heartRef.current.style.color=isLiked?'#7f6ea6':'white';
+    //setToWorkOnIt(userData.workOnIt.includes(videoData.videoID));
+    //setIsLiked(userData.favorites.includes(videoData.videoID));
+  },[videoData]); 
+
   useEffect(()=> {
 
     let resetHeart;
@@ -260,7 +275,16 @@ const Learn = () => {
             </div>
                   
             <div className="img-container">
-                      <video src={videoData.data} width="1000" height="600" type="video/mp4" controls autoPlay loop>
+                      <video 
+                            src={videoData.data} 
+                            width="1000" 
+                            height="600" 
+                            type="video/mp4"
+                            onPlay={()=>addPoints('video')} 
+                            onPause={()=>addPoints('video')}
+                            controls 
+                            autoPlay 
+                            loop>
                 Your browser does not support the video tag.</video> 
             </div>
             

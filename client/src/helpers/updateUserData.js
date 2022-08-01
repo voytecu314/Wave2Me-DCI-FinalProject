@@ -1,4 +1,4 @@
-const updateUserData = (body,property) => {
+const updateUserData = (body,property='points') => {
   
     if(localStorage.getItem('W2M-JWT-Token')) {
 
@@ -10,8 +10,6 @@ const updateUserData = (body,property) => {
         }
 
         fetch('http://localhost:5000/update-user-data',fetchOptions)
-        .then(res=>res.json())
-        .then(data=>console.log('feczi',data))
         .catch(err=>console.log('fetching data update error',err.message))
 
     } else console.log('No W2M JWT token provided');
