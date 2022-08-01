@@ -18,7 +18,8 @@ const Learn = () => {
  
   const [userData, setUserData] = useState({favorites: [], workOnIt: [], points: 0, dataID: null});
   const [modalsPosition, setModalsPosition] = useState(initialPositions);
-  const [videoData, setVideoData] = useState({title: 'Loading...', data: uploadingVid, videoID: null});      
+  const [videoData, setVideoData] = useState({title: 'Loading...', data: uploadingVid, videoID: null});  
+  const [chosenVideos, setChosenVideos] = useState({favorites:[], workOnIt: []}); 
   const [selectSearch, setSelectSearch] = useState('');  
   const [submitted, setSubmitted] = useState(false);
   const [isLiked, setIsLiked] = useState(false);  
@@ -29,20 +30,15 @@ const Learn = () => {
   const anotherRef = useRef();
   const heartRef = useRef();
   const workOnVideoRef = useRef();
+  const favVidRef = useRef();
+  const workVidRef = useRef();
+  const anotherVidRef = useRef();
 
-  const addPoints = (where_from) => {
-
-    let points;
-
-    switch(where_from) {
-      case ('video'): points = 2;
-      break;
-
-      default: return 0;
-    }
+  const addPoints = (points) => {
 
     updateUserData({...userData, points: userData.points+points});
     setUserData({...userData, points: userData.points+points});
+
   }
   
   const workOnVideo = () =>{
@@ -221,9 +217,39 @@ const Learn = () => {
 
   const resizeModal = (modal_name) => {
 
+    addPoints(2);
+
+    if( modal_name==='favorites' && modalsPosition[modal_name]>10 ) {
+      favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;}
+    if( modal_name==='workOnIt' && modalsPosition[modal_name]>10 ) {
+      favVidRef.current.style.opacity=.4; workVidRef.current.style.opacity=1; anotherVidRef.current.style.opacity=0;}
+    if( modal_name==='favorites' && modalsPosition[modal_name]<10 && modalsPosition.workOnIt > 10) {
+      favVidRef.current.style.opacity=0; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;}
+    if( modal_name==='favorites' && modalsPosition[modal_name]<10 && modalsPosition.workOnIt < 10) {
+        favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;}
+    if( modal_name==='workOnIt' && modalsPosition[modal_name]<10 ) {
+      favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;}
+    if( modal_name==='another' && modalsPosition[modal_name]<10 ) {
+      favVidRef.current.style.opacity=.4; workVidRef.current.style.opacity=1; anotherVidRef.current.style.opacity=0;}
+    if( modal_name==='another' && modalsPosition[modal_name]>10 ) {
+      favVidRef.current.style.opacity=.4; workVidRef.current.style.opacity=.4; anotherVidRef.current.style.opacity=1;}
+    if(modal_name==='search'){
+      favVidRef.current.style.opacity=0; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;
+    }
+    
+    modal_name!=='another' && (modalsPosition[modal_name]>10 || modalsPosition.workOnIt<10) && 
+    fetch('http://localhost:5000/get-my-videos',{
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({data: userData[modal_name]})
+    })
+    .then(res=>res.json())
+    .then(vids=>{setChosenVideos({...chosenVideos,[modal_name]:vids}); console.log(vids);})
+    .catch(err=>console.log('fetch-my-vids',err));
+
     switch(modal_name){
 
-      case 'favorites': modalsPosition.workOnIt > 10 ? 
+      case 'favorites': modalsPosition.workOnIt > 10 ?
                         setModalsPosition(prev => prev = modalsPosition[modal_name] < 10? initialPositions : {...initialPositions, [modal_name]:expandedPositions.favorites}) :
                         setModalsPosition({...initialPositions, [modal_name]:expandedPositions.favorites});
       break;
@@ -280,8 +306,8 @@ const Learn = () => {
                             width="1000" 
                             height="600" 
                             type="video/mp4"
-                            onPlay={()=>addPoints('video')} 
-                            onPause={()=>addPoints('video')}
+                            onPlay={()=>addPoints(2)} 
+                            onPause={()=>addPoints(2)}
                             controls 
                             autoPlay 
                             loop>
@@ -293,33 +319,59 @@ const Learn = () => {
               <i className="fa fa-heart" title={isLiked?"Remove like?":"Add to favorites"} style={{position:'relative'}}>
                 <i className="fa fa-heart video-icon" ref={heartRef} onClick={likeVideo}></i>
               </i>
-              <i className='fas fa-business-time' title="Work on it later" style={{position:'relative'}}>
+              <i className='fas fa-business-time' title={toWorkOnIt?"Remove icon?":"Work on it later"} style={{position:'relative'}}>
                 <i className='fas fa-business-time video-icon' ref={workOnVideoRef} onClick={workOnVideo}></i>
               </i>
             </div>}
           
         </div>
         <div id="favorites-modal" ref={favoritesRef}>
-          <div className="dummy-margin-top" style={{height: '15px', cursor: 'pointer'}} onClick={()=>setModalsPosition(initialPositions)}>
-		  {modalsPosition.workOnIt<90 && <><i className="fas fa-search"></i><i className="fa fa-arrow-right"></i></>}</div>
-          <div className='modal-icons' onClick={(e)=>resizeModal('favorites')}>
-            {modalsPosition.favorites>10 ? <i className="fa fa-arrow-left"></i> : modalsPosition.workOnIt>10 ? <i className="fa fa-arrow-right"></i> : 
-			<span style={{marginRight: '1%'}}></span> }
-           {'    '} <i className="fa fa-heart"></i>
+          <div className="dummy-margin-top" style={{height: '15px', cursor: 'pointer'}} onClick={(e)=>resizeModal('search')}>
+		        {modalsPosition.workOnIt<90 && <><i className="fas fa-search"></i><i className="fa fa-arrow-right"></i></>}
           </div>
+          <div className='modal-icons' onClick={(e)=>resizeModal('favorites')}>
+            {modalsPosition.favorites>10 ? 
+            <i className="fa fa-arrow-left"></i> : 
+            modalsPosition.workOnIt>10 ? <i className="fa fa-arrow-right"></i> : <span style={{marginRight: '1%'}}></span> }
+            {'    '} <i className="fa fa-heart"></i>
+          </div>
+          <section className='videos-wrapper'>
+
+              <div className='videos-container' ref={favVidRef}>
+
+                {chosenVideos.favorites.map(vidData=><p>{vidData._id}</p>)  }              
+
+              </div>
+
+          </section>
         </div>
         <div id="work-on-it-modal" ref={workOnItRef}>
           <div className="dummy-margin-top" style={{height: '15px'}}></div>
           <div onClick={(e)=>resizeModal('workOnIt')} className='modal-icons'>
-          {modalsPosition.workOnIt>10 ? <i className="fa fa-arrow-left"></i> : modalsPosition.another>10 ? <i className="fa fa-arrow-right"></i> : 
-			<span style={{marginRight: '1%'}}></span>}
-           {'    '}<i className='fas fa-business-time'></i></div>
+            {modalsPosition.workOnIt>10 ? <i className="fa fa-arrow-left"></i> : 
+            modalsPosition.another>10 ? <i className="fa fa-arrow-right"></i> : < span style={{marginRight: '1%'}}></span>}
+            {'    '}<i className='fas fa-business-time'></i>
+          </div>
+          <section className='videos-wrapper'>
+
+              <div className='videos-container' ref={workVidRef}>
+
+                {chosenVideos.workOnIt.map(vidData=><p>{vidData._id}</p>)  }              
+
+              </div>
+
+          </section>
         </div>
         <div id="another-modal" ref={anotherRef}>
           <div className="dummy-margin-top" style={{height: '15px'}}></div>
           <div onClick={(e)=>resizeModal('another')} className='modal-icons'>
             {modalsPosition.another>10 ? <i className="fa fa-arrow-left"></i> : <i className="fa fa-arrow-right"></i>}
-           {'    '}<i className="fa fa-play-circle-o"></i></div>
+            {'    '}<i className="fa fa-play-circle-o"></i></div>
+          <section className='videos-wrapper' style={{opacity: '0'}} ref={anotherVidRef}>
+
+              bla bla bla
+
+          </section>
         </div>
     </div>
   )

@@ -47,3 +47,17 @@ export const searchVideo = async (req, res) => {
 	
 	}
 }
+
+export const getMyVideos = async (req, res) => {
+	try {
+		
+		res.status(200).json(await videosModel.find({ _id: {$in: req.body.data}}).select('-__v'));
+		
+	
+	} catch(error) {
+		
+		console,log('Find video - searchVideo controller:',error);
+		res.status(500).json(error);
+	
+	}
+}

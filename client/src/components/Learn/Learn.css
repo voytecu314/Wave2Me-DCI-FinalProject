@@ -67,6 +67,12 @@
     background-color: #d9a21b;
 }
 
+.videos-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	opacity: 0;
+}
+
 .modal-icons {
     margin-top: .9%;
     font-size: 1.6rem;
