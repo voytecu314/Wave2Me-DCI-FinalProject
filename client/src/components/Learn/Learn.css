@@ -52,6 +52,7 @@
     transition: all .75s;
 }
 
+
 #favorites-modal {
     width: 100%;
     background-color: #7f6ea6;
@@ -71,7 +72,16 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	opacity: 0;
+	height: 85vh;
+	overflow-y: scroll;
+	-ms-overflow-style: none;  /* IE and Edge */
+  	scrollbar-width: none;  /* Firefox */
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.videos-container::-webkit-scrollbar {
+	display: none;
+  }
 
 .modal-icons {
     margin-top: .9%;
@@ -100,6 +110,13 @@
 	animation: shake .3s;
 }
 
+.fav-delete {
+	width: 5vw;
+	margin: auto;
+	text-align: center;
+	font-size: 1.5rem;
+}
+
 @keyframes shake {
 	25% {
 		transform: rotate(-15deg);
@@ -120,5 +137,11 @@
  @media screen and (max-width: 1024px){ 
 	#favorites-modal, #work-on-it-modal, #another-modal{
 		top: 7%;
+	}
+ }
+
+ @media screen and (max-width: 1300px){ 
+	.videos-container {
+		grid-template-columns: 1fr;
 	}
  }
