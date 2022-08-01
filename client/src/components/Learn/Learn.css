@@ -86,7 +86,7 @@
 	top:0;
 	left: 0;
 	cursor: pointer;
-	transition: top 1.5s ease-in,transform 4s,color .5s ease-in;
+	transition: top 1.5s ease-in,transform 4s,color .5s ease-out;
 }
 
 .shake {

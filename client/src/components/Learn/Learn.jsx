@@ -1,8 +1,10 @@
 import './Learn.css';
+// eslint-disable-next-line
 import jwtProblem from './jwtProblem.jsx';
 import uploadingVid from '../../assets/uploading_bar.mp4';
 import notFound from '../../assets/404pagenotfound.mp4';
 import decodeJWTPayload from '../../helpers/decodeJWTPayload.js';
+import updateUserData from '../../helpers/updateUserData';
 import { useState, useRef, useEffect, useContext } from 'react';
 import MyContext from '../../context/MyContext.js';
 
@@ -14,7 +16,7 @@ const Learn = () => {
   const initialPositions = {favorites: 90, workOnIt: 93.3, another: 96.6};
   const expandedPositions = {favorites: 0, workOnIt: 3, another: 6};
  
-  const [userData, setUserData] = useState({favorites: [], workOnIt: [], points: 0, dataID: null}); console.log(userData);
+  const [userData, setUserData] = useState({favorites: [], workOnIt: [], points: 0, dataID: null});console.log(userData);
   const [modalsPosition, setModalsPosition] = useState(initialPositions);
   const [videoData, setVideoData] = useState({title: 'Loading...', data: uploadingVid, videoID: null});      
   const [selectSearch, setSelectSearch] = useState('');  
@@ -26,23 +28,54 @@ const Learn = () => {
   const workOnItRef = useRef();
   const anotherRef = useRef();
   const heartRef = useRef();
-  const workOnVideoRef = useRef(); 
+  const workOnVideoRef = useRef();
 
+  useEffect(()=>{
+    if(workOnVideoRef.current) workOnVideoRef.current.style.color=toWorkOnIt?'#9168a1':'white';
+    if(heartRef.current) heartRef.current.style.color=isLiked?'#7f6ea6':'white';
+    //setToWorkOnIt(userData.workOnIt.includes(videoData.videoID));
+    //setIsLiked(userData.favorites.includes(videoData.videoID));
+  },[videoData]); 
+  
   const workOnVideo = () =>{
-    setToWorkOnIt(!toWorkOnIt)
-    workOnVideoRef.current.classList.add("shake");
-    workOnVideoRef.current.style.color=!toWorkOnIt?'#9168a1':'white';
-    setTimeout(()=>{ workOnVideoRef?.current && workOnVideoRef.current.classList.remove("shake");},1000);
+    if(userData.dataID && videoData.videoID){
+      if(!toWorkOnIt){
+        userData.workOnIt.push(videoData.videoID);
+        userData.points+=2;
+        updateUserData(userData,'workOnIt');
+      } else {
+        userData.points+=2;
+        const removeID = userData.workOnIt.filter(id=>id!==videoData.videoID);
+        updateUserData({...userData,workOnIt:removeID},'workOnIt');
+        setUserData({...userData, workOnIt: removeID});
+      }
+      
+      setToWorkOnIt(!toWorkOnIt)
+      workOnVideoRef.current.classList.add("shake");
+      workOnVideoRef.current.style.color=!toWorkOnIt?'#9168a1':'white';
+      setTimeout(()=>{ workOnVideoRef?.current && workOnVideoRef.current.classList.remove("shake");},1000);
+    }
   }
    
   const likeVideo = () =>{
-    heartRef.current.parentElement.style.color=isLiked?'white':'#7f6ea6';
-    heartRef.current.style.color='#7f6ea6';
-    heartRef.current.style.top='-5000%';
-    heartRef.current.style.transform="rotate(720deg) translate(300%)";
-    heartRef.current.style.opacity='1';
-    setIsLiked(!isLiked);
+    if(userData.dataID && videoData.videoID){
+      if(!isLiked){
+        userData.favorites.push(videoData.videoID);
+        userData.points+=3;
+        updateUserData(userData,'favorites');
+      } else {
+        const removeID = userData.favorites.filter(id=>id!==videoData.videoID);
+        updateUserData({...userData, favorites: removeID},'favorites');
+        setUserData({...userData, favorites: removeID});
+      }
+      heartRef.current.parentElement.style.color=isLiked?'white':'#7f6ea6';
+      heartRef.current.style.color='#7f6ea6';
+      heartRef.current.style.top='-4500%';
+      heartRef.current.style.transform="rotateY(1080deg)";
+      heartRef.current.style.opacity='1';
+      setIsLiked(!isLiked);
     }
+  }
     
   useEffect(()=> {
 
@@ -50,7 +83,7 @@ const Learn = () => {
     if(heartRef.current){
     resetHeart = setTimeout(() => {
       heartRef.current.style.color=isLiked?'#7f6ea6':'white';
-      heartRef.current.style.opacity='0';
+      //heartRef.current.style.opacity='0';
       heartRef.current.style.top='0';
       heartRef.current.style.transform="initial";
     }, 1000);}
@@ -139,7 +172,7 @@ const Learn = () => {
 
   },[modalsPosition]);
 
-  useEffect(()=>{console.log('Effect!on mount');
+  useEffect(()=>{
 
   const userDataID = decodeJWTPayload().dataID;
 
@@ -157,8 +190,8 @@ const Learn = () => {
     .then(res=>res.json())
     .then(data=>{ 
                 data.token_error || !localStorage.getItem('W2M-JWT-Token') ? 
-                setUserData({favorites: [], workOnIt: [], points: 0, dataID: null}) || setLandingModal(true) || console.log(landingModal):
-                setUserData(data)})
+                setUserData({favorites: [], workOnIt: [], points: 0, dataID: null}) :
+                data.data_error ? console.log(data) : setUserData(data)})
     .catch(err=>console.log('fetch error',err.message));
 
 	  
@@ -195,7 +228,6 @@ const Learn = () => {
   }
 
   if(!localStorage.getItem('W2M-JWT-Token')) setLandingModal(true);
-  console.log({landingModal});
 
   return ( landingModal ? <jwtProblem /> :
     <div id="learn-container">
