@@ -1,5 +1,4 @@
 import './Learn.css';
-//import {useNavigate} from 'react-router-dom';
 import uploadingVid from '../../assets/uploading_bar.mp4';
 import notFound from '../../assets/404pagenotfound.mp4';
 import decodeJWTPayload from '../../helpers/decodeJWTPayload.js';
@@ -11,14 +10,14 @@ import MyContext from '../../context/MyContext.js';
 const Learn = () => {
 
   const {setLandingModal} = useContext(MyContext);
-  //const navigate = useNavigate();
+
   const initialPositions = {favorites: 90, workOnIt: 93.3, another: 96.6};
   const expandedPositions = {favorites: 0, workOnIt: 3, another: 6};
  
   const [userData, setUserData] = useState({favorites: [], workOnIt: [], points: 0, dataID: null});
   const [modalsPosition, setModalsPosition] = useState(initialPositions);
   const [videoData, setVideoData] = useState({title: 'Loading...', data: uploadingVid, videoID: null});  
-  const [chosenVideos, setChosenVideos] = useState({favorites:[], workOnIt: []}); 
+  const [chosenVideosData, setChosenVideosData] = useState({favorites:[], workOnIt: []});
   const [selectSearch, setSelectSearch] = useState('');  
   const [submitted, setSubmitted] = useState(false);
   const [isLiked, setIsLiked] = useState(false);  
@@ -33,7 +32,68 @@ const Learn = () => {
   const workVidRef = useRef();
   const anotherVidRef = useRef();
 
-  const favList = chosenVideos.favorites.map((vidData,i)=>
+  const testRef = useRef();
+  const [testState, setTestState] = useState(true);
+
+  useEffect(()=>{
+    if(heartRef.current && userData.favorites.includes(videoData.videoID)) heartRef.current.style.color='#7f6ea6';
+    else if(heartRef.current) heartRef.current.style.color='white';
+    console.log('effect:',userData.favorites, videoData.videoID);
+  },[userData.favorites,videoData.videoID]);
+
+  useEffect(()=>{
+    if(workOnVideoRef.current && userData.workOnIt.includes(videoData.videoID)) workOnVideoRef.current.style.color='#9168a1';
+    else if(workOnVideoRef.current) workOnVideoRef.current.style.color='white';
+    console.log('effect:',userData.workOnIt, videoData.videoID);
+  },[userData.workOnIt,videoData.videoID]);
+
+  const chngTestState = () => {
+    console.log('click');
+    setTestState(!testState);
+  }
+
+
+  const favList = () => {
+
+    return    chosenVideosData.favorites.map((vidData,i)=>
+                            <div key={'fav_'+i}>
+
+                              <div className="img-container">
+                                        <video 
+                                              src={vidData.data} 
+                                              type="video/mp4"
+                                              onPlay={()=>addPoints(2)} 
+                                              onPause={()=>addPoints(2)}
+                                              controls 
+                                              loop>
+                                  Your browser does not support the video tag.</video> 
+                              </div>
+                              
+                              <div className="text">
+                                <h5 className='fav-title'> 
+                                  {vidData.title.toUpperCase()}
+                                </h5>
+                              </div>
+
+                              <div className="fav-delete">
+                                <i className="fa fa-trash-o" 
+                                  title='Remove this video from favorites' 
+                                  onClick={(e)=>{e.target.parentElement.parentElement.remove();
+                                                  likeVideo('favorites',vidData._id);
+                                                  }}
+                                  style={{cursor:'pointer', color: '#404756'}}></i>
+                                <i className="fa fa-arrow-up" 
+                                  title='Remove this video from favorites' 
+                                  onClick={(e)=>{e.target.parentElement.parentElement.style.display='none';
+                                                  likeVideo('favorites',vidData._id);
+                                                  }}
+                                  style={{cursor:'pointer', 	color: '#404756'}}></i>
+                              </div> 
+
+                            </div>) ;
+  }
+
+  /* const favList = chosenVideosData.favorites.map((vidData,i)=>
                 <div key={'fav_'+i}>
       
                   <div className="img-container">
@@ -68,7 +128,7 @@ const Learn = () => {
                        style={{cursor:'pointer', 	color: '#404756'}}></i>
                   </div> 
 
-                </div>) ; console.log(favList,chosenVideos.favorites);
+                </div>) ; console.log(favList,chosenVideosData.favorites); */
 
   const addPoints = (points) => {
 
@@ -82,10 +142,6 @@ const Learn = () => {
         const removeID = userData[property].filter(id=>id!==videoID);
         updateUserData({...userData,[property]:removeID},property);
         setUserData({...userData, [property]: removeID});
-        if(videoID===videoData.videoID) {
-          if(property==='favorites') setIsLiked(false);
-          if(property==='workOnIt') setToWorkOnIt(false);
-        }
   }
   
   const workOnVideo = () =>{
@@ -95,13 +151,14 @@ const Learn = () => {
         userData.workOnIt.push(videoData.videoID);
         userData.points+=2;
         updateUserData(userData,property);
+        setUserData({...userData,[property]:[...userData[property]]});
       } else {
         removeVid(property,videoData.videoID);
       }
       
       setToWorkOnIt(!toWorkOnIt)
       workOnVideoRef.current.classList.add("shake");
-      workOnVideoRef.current.style.color=!toWorkOnIt?'#9168a1':'white';
+      //workOnVideoRef.current.style.color=!toWorkOnIt?'#9168a1':'white';
       setTimeout(()=>{ workOnVideoRef?.current && workOnVideoRef.current.classList.remove("shake");},1000);
     }
   }
@@ -114,11 +171,12 @@ const Learn = () => {
         userData.favorites.push(videoData.videoID);
         userData.points+=3;
         updateUserData(userData,property);
+        setUserData({...userData,[property]:[...userData[property]]});
       } else {
         removeVid(property,videoData.videoID);
       }
-      heartRef.current.parentElement.style.color=isLiked?'white':'#7f6ea6';
-      heartRef.current.style.color='#7f6ea6';
+      //heartRef.current.parentElement.style.color=isLiked?'white':'#7f6ea6';
+      //heartRef.current.style.color='#7f6ea6';
       heartRef.current.style.top='-4500%';
       heartRef.current.style.transform="rotateY(1080deg)";
       heartRef.current.style.opacity='1';
@@ -126,22 +184,22 @@ const Learn = () => {
     }
   }
 
-  useEffect(()=>{
+ /*  useEffect(()=>{
     setToWorkOnIt(userData.workOnIt.includes(videoData.videoID));
     setIsLiked(userData.favorites.includes(videoData.videoID));
-  });
+  }); */
 
-  useEffect(()=>{
+ /*  useEffect(()=>{
     if(workOnVideoRef.current) workOnVideoRef.current.style.color=toWorkOnIt?'#9168a1':'white';
     if(heartRef.current) heartRef.current.style.color=isLiked?'#7f6ea6':'white';
-  },[videoData,toWorkOnIt]); 
+  },[videoData,toWorkOnIt]);  */
 
   useEffect(()=> {
 
     let resetHeart;
     if(heartRef.current){
     resetHeart = setTimeout(() => {
-      heartRef.current.style.color=isLiked?'#7f6ea6':'white';
+      //heartRef.current.style.color=isLiked?'#7f6ea6':'white';
       //heartRef.current.style.opacity='0';
       heartRef.current.style.top='0';
       heartRef.current.style.transform="initial";
@@ -292,7 +350,7 @@ const Learn = () => {
       body: JSON.stringify({data: userData[modal_name]})
     })
     .then(res=>res.json())
-    .then(vids=>{setChosenVideos({...chosenVideos,[modal_name]:vids}); console.log(vids);})
+    .then(vids=>{setChosenVideosData({...chosenVideosData,[modal_name]:vids}); console.log(vids);})
     .catch(err=>console.log('fetch-my-vids',err));
 
     switch(modal_name){
@@ -319,7 +377,7 @@ const Learn = () => {
   if(!localStorage.getItem('W2M-JWT-Token')) setLandingModal(true);
 
   return ( 
-    <div id="learn-container">
+    <div id="learn-container">{/* <div id='test' ref={testRef} onClick={chngTestState}></div> */}
         <div id="first-page">
             <form id="search-container" onSubmit={submitHandler}>
               <div id='search-div'>
@@ -387,7 +445,7 @@ const Learn = () => {
 
               <div className='videos-container' ref={favVidRef}>
 
-                {favList}              
+                {favList()}              
 
               </div>
 
@@ -404,7 +462,7 @@ const Learn = () => {
 
               <div className='videos-container' ref={workVidRef}>
 
-                {chosenVideos.workOnIt.map((vidData,i)=>
+                {chosenVideosData.workOnIt.map((vidData,i)=>
                 
                 <div key={'work'+i}>
       

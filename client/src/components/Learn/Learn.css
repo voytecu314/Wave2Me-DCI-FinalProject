@@ -102,7 +102,7 @@
 	top:0;
 	left: 0;
 	cursor: pointer;
-	transition: top 1.5s ease-in,transform 4s,color .5s ease-out;
+	transition: top 1.5s ease-in,transform 4s,color .1s ease-out;
 }
 
 .shake {
@@ -144,4 +144,11 @@
 	.videos-container {
 		grid-template-columns: 1fr;
 	}
+ }
+
+ #test {
+	background-color: black;
+	color: antiquewhite;
+	width: 100vw;height: 100vh;
+	z-index: 9999999;
  }

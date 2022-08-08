@@ -56,7 +56,7 @@ export const getMyVideos = async (req, res) => {
 	
 	} catch(error) {
 		
-		console,log('Find video - searchVideo controller:',error);
+		console.log('Find video - searchVideo controller:',error);
 		res.status(500).json(error);
 	
 	}
