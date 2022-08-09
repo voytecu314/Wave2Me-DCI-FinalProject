@@ -1,24 +1,24 @@
 import './Learn.css';
+//import {useNavigate} from 'react-router-dom';
 import uploadingVid from '../../assets/uploading_bar.mp4';
 import notFound from '../../assets/404pagenotfound.mp4';
 import decodeJWTPayload from '../../helpers/decodeJWTPayload.js';
 import updateUserData from '../../helpers/updateUserData';
 import { useState, useRef, useEffect, useContext } from 'react';
 import MyContext from '../../context/MyContext.js';
-import fetchMyVideos from '../../helpers/fetchMyVideos';
 
 
 const Learn = () => {
 
   const {setLandingModal} = useContext(MyContext);
-
+  //const navigate = useNavigate();
   const initialPositions = {favorites: 90, workOnIt: 93.3, another: 96.6};
   const expandedPositions = {favorites: 0, workOnIt: 3, another: 6};
  
   const [userData, setUserData] = useState({favorites: [], workOnIt: [], points: 0, dataID: null});
   const [modalsPosition, setModalsPosition] = useState(initialPositions);
   const [videoData, setVideoData] = useState({title: 'Loading...', data: uploadingVid, videoID: null});  
-  const [chosenVideosData, setChosenVideosData] = useState({favorites:[], workOnIt: []});
+  const [chosenVideos, setChosenVideos] = useState({favorites:[], workOnIt: []}); 
   const [selectSearch, setSelectSearch] = useState('');  
   const [submitted, setSubmitted] = useState(false);
   const [isLiked, setIsLiked] = useState(false);  
@@ -33,109 +33,42 @@ const Learn = () => {
   const workVidRef = useRef();
   const anotherVidRef = useRef();
 
-  useEffect(()=>{
-    if(heartRef.current && userData.favorites.includes(videoData.videoID)) {
-      heartRef.current.style.color='#7f6ea6';
-      heartRef.current.title="Remove like?";}
-    else if(heartRef.current) {
-      heartRef.current.style.color='white';
-      heartRef.current.title="Add to favorites";
-    }
-  },[userData.favorites,videoData.videoID]);
-  
-  useEffect(()=>{
-    if(workOnVideoRef.current && userData.workOnIt.includes(videoData.videoID)) {
-      workOnVideoRef.current.style.color='#9168a1';
-      workOnVideoRef.current.title="Remove icon?";}
-    else if(workOnVideoRef.current) {
-      workOnVideoRef.current.style.color='white';
-      workOnVideoRef.current.title="Work on it later"}
-  },[userData.workOnIt,videoData.videoID]);
+  const favList = chosenVideos.favorites.map((vidData,i)=>
+                <div key={'fav_'+i}>
+      
+                  <div className="img-container">
+                            <video 
+                                  src={vidData.data} 
+                                  type="video/mp4"
+                                  onPlay={()=>addPoints(2)} 
+                                  onPause={()=>addPoints(2)}
+                                  controls 
+                                  loop>
+                      Your browser does not support the video tag.</video> 
+                  </div>
+                  
+                   <div className="text">
+                    <h5 className='fav-title'> 
+                      {vidData.title.toUpperCase()}
+                    </h5>
+                  </div>
 
+                  <div className="fav-delete">
+                    <i className="fa fa-trash-o" 
+                       title='Remove this video from favorites' 
+                       onClick={(e)=>{e.target.parentElement.parentElement.remove();
+                                      likeVideo('favorites',vidData._id);
+                                      }}
+                       style={{cursor:'pointer', color: '#404756'}}></i>
+                    <i className="fa fa-arrow-up" 
+                       title='Remove this video from favorites' 
+                       onClick={(e)=>{e.target.parentElement.parentElement.style.display='none';
+                                      likeVideo('favorites',vidData._id);
+                                      }}
+                       style={{cursor:'pointer', 	color: '#404756'}}></i>
+                  </div> 
 
-  const favList = () => {
-
-    return    chosenVideosData.favorites.map((vidData,i)=>
-                            <div key={Math.random()/i}>
-
-                              <div className="img-container">
-                                        <video 
-                                              src={vidData.data} 
-                                              type="video/mp4"
-                                              onPlay={()=>addPoints(2)} 
-                                              onPause={()=>addPoints(2)}
-                                              controls 
-                                              loop>
-                                  Your browser does not support the video tag.</video> 
-                              </div>
-                              
-                              <div className="text">
-                                <h5 className='fav-title'> 
-                                  {vidData.title.toUpperCase()}
-                                </h5>
-                              </div>
-
-                              <div className="fav-delete">
-                                <i className="fa fa-trash-o" 
-                                  title='Remove this video from favorites' 
-                                  onClick={(e)=>{setIsLiked(!isLiked);
-                                    removeVid('favorites',vidData._id);
-                                    fetchMyVideos(setChosenVideosData,{...userData,favorites:userData.favorites.filter(id=>id!==vidData._id)},chosenVideosData,'favorites');
-                                                  }}
-                                  style={{cursor:'pointer', color: '#404756'}}></i>
-                                <i className="fa fa-arrow-up" 
-                                  title='Remove this video from favorites' 
-                                  onClick={(e)=>{setIsLiked(!isLiked);
-                                    removeVid('favorites',vidData._id);
-                                    fetchMyVideos(setChosenVideosData,{...userData,favorites:userData.favorites.filter(id=>id!==vidData._id)},chosenVideosData,'favorites');
-                                                  }}
-                                  style={{cursor:'pointer', 	color: '#404756'}}></i>
-                              </div> 
-
-                            </div>) ;
-  }
-
-  const workOnItList = () => {
-
-    return    chosenVideosData.workOnIt.map((vidData,i)=>
-                            <div key={Math.random()/i}>
-
-                              <div className="img-container">
-                                        <video 
-                                              src={vidData.data} 
-                                              type="video/mp4"
-                                              onPlay={()=>addPoints(2)} 
-                                              onPause={()=>addPoints(2)}
-                                              controls 
-                                              loop>
-                                  Your browser does not support the video tag.</video> 
-                              </div>
-                              
-                              <div className="text">
-                                <h5 className='fav-title'> 
-                                  {vidData.title.toUpperCase()}
-                                </h5>
-                              </div>
-
-                              <div className="fav-delete">
-                                <i className="fa fa-trash-o" 
-                                  title='Remove this video from workOnIt' 
-                                  onClick={(e)=>{setIsLiked(!isLiked);
-                                    removeVid('workOnIt',vidData._id);
-                                    fetchMyVideos(setChosenVideosData,{...userData,workOnIt:userData.workOnIt.filter(id=>id!==vidData._id)},chosenVideosData,'workOnIt');
-                                                  }}
-                                  style={{cursor:'pointer', color: '#404756'}}></i>
-                                <i className="fa fa-arrow-up" 
-                                  title='Remove this video from workOnIt' 
-                                  onClick={(e)=>{setIsLiked(!isLiked);
-                                    removeVid('workOnIt',vidData._id);
-                                    fetchMyVideos(setChosenVideosData,{...userData,workOnIt:userData.workOnIt.filter(id=>id!==vidData._id)},chosenVideosData,'workOnIt');
-                                                  }}
-                                  style={{cursor:'pointer', 	color: '#404756'}}></i>
-                              </div> 
-
-                            </div>) ;
-  }
+                </div>) ; console.log(favList,chosenVideos.favorites);
 
   const addPoints = (points) => {
 
@@ -149,6 +82,10 @@ const Learn = () => {
         const removeID = userData[property].filter(id=>id!==videoID);
         updateUserData({...userData,[property]:removeID},property);
         setUserData({...userData, [property]: removeID});
+        if(videoID===videoData.videoID) {
+          if(property==='favorites') setIsLiked(false);
+          if(property==='workOnIt') setToWorkOnIt(false);
+        }
   }
   
   const workOnVideo = () =>{
@@ -158,13 +95,13 @@ const Learn = () => {
         userData.workOnIt.push(videoData.videoID);
         userData.points+=2;
         updateUserData(userData,property);
-        setUserData({...userData,[property]:[...userData[property]]});
       } else {
         removeVid(property,videoData.videoID);
       }
       
       setToWorkOnIt(!toWorkOnIt)
       workOnVideoRef.current.classList.add("shake");
+      workOnVideoRef.current.style.color=!toWorkOnIt?'#9168a1':'white';
       setTimeout(()=>{ workOnVideoRef?.current && workOnVideoRef.current.classList.remove("shake");},1000);
     }
   }
@@ -177,22 +114,35 @@ const Learn = () => {
         userData.favorites.push(videoData.videoID);
         userData.points+=3;
         updateUserData(userData,property);
-        setUserData({...userData,[property]:[...userData[property]]});
       } else {
         removeVid(property,videoData.videoID);
       }
+      heartRef.current.parentElement.style.color=isLiked?'white':'#7f6ea6';
+      heartRef.current.style.color='#7f6ea6';
       heartRef.current.style.top='-4500%';
-      heartRef.current.style.transform="rotate(1080deg)";
+      heartRef.current.style.transform="rotateY(1080deg)";
       heartRef.current.style.opacity='1';
       setIsLiked(!isLiked);
     }
   }
+
+  useEffect(()=>{
+    setToWorkOnIt(userData.workOnIt.includes(videoData.videoID));
+    setIsLiked(userData.favorites.includes(videoData.videoID));
+  });
+
+  useEffect(()=>{
+    if(workOnVideoRef.current) workOnVideoRef.current.style.color=toWorkOnIt?'#9168a1':'white';
+    if(heartRef.current) heartRef.current.style.color=isLiked?'#7f6ea6':'white';
+  },[videoData,toWorkOnIt]); 
 
   useEffect(()=> {
 
     let resetHeart;
     if(heartRef.current){
     resetHeart = setTimeout(() => {
+      heartRef.current.style.color=isLiked?'#7f6ea6':'white';
+      //heartRef.current.style.opacity='0';
       heartRef.current.style.top='0';
       heartRef.current.style.transform="initial";
     }, 1000);}
@@ -336,7 +286,14 @@ const Learn = () => {
     }
     
     modal_name!=='another' && (modalsPosition[modal_name]>10 || modalsPosition.workOnIt<10) && 
-    fetchMyVideos(setChosenVideosData,userData,chosenVideosData,modal_name);
+    fetch('http://localhost:5000/get-my-videos',{
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({data: userData[modal_name]})
+    })
+    .then(res=>res.json())
+    .then(vids=>{setChosenVideos({...chosenVideos,[modal_name]:vids}); console.log(vids);})
+    .catch(err=>console.log('fetch-my-vids',err));
 
     switch(modal_name){
 
@@ -407,10 +364,10 @@ const Learn = () => {
             
             {videoData.videoID &&
             <div id="video-likes">
-              <i className="fa fa-heart" style={{position:'relative'}}>
+              <i className="fa fa-heart" title={isLiked?"Remove like?":"Add to favorites"} style={{position:'relative'}}>
                 <i className="fa fa-heart video-icon" ref={heartRef} onClick={likeVideo}></i>
               </i>
-              <i className='fas fa-business-time' style={{position:'relative'}}>
+              <i className='fas fa-business-time' title={toWorkOnIt?"Remove icon?":"Work on it later"} style={{position:'relative'}}>
                 <i className='fas fa-business-time video-icon' ref={workOnVideoRef} onClick={workOnVideo}></i>
               </i>
             </div>}
@@ -430,7 +387,7 @@ const Learn = () => {
 
               <div className='videos-container' ref={favVidRef}>
 
-                {favList()}             
+                {favList}              
 
               </div>
 
@@ -447,7 +404,45 @@ const Learn = () => {
 
               <div className='videos-container' ref={workVidRef}>
 
-                {workOnItList()}              
+                {chosenVideos.workOnIt.map((vidData,i)=>
+                
+                <div key={'work'+i}>
+      
+                  <div className="img-container">
+                            <video 
+                                  src={vidData.data} 
+                                  type="video/mp4"
+                                  onPlay={()=>addPoints(2)} 
+                                  onPause={()=>addPoints(2)}
+                                  controls 
+                                  loop>
+                      Your browser does not support the video tag.</video> 
+                  </div>
+                  
+                   <div className="text">
+                    <h5 className='fav-title'> 
+                      {vidData.title.toUpperCase()}
+                    </h5>
+                  </div>
+
+                  <div className="fav-delete">
+                    <i className="fa fa-trash-o" 
+                       title='Remove this video from her' 
+                       onClick={(e)=>{
+                                      removeVid('workOnIt',vidData._id);
+                                      e.target.parentElement.parentElement.style.display='none';}}
+                       style={{cursor:'pointer', color: '#404756'}}></i>
+                    <i className="fa fa-arrow-up" 
+                       title='Remove this video from here' 
+                       onClick={(e)=>{
+                                      removeVid('workOnIt',vidData._id);
+                                      e.target.parentElement.parentElement.style.display='none';}}
+                       style={{cursor:'pointer', 	color: '#404756'}}></i>
+                  </div> 
+
+                </div>
+
+                )  }              
 
               </div>
 
