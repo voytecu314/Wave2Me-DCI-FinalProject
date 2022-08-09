@@ -145,10 +145,3 @@
 		grid-template-columns: 1fr;
 	}
  }
-
- #test {
-	background-color: black;
-	color: antiquewhite;
-	width: 100vw;height: 100vh;
-	z-index: 9999999;
- }
