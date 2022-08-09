@@ -5,6 +5,7 @@ import decodeJWTPayload from '../../helpers/decodeJWTPayload.js';
 import updateUserData from '../../helpers/updateUserData';
 import { useState, useRef, useEffect, useContext } from 'react';
 import MyContext from '../../context/MyContext.js';
+import fetchMyVideos from '../../helpers/fetchMyVideos';
 
 
 const Learn = () => {
@@ -22,6 +23,8 @@ const Learn = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isLiked, setIsLiked] = useState(false);  
   const [toWorkOnIt, setToWorkOnIt] = useState(false);
+  //const [fvLst, setFvLst] = useState(null);
+
 
   const favoritesRef = useRef();
   const workOnItRef = useRef();
@@ -36,15 +39,22 @@ const Learn = () => {
   const [testState, setTestState] = useState(true);
 
   useEffect(()=>{
-    if(heartRef.current && userData.favorites.includes(videoData.videoID)) heartRef.current.style.color='#7f6ea6';
-    else if(heartRef.current) heartRef.current.style.color='white';
-    console.log('effect:',userData.favorites, videoData.videoID);
+    if(heartRef.current && userData.favorites.includes(videoData.videoID)) {
+      heartRef.current.style.color='#7f6ea6';
+      heartRef.current.title="Remove like?";}
+    else if(heartRef.current) {
+      heartRef.current.style.color='white';
+      heartRef.current.title="Add to favorites";
+    }
   },[userData.favorites,videoData.videoID]);
-
+  
   useEffect(()=>{
-    if(workOnVideoRef.current && userData.workOnIt.includes(videoData.videoID)) workOnVideoRef.current.style.color='#9168a1';
-    else if(workOnVideoRef.current) workOnVideoRef.current.style.color='white';
-    console.log('effect:',userData.workOnIt, videoData.videoID);
+    if(workOnVideoRef.current && userData.workOnIt.includes(videoData.videoID)) {
+      workOnVideoRef.current.style.color='#9168a1';
+      workOnVideoRef.current.title="Remove icon?";}
+    else if(workOnVideoRef.current) {
+      workOnVideoRef.current.style.color='white';
+      workOnVideoRef.current.title="Work on it later"}
   },[userData.workOnIt,videoData.videoID]);
 
   const chngTestState = () => {
@@ -56,7 +66,7 @@ const Learn = () => {
   const favList = () => {
 
     return    chosenVideosData.favorites.map((vidData,i)=>
-                            <div key={'fav_'+i}>
+                            <div key={Math.random()/i}>
 
                               <div className="img-container">
                                         <video 
@@ -78,20 +88,33 @@ const Learn = () => {
                               <div className="fav-delete">
                                 <i className="fa fa-trash-o" 
                                   title='Remove this video from favorites' 
-                                  onClick={(e)=>{e.target.parentElement.parentElement.remove();
-                                                  likeVideo('favorites',vidData._id);
+                                  onClick={(e)=>{setIsLiked(!isLiked);
+                                    removeVid('favorites',vidData._id);
+                                    fetchMyVideos(setChosenVideosData,{...userData,favorites:userData.favorites.filter(id=>id!==vidData._id)},chosenVideosData,'favorites');
                                                   }}
                                   style={{cursor:'pointer', color: '#404756'}}></i>
                                 <i className="fa fa-arrow-up" 
                                   title='Remove this video from favorites' 
-                                  onClick={(e)=>{e.target.parentElement.parentElement.style.display='none';
-                                                  likeVideo('favorites',vidData._id);
+                                  onClick={(e)=>{setIsLiked(!isLiked);
+                                    removeVid('favorites',vidData._id);
+                                    fetchMyVideos(setChosenVideosData,{...userData,favorites:userData.favorites.filter(id=>id!==vidData._id)},chosenVideosData,'favorites');
                                                   }}
                                   style={{cursor:'pointer', 	color: '#404756'}}></i>
                               </div> 
 
                             </div>) ;
   }
+
+  /* useEffect(()=>{
+    
+    setFvLst(chosenVideosData.favorites.map((vidData,i)=><div style={{display:'grid',placeItems:'center',cursor:'pointer'}}
+                                                            key={i} 
+                                                            onClick={(e)=>{e.target.style.opacity='.5'
+                                                                           removeVid('favorites',vidData._id);}}>
+                                                            {vidData.title}</div>));
+
+  },[chosenVideosData]); */
+
 
   /* const favList = chosenVideosData.favorites.map((vidData,i)=>
                 <div key={'fav_'+i}>
@@ -142,6 +165,7 @@ const Learn = () => {
         const removeID = userData[property].filter(id=>id!==videoID);
         updateUserData({...userData,[property]:removeID},property);
         setUserData({...userData, [property]: removeID});
+        //setIsLiked(!isLiked);
   }
   
   const workOnVideo = () =>{
@@ -178,7 +202,7 @@ const Learn = () => {
       //heartRef.current.parentElement.style.color=isLiked?'white':'#7f6ea6';
       //heartRef.current.style.color='#7f6ea6';
       heartRef.current.style.top='-4500%';
-      heartRef.current.style.transform="rotateY(1080deg)";
+      heartRef.current.style.transform="rotate(1080deg)";
       heartRef.current.style.opacity='1';
       setIsLiked(!isLiked);
     }
@@ -344,14 +368,15 @@ const Learn = () => {
     }
     
     modal_name!=='another' && (modalsPosition[modal_name]>10 || modalsPosition.workOnIt<10) && 
-    fetch('http://localhost:5000/get-my-videos',{
+    fetchMyVideos(setChosenVideosData,userData,chosenVideosData,modal_name);
+    /* fetch('http://localhost:5000/get-my-videos',{
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({data: userData[modal_name]})
     })
     .then(res=>res.json())
     .then(vids=>{setChosenVideosData({...chosenVideosData,[modal_name]:vids}); console.log(vids);})
-    .catch(err=>console.log('fetch-my-vids',err));
+    .catch(err=>console.log('fetch-my-vids',err)); */
 
     switch(modal_name){
 
@@ -422,10 +447,10 @@ const Learn = () => {
             
             {videoData.videoID &&
             <div id="video-likes">
-              <i className="fa fa-heart" title={isLiked?"Remove like?":"Add to favorites"} style={{position:'relative'}}>
+              <i className="fa fa-heart" style={{position:'relative'}}>
                 <i className="fa fa-heart video-icon" ref={heartRef} onClick={likeVideo}></i>
               </i>
-              <i className='fas fa-business-time' title={toWorkOnIt?"Remove icon?":"Work on it later"} style={{position:'relative'}}>
+              <i className='fas fa-business-time' style={{position:'relative'}}>
                 <i className='fas fa-business-time video-icon' ref={workOnVideoRef} onClick={workOnVideo}></i>
               </i>
             </div>}
@@ -445,7 +470,8 @@ const Learn = () => {
 
               <div className='videos-container' ref={favVidRef}>
 
-                {favList()}              
+                {favList()}
+                {/* fvLst */}              
 
               </div>
 
