@@ -56,7 +56,7 @@ const Learn = () => {
   const favList = () => {
 
     return    chosenVideosData.favorites.map((vidData,i)=>
-                            <div key={Math.random()/i}>
+                            <div key={'fav_'+i}>
 
                               <div className="img-container">
                                         <video 
@@ -98,7 +98,7 @@ const Learn = () => {
   const workOnItList = () => {
 
     return    chosenVideosData.workOnIt.map((vidData,i)=>
-                            <div key={Math.random()/i}>
+                            <div key={'work_'+i}>
 
                               <div className="img-container">
                                         <video 
@@ -120,14 +120,14 @@ const Learn = () => {
                               <div className="fav-delete">
                                 <i className="fa fa-trash-o" 
                                   title='Remove this video from workOnIt' 
-                                  onClick={(e)=>{setIsLiked(!isLiked);
+                                  onClick={(e)=>{
                                     removeVid('workOnIt',vidData._id);
                                     fetchMyVideos(setChosenVideosData,{...userData,workOnIt:userData.workOnIt.filter(id=>id!==vidData._id)},chosenVideosData,'workOnIt');
                                                   }}
                                   style={{cursor:'pointer', color: '#404756'}}></i>
                                 <i className="fa fa-arrow-up" 
                                   title='Remove this video from workOnIt' 
-                                  onClick={(e)=>{setIsLiked(!isLiked);
+                                  onClick={(e)=>{
                                     removeVid('workOnIt',vidData._id);
                                     fetchMyVideos(setChosenVideosData,{...userData,workOnIt:userData.workOnIt.filter(id=>id!==vidData._id)},chosenVideosData,'workOnIt');
                                                   }}
