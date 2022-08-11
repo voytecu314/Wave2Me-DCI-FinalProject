@@ -4,8 +4,6 @@ import './Blog.css'
 const Blog = () => {
 
     const [data, setData] = useState({articles: null, loading: true, error: null});
-    const [language,setLanguage] = useState('en');
-
 
     useEffect(()=>{
         fetch('http://localhost:5000/get-blog-posts')
@@ -19,41 +17,8 @@ const Blog = () => {
 
   return (
     <>
-  <div className="language">
-    <form>
-      <label>
-      <input
-        type='radio'
-        checked={language === 'en'}
-        value='en'
-        /* onChange={languageHandler} */
-      />
-      <span>EN</span>
-    </label>
-    <label>
-      <input
-        type='radio'
-        checked={language === 'es'}
-        value='es'
-        /* onChange={languageHandler} */
-      />
-      <span>ES</span>
-    </label>
-    <label>
-      <input
-        type='radio'
-        checked={language === 'de'}
-        value='de'
-        /* onChange={languageHandler} */
-      />
-      <span>DE</span>
-      </label>
-    </form>
-  </div>
   <div id="blog-grid-container">
           
-        
-
         {data.articles.map((article, index)=><div id="blog-grid-item" key={index}>
                                                 <h1 className="title">{article.title}</h1>
                                                 <img src={article.urlToImage} 

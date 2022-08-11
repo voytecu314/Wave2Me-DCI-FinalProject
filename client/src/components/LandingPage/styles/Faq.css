@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@1,700&display=swap');
+
+#faq {
+    position: absolute;
+    background-color: #5F77A5;
+    display: grid;
+    place-items: center;
+    width: 100vw;
+    height: 120vh;
+    top: 0;
+    left: 0;
+    z-index: 200;
+}
+
+main > legend:hover {
+    font-family: 'Playfair Display SC', serif;
+    word-spacing: 10px;
+    color: #96ecbd;
+    border-left: blue solid 3px;
+}
+
+fieldset {
+    border-radius: 10px;
+    padding: .5rem;
+    filter: drop-shadow(4px 4px 5px rgba(30,30,30,.7));
+    width: 60%;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+fieldset:nth-of-type(odd) {
+    background-color: #9168a1 ;
+    color: black;
+}
+fieldset:nth-of-type(even) {
+    background-color: #6e73a7 ;
+}
+
+fieldset > p {
+    padding: .5rem;
+    font-size: 1.7rem;
+    word-spacing: 5px;
+}
+
+fieldset  > legend {
+    margin: 2%;
+    word-spacing: 6px;
+    font-size: 2.5rem;
+    font-family: 'Playfair Display SC', serif;
+}
+legend:hover {
+    font-size: 2.5rem;
+    color: #96ecbd;
+}
+
+.anchor-tag {
+    display: block;
+    text-align: center;
+}
