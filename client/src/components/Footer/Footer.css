@@ -24,6 +24,11 @@
     font-size: 4.2rem;
 }
 
+.coloringstar:hover {
+    color: #f9f971;
+    font-size: 4.2rem;
+}
+
 .logo-text {
     font-style: italic;
     font-size: 1.3rem;
