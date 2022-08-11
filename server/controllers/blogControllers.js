@@ -28,11 +28,12 @@ export const blogPosts = (req, res) => {
         content: "There was a problem with our database, please refresh the page",
         createdAt: new Date()
     }];
+    
     blogModel.find()
              .then(data=>{
-                            posts=data[0]?.articles || posts;
+                            posts= data[0]?.articles || posts;
                             res.status(200).json(posts);
-                            console.log('DB blog posts update in',((86400000-(new Date().getTime()-data[0].createdAt.getTime()))/60000).toFixed(2),'min');
+                            //console.log('DB blog posts update in',((86400000-(new Date().getTime()-data[0].createdAt.getTime()))/60000).toFixed(2),'min');
                             if(data[0]?.articles && new Date().getTime()-data[0].createdAt.getTime()>=86400000) {
                                 blogModel.deleteOne({status: 'ok'}).then(console.log).then(
                                     axios.get(NEWS_API_URL)

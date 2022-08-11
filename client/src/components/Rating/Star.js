@@ -12,7 +12,7 @@ const Star = (props) => {
                 type="radio"
                 name="rating"
                 id={props.grade}
-                value={props.index}
+                value={props.index+1}
                 className="stars_radio-input"
                 onClick={changeGrade}
             />

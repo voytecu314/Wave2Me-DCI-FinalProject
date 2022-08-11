@@ -1,7 +1,6 @@
 import './Learn.css';
 import uploadingVid from '../../assets/uploading_bar.mp4';
 import notFound from '../../assets/404pagenotfound.mp4';
-import decodeJWTPayload from '../../helpers/decodeJWTPayload.js';
 import updateUserData from '../../helpers/updateUserData';
 import { useState, useRef, useEffect, useContext } from 'react';
 import MyContext from '../../context/MyContext.js';
@@ -10,7 +9,8 @@ import fetchMyVideos from '../../helpers/fetchMyVideos';
 
 const Learn = () => {
 
-  const {setLandingModal} = useContext(MyContext);
+  const {setLandingModal, payload} = useContext(MyContext);
+  const userDataID = payload.dataID;
 
   const initialPositions = {favorites: 90, workOnIt: 93.3, another: 96.6};
   const expandedPositions = {favorites: 0, workOnIt: 3, another: 6};
@@ -283,7 +283,7 @@ const Learn = () => {
 
   useEffect(()=>{
 
-  const userDataID = decodeJWTPayload().dataID;
+  //const userDataID = decodeJWTPayload().dataID;
 
  
     const fetchOptions = {

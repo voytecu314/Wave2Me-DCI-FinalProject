@@ -6,6 +6,7 @@ import loginRoutes from './routes/loginRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import videosRoutes from './routes/videosRoutes.js';
 import userDataRoutes from './routes/dataRoutes.js';
+import ratingRoutes from './routes/ratingRoutes.js';
 
 const app = express();
 dotenv.config();
@@ -21,6 +22,7 @@ app.use('/', loginRoutes);
 app.use('/', blogRoutes);
 app.use('/', videosRoutes);
 app.use('/', userDataRoutes);
+app.use('/', ratingRoutes);
 
 mongoose
   .connect(process.env.CONNECTION_URL)

@@ -4,10 +4,10 @@
     box-sizing: border-box;
   }
   
-  .container {
+  .stars-container {
     padding: 16px;
     margin: 16px auto;
-
+    min-height: 60vh;
   }
   
   .result {
@@ -39,3 +39,71 @@
   .stars_radio-input:checked ~ svg {
     fill: yellow;
   }
+
+  .comment-section {
+    width: 70vw;
+    height: 40vh;
+    margin: auto;
+    overflow-y: hidden;
+    font-size: 1.85rem;
+}
+
+  .comments {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 16fr;
+    border-bottom-left-radius: 9%;
+  }
+
+  .comments:nth-child(n) {
+    background-image: linear-gradient(90deg, #a4abbd 98%, #5f77a5);
+  }
+
+  .comments:nth-child(3n) {
+    background-image: linear-gradient(90deg, #7f6ea6 98%, #5f77a5);
+  }
+
+  .comments:nth-child(3n+1) {
+    background-image: linear-gradient(90deg, #c3a779 98%, #5f77a5);
+  }
+  
+  .add-comment {
+    width: 50vw;
+    margin: auto;
+    text-align: center;
+  } 
+
+  .add-comment > textarea {
+    width: 0;
+    visibility: hidden;
+    color: #5F77A5;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .add-comment > textarea::placeholder {
+    text-align: center;
+    color: #5F77A5;
+    font-size: x-large;
+  }
+
+  .see-more {
+    position: fixed;
+    bottom: 12%; left: 40%;
+  }
+
+  .see-less {
+    position: fixed;
+    bottom: 0; left: 40%;
+  }
+
+  @media screen and (max-width: 1250px){ 
+    .stars-container {
+      min-height: 70vh;
+    }
+   }
+  
+   @media screen and (max-width: 700px){ 
+    .stars-container {
+      min-height: 76vh;
+    }
+   }
