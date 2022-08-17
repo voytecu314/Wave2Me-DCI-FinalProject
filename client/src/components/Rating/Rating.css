@@ -50,7 +50,7 @@
 
   .comments {
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 16fr;
+    grid-template-columns: 2fr 4fr 3fr 16fr;
     border-bottom-left-radius: 9%;
   }
 
@@ -88,12 +88,17 @@
 
   .see-more {
     position: fixed;
-    bottom: 12%; left: 40%;
+    bottom: 20%; left: 40%;
   }
 
   .see-less {
     position: fixed;
-    bottom: 0; left: 40%;
+    bottom: 3%; left: 40%;
+  }
+
+  .comment-star {
+    font-size: .9rem;
+    color: yellow;
   }
 
   @media screen and (max-width: 1250px){ 
@@ -103,7 +108,13 @@
    }
   
    @media screen and (max-width: 700px){ 
+    .see-less {
+      bottom: 3%; 
+    }
     .stars-container {
       min-height: 76vh;
     }
+    .stars-container span {
+      font-size: .85rem;
+    } 
    }

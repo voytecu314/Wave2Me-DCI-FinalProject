@@ -283,9 +283,6 @@ const Learn = () => {
 
   useEffect(()=>{
 
-  //const userDataID = decodeJWTPayload().dataID;
-
- 
     const fetchOptions = {
         method: 'POST',
         headers: {

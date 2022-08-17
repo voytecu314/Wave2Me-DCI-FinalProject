@@ -17,8 +17,8 @@ const Star = (props) => {
                 onClick={changeGrade}
             />
             <svg 
-                width="58" 
-                height="58" 
+                width="88" 
+                height="88" 
                 viewBox="0 0 24 24" 
                 fill="none" 
                 stroke="#393939" 
