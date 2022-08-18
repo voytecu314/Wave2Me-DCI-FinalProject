@@ -1,12 +1,12 @@
 import './Home.css';
-import logo from '../../assets/w2m.jpg';
+import logo from '../../assets/w2m2.png';
 
 const Home = () => {
   return (
     <div>
       <div className="head-div">
             <div className="img-container">
-                <img className="my-img" src={logo} alt="Anne" />
+                <img className="my-img img-size" src={logo} alt="Anne" />
             </div>
              
             <h1 className="wave-font">
