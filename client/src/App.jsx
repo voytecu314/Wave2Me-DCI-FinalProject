@@ -6,6 +6,7 @@ import Learn from './components/Learn/Learn.jsx';
 import Blog from './components/Blog/Blog.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import RatingStars from './components/Rating/RatingStars.js';
+import PointsPopup from './components/PointsPopup/PointsPopup.jsx';
 import './app.css'
 import { useContext } from 'react';
 import MyContext from './context/MyContext.js';
@@ -13,7 +14,7 @@ import MyContext from './context/MyContext.js';
 
 function App() {
 
-  const {landingModal, setLandingModal} = useContext(MyContext);
+  const {pointsPopup, landingModal, setLandingModal} = useContext(MyContext);
 
   return (
     <Router>
@@ -28,7 +29,9 @@ function App() {
             <Route path='/blog' element={<Blog />} />
             <Route path='/rate-us' element={<RatingStars />} />
           </Routes>
-      
+
+        {pointsPopup && <PointsPopup />}
+
         <Footer/>
 	  </>
       }

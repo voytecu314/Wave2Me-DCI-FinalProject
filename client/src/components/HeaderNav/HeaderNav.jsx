@@ -7,8 +7,6 @@ const HeaderNav = ({setLandingModal}) => {
 
   const {payload} = useContext(MyContext);
 
-  console.log(payload);
-
   return (
     <nav className="navbar">
         <div>

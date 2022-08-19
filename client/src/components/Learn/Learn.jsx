@@ -9,9 +9,8 @@ import fetchMyVideos from '../../helpers/fetchMyVideos';
 
 const Learn = () => {
 
-  const {setLandingModal, payload} = useContext(MyContext);
+  const {setLandingModal,justEarnedPoints ,setJustEarnedPoints, setPointsPopup, payload} = useContext(MyContext);
   const userDataID = payload.dataID;
-
   const initialPositions = {favorites: 90, workOnIt: 93.3, another: 96.6};
   const expandedPositions = {favorites: 0, workOnIt: 3, another: 6};
  
@@ -32,6 +31,7 @@ const Learn = () => {
   const favVidRef = useRef();
   const workVidRef = useRef();
   const anotherVidRef = useRef();
+  const levelBarRef = useRef();
 
   useEffect(()=>{
     if(heartRef.current && userData.favorites.includes(videoData.videoID)) {
@@ -137,11 +137,29 @@ const Learn = () => {
                             </div>) ;
   }
 
+  const getLevel = n => { //based on Fibonacci sequence
+
+    if (n <= 3) {
+      return 0;
+    }
+     
+    let a = 0, b = 1, c = 1, result = -4;
+    
+    while (c < n) {
+      c = a + b;
+      a = b;
+      b = c;
+      result++;
+    }
+    
+    return result;
+  };
+
   const addPoints = (points) => {
 
     updateUserData({...userData, points: userData.points+points});
     setUserData({...userData, points: userData.points+points});
-
+    setJustEarnedPoints(justEarnedPoints+points);
   }
   
   const removeVid = (property,videoID) => {
@@ -157,6 +175,7 @@ const Learn = () => {
       if(!toWorkOnIt){
         userData.workOnIt.push(videoData.videoID);
         userData.points+=2;
+        setJustEarnedPoints(justEarnedPoints+2)
         updateUserData(userData,property);
         setUserData({...userData,[property]:[...userData[property]]});
       } else {
@@ -176,6 +195,7 @@ const Learn = () => {
       if(!isLiked){
         userData.favorites.push(videoData.videoID);
         userData.points+=3;
+        setJustEarnedPoints(justEarnedPoints+3)
         updateUserData(userData,property);
         setUserData({...userData,[property]:[...userData[property]]});
       } else {
@@ -307,8 +327,39 @@ const Learn = () => {
 			setVideoData({title: video.title, data: video.data, videoID: video._id});
 		})
 		.catch(console.log);
-	  
+
+
+    setJustEarnedPoints(0);
+    setPointsPopup(false);
+
+	  return ()=> setPointsPopup(true);
+
   },[]);
+
+
+  useEffect(()=>{
+
+    const level = getLevel(userData.points);
+
+    //fibonacci based
+
+    let a = 0, b = 1, c = level+5;
+  
+    for(let i = 2; i <= level+5; i++) {
+      c = a + b;
+      a = b;
+      b = c;
+    }
+
+    const neededForNextLevelPoints = c-a; 
+    const colectedLevelPoints = userData.points - a;
+    const barPercent = (colectedLevelPoints/neededForNextLevelPoints)*100;
+
+    if(levelBarRef.current) 
+    levelBarRef.current.style.backgroundImage=`linear-gradient(90deg, #33336C ${barPercent-3}%, #e2f1ff ${barPercent+3}%)`;
+
+  },[userData.points]);
+
 
   const resizeModal = (modal_name) => {
 
@@ -323,7 +374,7 @@ const Learn = () => {
     if( modal_name==='favorites' && modalsPosition[modal_name]<10 && modalsPosition.workOnIt < 10) {
         favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;}
     if( modal_name==='workOnIt' && modalsPosition[modal_name]<10 ) {
-      favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;}
+      favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=1; anotherVidRef.current.style.opacity=0;}
     if( modal_name==='another' && modalsPosition[modal_name]<10 ) {
       favVidRef.current.style.opacity=.4; workVidRef.current.style.opacity=1; anotherVidRef.current.style.opacity=0;}
     if( modal_name==='another' && modalsPosition[modal_name]>10 ) {
@@ -332,7 +383,7 @@ const Learn = () => {
       favVidRef.current.style.opacity=0; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;
     }
     
-    modal_name!=='another' && (modalsPosition[modal_name]>10 || modalsPosition.workOnIt<10) && 
+    modal_name!=='another' && modal_name!=='search'&& (modalsPosition[modal_name]>10 || modalsPosition.workOnIt<10) && 
     fetchMyVideos(setChosenVideosData,userData,chosenVideosData,modal_name);
 
     switch(modal_name){
@@ -358,8 +409,9 @@ const Learn = () => {
 
   if(!localStorage.getItem('W2M-JWT-Token')) setLandingModal(true);
 
-  return ( 
+  return (
     <div id="learn-container">
+      
         <div id="first-page">
             <form id="search-container" onSubmit={submitHandler}>
               <div id='search-div'>
@@ -391,12 +443,10 @@ const Learn = () => {
             <div className="img-container">
                       <video 
                             src={videoData.data} 
-                            width="1000" 
-                            height="600" 
                             type="video/mp4"
                             onPlay={()=>addPoints(2)} 
                             onPause={()=>addPoints(2)}
-                            controls 
+                            controls={videoData.title==='Loading...'?false:true}
                             autoPlay 
                             loop>
                 Your browser does not support the video tag.</video> 
@@ -411,7 +461,10 @@ const Learn = () => {
                 <i className='fas fa-business-time video-icon' ref={workOnVideoRef} onClick={workOnVideo}></i>
               </i>
             </div>}
-          
+          <div id='level-indicator'>Level: {getLevel(userData.points)} </div>
+          <div id='level-bar' ref={levelBarRef}></div>
+
+
         </div>
         <div id="favorites-modal" ref={favoritesRef}>
           <div className="dummy-margin-top" style={{height: '15px', cursor: 'pointer'}} onClick={(e)=>resizeModal('search')}>
@@ -462,7 +515,7 @@ const Learn = () => {
           </section>
         </div>
     </div>
-  )
+     )
 }
 
 export default Learn;

@@ -24,11 +24,10 @@
 }
 
 .landing-image {
-    border-radius: 50%;
     height: 250px;
 }
 
-.landing-form,.donate {
+.landing-form {
     text-align: center;
 }
 

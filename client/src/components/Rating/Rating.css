@@ -101,6 +101,18 @@
     color: yellow;
   }
 
+  .limitName {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 1rem;
+  }
+
+  .italic {
+    font-style: italic;
+    filter: drop-shadow(3px 3px 3px rgba(30,30,30,0.4));
+  }
+
   @media screen and (max-width: 1250px){ 
     .stars-container {
       min-height: 70vh;
