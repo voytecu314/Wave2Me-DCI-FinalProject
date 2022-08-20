@@ -7,8 +7,15 @@
 }
 
 #level-bar {
-	width: 10%;
+	width: 35%;
 	height: 10px;
+}
+
+#level-container {
+	display: grid;
+	place-items: center;
+	width: 50vw;
+	margin: 3% auto;
 }
 
 #first-page {

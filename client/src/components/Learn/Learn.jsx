@@ -33,6 +33,8 @@ const Learn = () => {
   const anotherVidRef = useRef();
   const levelBarRef = useRef();
 
+  const levelName = ['NOVICE','BEGINNER','PROGRESSING BEGINNER','ENTERING INTERMEDIATE','INTERMEDIATE','ADVANCED','EXPERT','MASTER'];
+
   useEffect(()=>{
     if(heartRef.current && userData.favorites.includes(videoData.videoID)) {
       heartRef.current.style.color='#7f6ea6';
@@ -152,7 +154,7 @@ const Learn = () => {
       result++;
     }
     
-    return result;
+    return {result, levelName: Math.floor(result/5)};
   };
 
   const addPoints = (points) => {
@@ -339,7 +341,7 @@ const Learn = () => {
 
   useEffect(()=>{
 
-    const level = getLevel(userData.points);
+    const level = getLevel(userData.points).result;
 
     //fibonacci based
 
@@ -461,8 +463,11 @@ const Learn = () => {
                 <i className='fas fa-business-time video-icon' ref={workOnVideoRef} onClick={workOnVideo}></i>
               </i>
             </div>}
-          <div id='level-indicator'>Level: {getLevel(userData.points)} </div>
-          <div id='level-bar' ref={levelBarRef}></div>
+            <div id='level-container'>
+                <div id='level-indicator'>Level: {getLevel(userData.points).result} {levelName[getLevel(userData.points).levelName]}</div>
+                <div id='level-bar' ref={levelBarRef}></div>
+            </div>
+          
 
 
         </div>

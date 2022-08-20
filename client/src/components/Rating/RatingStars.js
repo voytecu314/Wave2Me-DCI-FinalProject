@@ -92,9 +92,8 @@ const RatingStars = () => {
             <section className='comment-section' ref={commentsRef}>
                 {comments.map((rating,i)=><>
                                                 <div key={'comm_'+i} className='comments'>
-
-                                                    <span className='limitName'>{rating.name}</span>
-                                                    <span className='italic'>{rating.rating}</span>
+                                                    <span>{rating.name}</span>
+                                                    <span>{rating.rating}</span>
                                                     <span>{ createCommentStars(rating.value).map((item,j)=><i className="fa fa-star-o comment-star" />) }</span>
                                                     <span>{rating.comment}</span>
                                                 </div>

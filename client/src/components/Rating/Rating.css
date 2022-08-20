@@ -93,24 +93,7 @@
 
   .see-less {
     position: fixed;
-    bottom: 3%; left: 40%;
-  }
-
-  .comment-star {
-    font-size: .9rem;
-    color: yellow;
-  }
-
-  .limitName {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    padding-left: 1rem;
-  }
-
-  .italic {
-    font-style: italic;
-    filter: drop-shadow(3px 3px 3px rgba(30,30,30,0.4));
+    bottom: 0; left: 40%;
   }
 
   @media screen and (max-width: 1250px){ 
