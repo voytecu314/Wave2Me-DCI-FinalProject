@@ -1,4 +1,4 @@
-import { userDataModel } from "../models/userModel.js";
+import { userDataModel, userModel } from "../models/userModel.js";
 
 export const getUserDataController = async (req, res) => {
     try {
@@ -18,4 +18,17 @@ export const updateUserDataController = async (req, res) => {
     } catch (error) {
       res.json({'updating data failed: ':error.message});
     }
+}
+
+export const topUsersController = async (req, res) => {
+
+  try {
+    const users = await userModel.find({}).select('name').populate('dataID', 'points');
+    const sanitized = users.map(user=>{return {'name':user.name,'points':user.dataID.points}});
+    sanitized.sort((a,b)=>a.points-b.points);
+    res.status(200).json({topUsers: sanitized.reverse()});
+  } catch (error) {
+    res.status(500).json({error:'Top users server error'})
+  }
+
 }

@@ -1,0 +1,27 @@
+#top-users {
+    position: absolute;
+    top: 0;
+    left: 10vw;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    background-color: aliceblue;
+    color: black;
+    transition: all 1s;
+}
+
+#top-users > button {
+    float: right;
+}
+
+#top-users h1 {
+    width: 50vw;
+    margin: 10% auto;
+    text-align: center;
+    color: black 
+}
+
+#top-users h2 {
+    margin-left: 40%;
+    color: black;
+}

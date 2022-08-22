@@ -1,3 +1,4 @@
+import TopUsers from './TopUsers.jsx';
 import './Learn.css';
 import uploadingVid from '../../assets/uploading_bar.mp4';
 import notFound from '../../assets/404pagenotfound.mp4';
@@ -22,6 +23,7 @@ const Learn = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isLiked, setIsLiked] = useState(false);  
   const [toWorkOnIt, setToWorkOnIt] = useState(false);
+  const [topUsersIsOpen, setTopUsersIsOpen] = useState(false);
 
   const favoritesRef = useRef();
   const workOnItRef = useRef();
@@ -32,6 +34,7 @@ const Learn = () => {
   const workVidRef = useRef();
   const anotherVidRef = useRef();
   const levelBarRef = useRef();
+  const topRef = useRef();
 
   const levelName = ['NOVICE','BEGINNER','PROGRESSING BEGINNER','ENTERING INTERMEDIATE','INTERMEDIATE','ADVANCED','EXPERT','MASTER'];
 
@@ -409,11 +412,20 @@ const Learn = () => {
     }
   }
 
+  const resizeTopUsersModal = () => {
+    if(topRef.current) {
+        topRef.current.style.height = '80vh';
+        topRef.current.style.width = '80vw';
+        topRef.current.style.opacity = '1';
+        setTopUsersIsOpen(!topUsersIsOpen);
+    } 
+}
+
   if(!localStorage.getItem('W2M-JWT-Token')) setLandingModal(true);
 
   return (
     <div id="learn-container">
-      
+
         <div id="first-page">
             <form id="search-container" onSubmit={submitHandler}>
               <div id='search-div'>
@@ -448,7 +460,7 @@ const Learn = () => {
                             type="video/mp4"
                             onPlay={()=>addPoints(2)} 
                             onPause={()=>addPoints(2)}
-                            controls={videoData.title==='Loading...'?false:true}
+                            controls={videoData.title==='Loading...' || videoData.title==='Video not found.'?false:true}
                             autoPlay 
                             loop>
                 Your browser does not support the video tag.</video> 
@@ -463,12 +475,12 @@ const Learn = () => {
                 <i className='fas fa-business-time video-icon' ref={workOnVideoRef} onClick={workOnVideo}></i>
               </i>
             </div>}
-            <div id='level-container'>
+            <div id='level-container' title='Click to see Top Users' onClick={resizeTopUsersModal}>
                 <div id='level-indicator'>Level: {getLevel(userData.points).result} {levelName[getLevel(userData.points).levelName]}</div>
                 <div id='level-bar' ref={levelBarRef}></div>
             </div>
           
-
+            <TopUsers topRef={topRef} topUsersIsOpen={topUsersIsOpen}/>
 
         </div>
         <div id="favorites-modal" ref={favoritesRef}>
