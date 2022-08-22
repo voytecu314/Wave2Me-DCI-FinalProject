@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './TopUsers.css';
 
-const TopUsers = ({topRef, topUsersIsOpen}) => {
+const TopUsers = ({topRef, topUsersIsOpen, getLevel}) => {
 
     const [topUsersData, setTopUsersData] = useState([]);
 
@@ -33,7 +33,11 @@ const TopUsers = ({topRef, topUsersIsOpen}) => {
     <div id='top-users' ref={topRef}> <button onClick={resizeTopUsersModal}>X</button>
         <div>
             <h1>Top Users</h1>
-            {/* topUsersData.map(user=><h2><span>{user.name}</span>< span>{user.points}</span></h2>) */}
+            {topUsersData.map(user=><h2 className='flex-top-users-list'>
+                <span>{user.name}</span>
+                <span>Level: {getLevel(user.points).result}</span>
+                < span>Points: {user.points}</span>
+                </h2>)}
         </div>
     </div>
   )

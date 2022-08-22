@@ -22,6 +22,17 @@
 }
 
 #top-users h2 {
-    margin-left: 40%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+}
+
+#top-users span {
+    margin-bottom: 2%;
     color: black;
+    text-align: center;
+}
+
+#top-users h2:nth-child(2n) {
+    background-image: linear-gradient(90deg, white, #00b9ca, white);
 }
