@@ -67,7 +67,7 @@
 	max-width: 600px;
 }
 
-#favorites-modal, #work-on-it-modal, #another-modal {
+#favorites-modal, #work-on-it-modal, #quiz-modal {
     position: fixed;
     top: 8%;
 	z-index: 100;
@@ -85,7 +85,7 @@
     background-color: #9168a1;
 }
 
-#another-modal {
+#quiz-modal {
     width: 94%;
     background-color: #d9a21b;
 }
@@ -139,6 +139,14 @@
 	font-size: 1.5rem;
 }
 
+#quiz-answers {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	width: 75vw;
+	margin: auto;
+}
+
 @keyframes shake {
 	25% {
 		transform: rotate(-15deg);
@@ -157,7 +165,7 @@
 }
 
  @media screen and (max-width: 1024px){ 
-	#favorites-modal, #work-on-it-modal, #another-modal{
+	#favorites-modal, #work-on-it-modal, #quiz-modal{
 		top: 7%;
 	}
 

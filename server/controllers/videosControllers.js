@@ -61,3 +61,27 @@ export const getMyVideos = async (req, res) => {
 	
 	}
 }
+
+export const quizController = async (req, res) => {
+	try {
+		const randomizedTitles = [];
+		const videosTitles = await videosModel.find().select('-data -__v');
+		const initialLength = videosTitles.length;
+		//now just random video
+		const quizVideoTitle = videosTitles[Math.floor(Math.random()*videosTitles.length)];
+		const quizVideoData = await videosModel.findById(quizVideoTitle.id);
+		const sanitized = videosTitles.filter(video=>video.title != quizVideoTitle.title);
+		for(let i=0; i<initialLength; i++) {
+			randomizedTitles.push(
+				...sanitized.splice(Math.floor(Math.random()*videosTitles.length,1))
+			);
+		}
+		
+		res.status(200).json({randomizedTitles,title: quizVideoTitle.title, data: quizVideoData.data});
+		
+	} catch (error) {
+			
+		res.status(500).json({quizControllerError: error.message});
+		
+	}
+}

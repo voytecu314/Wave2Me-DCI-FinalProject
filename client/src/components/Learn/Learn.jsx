@@ -1,19 +1,19 @@
+import { useState, useRef, useEffect, useContext } from 'react';
+import MyContext from '../../context/MyContext.js';
 import TopUsers from './TopUsers.jsx';
 import './Learn.css';
 import uploadingVid from '../../assets/uploading_bar.mp4';
 import notFound from '../../assets/404pagenotfound.mp4';
 import updateUserData from '../../helpers/updateUserData';
-import { useState, useRef, useEffect, useContext } from 'react';
-import MyContext from '../../context/MyContext.js';
-import fetchMyVideos from '../../helpers/fetchMyVideos';
+import fetchMyVideos, { fetchMyQuiz } from '../../helpers/fetchMyVideos.js';
 
 
 const Learn = () => {
 
   const {setLandingModal,justEarnedPoints ,setJustEarnedPoints, setPointsPopup, payload} = useContext(MyContext);
   const userDataID = payload.dataID;
-  const initialPositions = {favorites: 90, workOnIt: 93.3, another: 96.6};
-  const expandedPositions = {favorites: 0, workOnIt: 3, another: 6};
+  const initialPositions = {favorites: 90, workOnIt: 93.3, quiz: 96.6};
+  const expandedPositions = {favorites: 0, workOnIt: 3, quiz: 6};
  
   const [userData, setUserData] = useState({favorites: [], workOnIt: [], points: 0, dataID: null});
   const [modalsPosition, setModalsPosition] = useState(initialPositions);
@@ -23,20 +23,35 @@ const Learn = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isLiked, setIsLiked] = useState(false);  
   const [toWorkOnIt, setToWorkOnIt] = useState(false);
+  const [level, setLevel] = useState({level: 0, levelName: 'NOVICE'});
   const [topUsersIsOpen, setTopUsersIsOpen] = useState(false);
+  const [quizVideo, setQuizVideo] = useState(null);
 
   const favoritesRef = useRef();
   const workOnItRef = useRef();
-  const anotherRef = useRef();
+  const quizRef = useRef();
   const heartRef = useRef();
   const workOnVideoRef = useRef();
   const favVidRef = useRef();
   const workVidRef = useRef();
-  const anotherVidRef = useRef();
+  const quizVidRef = useRef();
   const levelBarRef = useRef();
   const topRef = useRef();
 
-  const levelName = ['NOVICE','BEGINNER','PROGRESSING BEGINNER','ENTERING INTERMEDIATE','INTERMEDIATE','ADVANCED','EXPERT','MASTER'];
+  const levelName = ['NOVICE',
+                     'LEARNING NOVICE', 
+                     'BEGINNER',
+                     'PROGRESSING BEGINNER',
+                     'ENTERING INTERMEDIATE',
+                     'ALMOST INTERMEDIATE',
+                     'INTERMEDIATE',
+                     'PROGRESSING INTERMEDIATE',
+                     'ADVANCED',
+                     'EXPERT',
+                     'MASTER',
+                     'MAESTRO',
+                     'THE SUPER USER',
+                     'THE KING OF THE APP'];
 
   useEffect(()=>{
     if(heartRef.current && userData.favorites.includes(videoData.videoID)) {
@@ -67,8 +82,8 @@ const Learn = () => {
                                         <video 
                                               src={vidData.data} 
                                               type="video/mp4"
-                                              onPlay={()=>addPoints(2)} 
-                                              onPause={()=>addPoints(2)}
+                                              onPlay={()=>addPoints(level.level)} 
+                                              onPause={()=>addPoints(level.level)}
                                               controls 
                                               loop>
                                   Your browser does not support the video tag.</video> 
@@ -109,8 +124,8 @@ const Learn = () => {
                                         <video 
                                               src={vidData.data} 
                                               type="video/mp4"
-                                              onPlay={()=>addPoints(2)} 
-                                              onPause={()=>addPoints(2)}
+                                              onPlay={()=>addPoints(level.level)} 
+                                              onPause={()=>addPoints(level.level)}
                                               controls 
                                               loop>
                                   Your browser does not support the video tag.</video> 
@@ -142,22 +157,22 @@ const Learn = () => {
                             </div>) ;
   }
 
-  const getLevel = n => { //based on Fibonacci sequence
+  function getLevel (n) { //based on Fibonacci sequence
 
     if (n <= 3) {
-      return 0;
+      return {level:0, levelName: 'NOVICE'};
     }
      
-    let a = 0, b = 1, c = 1, result = -4;
+    let a = 0, b = 1, c = 1, level = -4;
     
     while (c < n) {
       c = a + b;
       a = b;
       b = c;
-      result++;
+      level++;
     }
     
-    return {result, levelName: Math.floor(result/5)};
+    return {level, levelName: levelName[Math.floor(level/5)]};
   };
 
   const addPoints = (points) => {
@@ -179,8 +194,8 @@ const Learn = () => {
     if(userData.dataID && videoData.videoID){
       if(!toWorkOnIt){
         userData.workOnIt.push(videoData.videoID);
-        userData.points+=2;
-        setJustEarnedPoints(justEarnedPoints+2)
+        userData.points+=Math.floor(level.level*1.5);
+        setJustEarnedPoints(justEarnedPoints+Math.floor(level.level*1.5))
         updateUserData(userData,property);
         setUserData({...userData,[property]:[...userData[property]]});
       } else {
@@ -199,8 +214,8 @@ const Learn = () => {
     if(userData.dataID && videoData.videoID){
       if(!isLiked){
         userData.favorites.push(videoData.videoID);
-        userData.points+=3;
-        setJustEarnedPoints(justEarnedPoints+3)
+        userData.points+=Math.floor(level.level*1.75);
+        setJustEarnedPoints(justEarnedPoints+Math.floor(level.level*1.75))
         updateUserData(userData,property);
         setUserData({...userData,[property]:[...userData[property]]});
       } else {
@@ -211,6 +226,36 @@ const Learn = () => {
       heartRef.current.style.opacity='1';
       setIsLiked(!isLiked);
     }
+  }
+
+   //fibonacci based
+
+   const getFibonacciNumber = (level) => {
+          
+    let a = 0, b = 1, c;
+      
+    for(let i = 2; i <= level; i++) {
+          c = a + b;
+          a = b;
+          b = c;
+      }
+
+      return {previous: a, next: c}
+  }
+
+  const quizAnswer = (e) => {
+    if(e.target.innerText===quizVideo.title) {
+      const points = getFibonacciNumber(level.level).previous;
+      addPoints(points);
+      const earnedQuizPoints = () => {
+        return `\n For this answer you are receiving ${points} points!`
+      }
+      alert(Math.round(Math.random())?`Correct answer! ${earnedQuizPoints()}`:`Well done!${earnedQuizPoints()}`);
+      fetchMyQuiz(setQuizVideo, level.level);
+    }
+    else {
+      alert(Math.round(Math.random())?`Try again!`:Math.round(Math.random())?`Better next time!`:`Almost...`);
+      fetchMyQuiz(setQuizVideo, level.level)}
   }
 
   useEffect(()=> {
@@ -284,7 +329,7 @@ const Learn = () => {
   useEffect(()=>{
     favoritesRef.current.style.left = modalsPosition.favorites+'%';
     workOnItRef.current.style.left = modalsPosition.workOnIt+'%';
-    anotherRef.current.style.left = modalsPosition.another+'%';
+    quizRef.current.style.left = modalsPosition.quiz+'%';
 
     if(modalsPosition.favorites >= 90) {
       favoritesRef.current.style.height = '0';
@@ -298,10 +343,10 @@ const Learn = () => {
         workOnItRef.current.style.height = '100vh';
       }
 
-    if(modalsPosition.another >= 90) {
-      anotherRef.current.style.height = '0';
+    if(modalsPosition.quiz >= 90) {
+      quizRef.current.style.height = '0';
       } else {
-        anotherRef.current.style.height = '100vh';
+        quizRef.current.style.height = '100vh';
       }
 
   },[modalsPosition]);
@@ -344,52 +389,43 @@ const Learn = () => {
 
   useEffect(()=>{
 
-    const level = getLevel(userData.points).result;
+    setLevel(getLevel(userData.points)) ;
 
-    //fibonacci based
-
-    let a = 0, b = 1, c = level+5;
-  
-    for(let i = 2; i <= level+5; i++) {
-      c = a + b;
-      a = b;
-      b = c;
-    }
-
-    const neededForNextLevelPoints = c-a; 
-    const colectedLevelPoints = userData.points - a;
+    const neededForNextLevelPoints = getFibonacciNumber(level.level+5).next-getFibonacciNumber(level.level+5).previous; 
+    const colectedLevelPoints = userData.points - getFibonacciNumber(level.level+5).previous;
     const barPercent = (colectedLevelPoints/neededForNextLevelPoints)*100;
 
     if(levelBarRef.current) 
     levelBarRef.current.style.backgroundImage=`linear-gradient(90deg, #33336C ${barPercent-3}%, #e2f1ff ${barPercent+3}%)`;
 
-  },[userData.points]);
+  },[userData.points,level.level]);
 
 
   const resizeModal = (modal_name) => {
 
-    addPoints(2);
+    addPoints(level.level);
 
     if( modal_name==='favorites' && modalsPosition[modal_name]>10 ) {
-      favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;}
+      favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=0; quizVidRef.current.style.opacity=0;}
     if( modal_name==='workOnIt' && modalsPosition[modal_name]>10 ) {
-      favVidRef.current.style.opacity=.4; workVidRef.current.style.opacity=1; anotherVidRef.current.style.opacity=0;}
+      favVidRef.current.style.opacity=.4; workVidRef.current.style.opacity=1; quizVidRef.current.style.opacity=0;}
     if( modal_name==='favorites' && modalsPosition[modal_name]<10 && modalsPosition.workOnIt > 10) {
-      favVidRef.current.style.opacity=0; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;}
+      favVidRef.current.style.opacity=0; workVidRef.current.style.opacity=0; quizVidRef.current.style.opacity=0;}
     if( modal_name==='favorites' && modalsPosition[modal_name]<10 && modalsPosition.workOnIt < 10) {
-        favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;}
+        favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=0; quizVidRef.current.style.opacity=0;}
     if( modal_name==='workOnIt' && modalsPosition[modal_name]<10 ) {
-      favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=1; anotherVidRef.current.style.opacity=0;}
-    if( modal_name==='another' && modalsPosition[modal_name]<10 ) {
-      favVidRef.current.style.opacity=.4; workVidRef.current.style.opacity=1; anotherVidRef.current.style.opacity=0;}
-    if( modal_name==='another' && modalsPosition[modal_name]>10 ) {
-      favVidRef.current.style.opacity=.4; workVidRef.current.style.opacity=.4; anotherVidRef.current.style.opacity=1;}
+      favVidRef.current.style.opacity=1; workVidRef.current.style.opacity=1; quizVidRef.current.style.opacity=0;}
+    if( modal_name==='quiz' && modalsPosition[modal_name]<10 ) {
+      favVidRef.current.style.opacity=.4; workVidRef.current.style.opacity=1; quizVidRef.current.style.opacity=0;}
+    if( modal_name==='quiz' && modalsPosition[modal_name]>10 ) {
+      favVidRef.current.style.opacity=.4; workVidRef.current.style.opacity=.4; quizVidRef.current.style.opacity=1;}
     if(modal_name==='search'){
-      favVidRef.current.style.opacity=0; workVidRef.current.style.opacity=0; anotherVidRef.current.style.opacity=0;
+      favVidRef.current.style.opacity=0; workVidRef.current.style.opacity=0; quizVidRef.current.style.opacity=0;
     }
-    
-    modal_name!=='another' && modal_name!=='search'&& (modalsPosition[modal_name]>10 || modalsPosition.workOnIt<10) && 
-    fetchMyVideos(setChosenVideosData,userData,chosenVideosData,modal_name);
+    if(modal_name==='quiz' && modalsPosition[modal_name]>10) fetchMyQuiz(setQuizVideo,level.level);
+    else{
+    modal_name!=='quiz' && modal_name!=='search'&& (modalsPosition[modal_name]>10 || modalsPosition.workOnIt<10) && 
+    fetchMyVideos(setChosenVideosData,userData,chosenVideosData,modal_name); }
 
     switch(modal_name){
 
@@ -398,12 +434,12 @@ const Learn = () => {
                         setModalsPosition({...initialPositions, [modal_name]:expandedPositions.favorites});
       break;
 
-      case 'workOnIt': modalsPosition.another > 10 ? 
-                       setModalsPosition(prev => prev = modalsPosition[modal_name] < 10? {...initialPositions, 'favorites': expandedPositions.favorites} : {...expandedPositions, 'another':initialPositions.another}) :
-                       setModalsPosition({...expandedPositions, 'another':initialPositions.another});
+      case 'workOnIt': modalsPosition.quiz > 10 ? 
+                       setModalsPosition(prev => prev = modalsPosition[modal_name] < 10? {...initialPositions, 'favorites': expandedPositions.favorites} : {...expandedPositions, 'quiz':initialPositions.quiz}) :
+                       setModalsPosition({...expandedPositions, 'quiz':initialPositions.quiz});
       break;
 
-      case 'another': setModalsPosition(prev => prev = modalsPosition[modal_name] < 10? {...expandedPositions, [modal_name]:initialPositions.another} : expandedPositions);
+      case 'quiz': setModalsPosition(prev => prev = modalsPosition[modal_name] < 10? {...expandedPositions, [modal_name]:initialPositions.quiz} : expandedPositions);
       break;
 
       case 'search': setModalsPosition(initialPositions);
@@ -458,8 +494,8 @@ const Learn = () => {
                       <video 
                             src={videoData.data} 
                             type="video/mp4"
-                            onPlay={()=>addPoints(2)} 
-                            onPause={()=>addPoints(2)}
+                            onPlay={()=>addPoints(level.level)} 
+                            onPause={()=>addPoints(level.level)}
                             controls={videoData.title==='Loading...' || videoData.title==='Video not found.'?false:true}
                             autoPlay 
                             loop>
@@ -476,7 +512,7 @@ const Learn = () => {
               </i>
             </div>}
             <div id='level-container' title='Click to see Top Users' onClick={resizeTopUsersModal}>
-                <div id='level-indicator'>Level: {getLevel(userData.points).result} {levelName[getLevel(userData.points).levelName]}</div>
+                <div id='level-indicator'>Level: {level.level} {level.levelName}</div>
                 <div id='level-bar' ref={levelBarRef}></div>
             </div>
           
@@ -507,7 +543,7 @@ const Learn = () => {
           <div className="dummy-margin-top" style={{height: '15px'}}></div>
           <div onClick={(e)=>resizeModal('workOnIt')} className='modal-icons'>
             {modalsPosition.workOnIt>10 ? <i className="fa fa-arrow-left"></i> : 
-            modalsPosition.another>10 ? <i className="fa fa-arrow-right"></i> : < span style={{marginRight: '1%'}}></span>}
+            modalsPosition.quiz>10 ? <i className="fa fa-arrow-right"></i> : < span style={{marginRight: '1%'}}></span>}
             {'    '}<i className='fas fa-business-time'></i>
           </div>
           <section className='videos-wrapper'>
@@ -520,15 +556,32 @@ const Learn = () => {
 
           </section>
         </div>
-        <div id="another-modal" ref={anotherRef}>
+        <div id="quiz-modal" ref={quizRef}>
           <div className="dummy-margin-top" style={{height: '15px'}}></div>
-          <div onClick={(e)=>resizeModal('another')} className='modal-icons'>
-            {modalsPosition.another>10 ? <i className="fa fa-arrow-left"></i> : <i className="fa fa-arrow-right"></i>}
+          <div onClick={(e)=>resizeModal('quiz')} className='modal-icons'>
+            {modalsPosition.quiz>10 ? <i className="fa fa-arrow-left"></i> : <i className="fa fa-arrow-right"></i>}
             {'    '}<i className="fa fa-play-circle-o"></i></div>
-          <section className='videos-wrapper' style={{opacity: '0'}} ref={anotherVidRef}>
+          <section className='videos-wrapper' style={{opacity: '0'}} ref={quizVidRef}>
 
-              bla bla bla
-
+          <div className="text">
+              <h2> 
+                {quizVideo?'Select the correct answer':'Loading...'}
+              </h2>
+            </div>
+                  
+            <div className="img-container">
+                      <video 
+                            src={quizVideo ? quizVideo.data : null} 
+                            type="video/mp4"
+                            autoPlay 
+                            loop>
+                Your browser does not support the video tag.</video> 
+            </div>
+            <div id='quiz-answers'>
+              {quizVideo && 
+                quizVideo.randomizedTitles.map(answer=><button onClick={quizAnswer}>{answer.title}</button>)}
+            </div>
+              
           </section>
         </div>
     </div>
