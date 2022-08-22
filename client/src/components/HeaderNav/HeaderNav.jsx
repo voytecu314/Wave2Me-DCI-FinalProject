@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import MyContext from '../../context/MyContext';
 import './HeaderNav.css';
 
 const HeaderNav = ({setLandingModal}) => {
 
+  const {payload} = useContext(MyContext);
+
   return (
     <nav className="navbar">
         <div>
-            <span className="navbar-brand">Welcome user!</span>
+            <span className="navbar-brand">Welcome {payload && payload.name}! </span>
             
         </div>
             

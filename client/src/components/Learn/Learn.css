@@ -2,6 +2,23 @@
     position: relative;
 }
 
+#level-indicator {
+	font-size: 2rem;
+}
+
+#level-bar {
+	width: 35%;
+	height: 10px;
+}
+
+#level-container {
+	display: grid;
+	place-items: center;
+	width: 50vw;
+	margin: 3% auto;
+	cursor: pointer;
+}
+
 #first-page {
 	display: flex;
 	flex-direction: column;
@@ -43,6 +60,11 @@
 #search-span {
     font-size: 1.3rem;
     cursor: pointer;
+}
+
+#img-container > video {
+	max-width: 1000px;
+	max-width: 600px;
 }
 
 #favorites-modal, #work-on-it-modal, #another-modal {
@@ -138,10 +160,20 @@
 	#favorites-modal, #work-on-it-modal, #another-modal{
 		top: 7%;
 	}
+
+	#level {
+		left: 30%;
+		font-size: 1.7rem;
+	}	
  }
 
  @media screen and (max-width: 1300px){ 
 	.videos-container {
 		grid-template-columns: 1fr;
+	}
+	
+	#level {
+		left: 35%;
+		font-size: 1.8rem;
 	}
  }

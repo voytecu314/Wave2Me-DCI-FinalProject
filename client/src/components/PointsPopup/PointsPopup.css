@@ -1,0 +1,29 @@
+#points-popup-container {
+    position: absolute;
+    top: 25vh;
+    left: 35vw;
+    display: grid;
+    place-items: center;
+    width: 30vw;
+    height: 40vh;
+    background-color: aliceblue;
+}
+
+#points-popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 25vw;
+    height: 30vh;
+    text-align: center;
+    color: black;
+    border: 1px solid black;
+}
+
+#points-popup > h1 {
+    color: black;
+}
+
+#points-popup > i {
+    color: #5F77A5;
+}

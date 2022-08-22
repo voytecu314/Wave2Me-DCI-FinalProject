@@ -51,6 +51,12 @@ const RatingStars = () => {
         setSeeMore(!seeMore);
     }
 
+    const createCommentStars = (value) => {
+        const arr = new Array(value);
+        arr.fill('o');
+        return arr;
+    }
+
     useEffect(()=>{
 
         fetch('http://localhost:5000/rating')
@@ -88,7 +94,7 @@ const RatingStars = () => {
                                                 <div key={'comm_'+i} className='comments'>
                                                     <span className='limitName'>{rating.name}</span>
                                                     <span className='italic'>{rating.rating}</span>
-                                                    <span>{rating.value}</span>
+                                                    <span>{ createCommentStars(rating.value).map((item,j)=><i className="fa fa-star-o comment-star" />) }</span>
                                                     <span>{rating.comment}</span>
                                                 </div>
                                             </>)}

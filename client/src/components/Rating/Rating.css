@@ -50,7 +50,7 @@
 
   .comments {
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 16fr;
+    grid-template-columns: 2fr 4fr 3fr 16fr;
     border-bottom-left-radius: 9%;
   }
 
@@ -88,11 +88,11 @@
 
   .see-more {
     position: relative;
-    bottom: 12%; left: 40%;
+    bottom: 20%; left: 40%;
   }
 
   .see-less {
-    position: relative;
+    position: fixed;
     bottom: 0; left: 40%;
   }
 
@@ -101,12 +101,13 @@
     overflow: hidden;
     white-space: nowrap;
     padding-left: 1rem;
-  }
+    } 
 
   .italic {
     font-style: italic;
     filter: drop-shadow(3px 3px 3px rgba(30,30,30,0.4));
-  }
+    text-align: center;
+    } 
 
   @media screen and (max-width: 1250px){ 
     .stars-container {
@@ -115,7 +116,13 @@
    }
   
    @media screen and (max-width: 700px){ 
+    .see-less {
+      bottom: 3%; 
+    }
     .stars-container {
       min-height: 76vh;
     }
+    .stars-container span {
+      font-size: .85rem;
+    } 
    }
