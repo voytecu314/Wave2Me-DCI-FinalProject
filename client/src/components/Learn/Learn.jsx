@@ -177,6 +177,8 @@ const Learn = () => {
 
   const addPoints = (points) => {
 
+    if(points<=0) points=1;
+
     updateUserData({...userData, points: userData.points+points});
     setUserData({...userData, points: userData.points+points});
     setJustEarnedPoints(justEarnedPoints+points);
@@ -231,6 +233,8 @@ const Learn = () => {
    //fibonacci based
 
    const getFibonacciNumber = (level) => {
+
+    if(level<2) return {previous:1, next:1};
           
     let a = 0, b = 1, c;
       
@@ -245,7 +249,7 @@ const Learn = () => {
 
   const quizAnswer = (e) => {
     if(e.target.innerText===quizVideo.title) {
-      const points = getFibonacciNumber(level.level).previous;
+      const points = level.level<15?getFibonacciNumber(level.level).next:getFibonacciNumber(level.level).previous;
       addPoints(points);
       const earnedQuizPoints = () => {
         return `\n For this answer you are receiving ${points} points!`
