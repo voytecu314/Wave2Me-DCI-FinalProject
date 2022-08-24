@@ -21,7 +21,7 @@ const TopUsers = ({topRef, topUsersIsOpen, getLevel}) => {
             .catch(console.log);
     },[topUsersIsOpen]);
 
-    const resizeTopUsersModal = () => {
+    const resizeTopUsersModal = (e) => {
         if(topRef.current) {
             topRef.current.style.height = '0vh';
             topRef.current.style.width = '0vw';

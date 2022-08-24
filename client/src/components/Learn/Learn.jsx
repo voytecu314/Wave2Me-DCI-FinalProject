@@ -46,6 +46,7 @@ const Learn = () => {
                      'ALMOST INTERMEDIATE',
                      'INTERMEDIATE',
                      'PROGRESSING INTERMEDIATE',
+                     'GAINING ADVANCED',
                      'ADVANCED',
                      'EXPERT',
                      'MASTER',
@@ -248,6 +249,7 @@ const Learn = () => {
   }
 
   const quizAnswer = (e) => {
+    
     if(e.target.innerText===quizVideo.title) {
       const points = level.level<15?getFibonacciNumber(level.level).next:getFibonacciNumber(level.level).previous;
       addPoints(points);
@@ -260,6 +262,8 @@ const Learn = () => {
     else {
       alert(Math.round(Math.random())?`Try again!`:Math.round(Math.random())?`Better next time!`:`Almost...`);
       fetchMyQuiz(setQuizVideo, level.level)}
+
+    setQuizVideo(null);
   }
 
   useEffect(()=> {
@@ -489,9 +493,9 @@ const Learn = () => {
             </form>
 			
             <div className="text">
-              <h5> 
+              <h2> 
                 {submitted || videoData.title==='Video not found.' ? videoData.title.toUpperCase() : 'Video of the day: '+videoData.title.toUpperCase()}
-              </h5>
+              </h2>
             </div>
                   
             <div className="img-container">
@@ -583,7 +587,10 @@ const Learn = () => {
             </div>
             <div id='quiz-answers'>
               {quizVideo && 
-                quizVideo.randomizedTitles.map(answer=><button onClick={quizAnswer}>{answer.title}</button>)}
+                quizVideo.randomizedTitles.map((answer,i)=><button 
+                                                            key={`qz_${i}`} 
+                                                            onClick={quizAnswer}
+                                                            disabled={false}>{answer.title}</button>)}
             </div>
               
           </section>
