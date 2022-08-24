@@ -37,7 +37,7 @@ export const searchVideos = async (req, res) => {
 export const searchVideo = async (req, res) => {
 	try {
 		
-		res.status(200).json(await videosModel.findOne({ title: req.body.input }));
+		res.status(200).json(await videosModel.findOne({ title: {$regex: req.body.input, $options: '-i'} }));
 		
 	
 	} catch(error) {
