@@ -49,6 +49,12 @@ fieldset  > legend {
     font-size: 2.5rem;
     font-family: 'Playfair Display SC', serif;
 }
+
+legend {
+    font-weight: 900;
+    text-decoration-line: underline;
+}
+
 legend:hover {
     font-size: 2.5rem;
     color: #96ecbd;

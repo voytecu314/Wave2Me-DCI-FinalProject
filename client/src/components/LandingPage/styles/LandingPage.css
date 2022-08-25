@@ -44,6 +44,8 @@
     border: 1px solid rgba(245, 243, 243,0.5);
     border-top: 0;
     text-shadow: 1.5px 2.5px rgba(0,0,0,0.2);
+    font-weight: 900;
+    font-size: 1.9rem;
 }
 
 .ftr {
@@ -54,20 +56,29 @@
 
 .foot {
     padding: .7rem .7rem;
-    margin: 1%;
-    font-size: 1.5rem;
+    margin: 2%;
+    font-size: 1.9rem;
     font-weight: 900;
     text-decoration: none;
     cursor: pointer;
-    border: 1px solid rgba(245, 243, 243,0.5);
-    border-radius: 15px;
-    border-top: 0;
-    box-shadow: 0px 4px rgba(30,30,30,0.5);
-    text-shadow: 1.5px 2.5px rgba(0,0,0,0.2);
 }
 
-.foot:hover {
-    color: #96ecbd;
-    font-size: 1.7rem;
-    background-color:  rgba(30,30,30,0.5);
+#button-submit2 {
+    padding: .7rem .7rem;
+    font-size: 1.9rem;
+    font-weight: 900;
+    border: 0;
+    border-radius: 0;
+    filter: drop-shadow(0px 0px 0px  #5F77A5);
+}
+
+.foot:hover ,#button-submit2:hover  {
+    border-bottom: 2px solid rgb(223, 217, 217);
+}
+
+
+
+.Sign-up {
+    display: inline-block;
+    width: 100%;
 }
