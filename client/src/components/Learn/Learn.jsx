@@ -502,8 +502,8 @@ const Learn = () => {
                       <video 
                             src={videoData.data} 
                             type="video/mp4"
-                            onPlay={()=>addPoints(level.level)} 
-                            onPause={()=>addPoints(level.level)}
+                            onPlay={()=>addPoints(level.level>15?level.level:0)} 
+                            onPause={()=>addPoints(level.level>15?level.level:0)}
                             controls={videoData.title==='Loading...' || videoData.title==='Video not found.'?false:true}
                             autoPlay 
                             loop>
