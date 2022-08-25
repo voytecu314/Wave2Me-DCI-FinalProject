@@ -480,7 +480,7 @@ const Learn = () => {
                 <div id='level-bar' ref={levelBarRef}></div>
             </div>
           
-            <TopUsers topRef={topRef} topUsersIsOpen={topUsersIsOpen}/>
+            <TopUsers topRef={topRef} topUsersIsOpen={topUsersIsOpen} getLevel={getLevel}/>
 
         </div>
         <div id="favorites-modal" ref={favoritesRef}>
