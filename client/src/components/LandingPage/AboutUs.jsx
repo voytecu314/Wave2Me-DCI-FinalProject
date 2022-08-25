@@ -1,4 +1,9 @@
 import './styles/AboutUs.css'
+import anne2 from '../../assets/ann2.jpg'
+import wojtek from '../../assets/Wojtek.png'
+import vonn from '../../assets/vonn.jpg'
+import egle from '../../assets/egle.jpg'
+import allan from '../../assets/allan.JPG'
 
 const AboutUs = ({setAbout}) => {
   return (
@@ -13,6 +18,65 @@ const AboutUs = ({setAbout}) => {
         
         
     </main>
+    <div className='container'>
+        <section>
+        <article className="front">
+          <img src={vonn} alt="" className="front2"/>
+          <div className="back pallete1">
+              <h1 className='color'>Vonn Ryann Cruz</h1>
+          <h3>Frontend Developer</h3>
+          <h3 className='last'>Summary</h3>
+          </div>
+          
+      </article>
+      </section>
+        <section>
+        <article className="front">
+          <img src={anne2} alt="" className="front2"/>
+          <div className="back pallete2">
+              <h1 className='color'>Anne Mueni Musyoki</h1>
+          <h3>Frontend Developer</h3>
+          <h3 className='last anne'>Summary</h3>
+          </div>
+          
+      </article>
+      </section>
+        <section>
+        <article className="front">
+          <img src={wojtek} alt="" className="front2"/>
+          <div className="back pallete3">
+              <h1 className='color'>Wojtek Urbanski</h1>
+          <h3>Fullstack Developer</h3>
+          <h3 className='last'>Summary</h3>
+          </div>
+          
+      </article>
+      </section>
+        <section>
+        <article className="front">
+          <img src={egle} alt="" className="front2"/>
+          <div className="back pallete4">
+              <h1 className='color'>Egle Jakonyte </h1>
+          <h3>Presentation</h3>
+          <h3 className='last'>Summary</h3>
+          </div>
+          
+      </article>
+      </section>
+        <section>
+        <article className="front">
+          <img src={allan} alt="" className="front2"/>
+          <div className="back pallete5">
+              <h1 className='color'>Allan Lufunda Chiyangi</h1>
+          <h3>Presentation</h3>
+          <h3 className='last adjust'>Summary</h3>
+          </div>
+          
+      </article>
+      </section>
+    </div>
+    
+    
     <footer>
         
         <h2 className='back-home' onClick={()=>setAbout(false)}>Go Back</h2>
