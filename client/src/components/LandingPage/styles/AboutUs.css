@@ -13,13 +13,130 @@
 }
 
 #content-about-us {
-    width: 35vw;
-    border: 10px solid rgba(30,30,30,0.5);
+    width: 50vw;
     padding: 1%;
-    border-radius: 15px;
-    filter: drop-shadow(10px 10px 5px rgba(30,30,30,0.5));
+
 }
 
 h2 {
     font-family: 'Playfair Display SC', serif;
+    font-size: 1.5rem;
+}
+
+h1 {
+    font-family: 'Playfair Display SC', serif;
+    font-size: 1.8rem;
+    padding: 4rem 0 2rem;
+    font-weight: 900;
+}
+
+h3 {
+    color: #404756;
+    font-size: 1.4rem;
+    padding-top: 1rem;
+}
+
+section:hover .front{
+    transform:
+    rotateY(180deg);
+    transform-origin: 50%;
+}
+
+.front {
+    position: relative;
+    width: 230px;
+    height: 230px;
+    transition: all 1s;
+    transform-style: preserve-3d;
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    width: 80vw;
+    flex-wrap: wrap;
+}
+
+.back {
+    height: 100%;
+    transform: rotateY(180deg);
+    text-align: center;
+    border-radius: 20%;
+    border: 1rem  solid rgba(30,30,30,0.5);
+    
+}
+
+.front2,.back {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden
+}
+
+.front2, .back {
+    width: 230px;
+    height: 230px;
+    border-radius: 20%;
+    filter: drop-shadow(5px 5px 5px rgba(30,30,30,0.3))
+}
+
+/* @media screen and (min-width: 769px) and (max-width:1023px){
+    .foot a {
+        font-size: 5rem;
+        margin: 2% 5%;
+        color: white;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+        footer {
+            margin-top: 5%;
+        }
+    
+    
+        .foot a {
+            font-size: 6rem;
+            margin: 2% 5%;
+            color: white;
+          
+         }
+        
+    } */
+
+.pallete1 {
+    background-color: #71ebf7;
+}
+.pallete2 {
+    background-color: #f7f781;
+}
+.pallete3 {
+    background-color: #e2f1ff;
+}
+.pallete4 {
+    background-color: #aa8ed6;
+}
+.pallete5 {
+    background-color: #96ecbd;
+}
+
+.color {
+    color: #404756;
+    border-bottom: .5rem  solid rgba(30,30,30,0.5);
+    filter: drop-shadow(5px 5px 5px rgba(30,30,30,0.5))
+}
+.last {
+    color: #404756;
+    padding-bottom: 2rem;
+    border-bottom: 4.5rem  solid rgba(30,30,30,0.5);
+    border-bottom-right-radius: 36px;
+    border-bottom-left-radius: 36px;
+    
+}
+.adjust {
+    color: #404756;
+    padding-bottom: .1rem;
+    border-bottom: 4rem  solid rgba(30,30,30,0.5);
+    border-bottom-right-radius: 36px;
+    border-bottom-left-radius: 36px;
+    
 }
