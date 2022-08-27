@@ -29,7 +29,7 @@ export const blogPosts = (req, res) => {
         createdAt: new Date()
     }];
     
-    blogModel.find()
+    blogModel.find({})
              .then(data=>{
                             posts= data[0]?.articles || posts;
                             res.status(200).json(posts);

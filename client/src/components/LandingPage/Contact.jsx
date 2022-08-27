@@ -4,7 +4,7 @@ const Contact = ({setContact}) => {
 
   return (
     <div id="contact">
-      <form id="contact-form">
+      <form id="contact-form" onSubmit={(e)=>e.target.reset()}>
         <input
           type='text'
           placeholder='FirstName'

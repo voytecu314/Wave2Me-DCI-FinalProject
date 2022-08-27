@@ -5,7 +5,6 @@ import SignUp from './SignUp.jsx';
 import Logo from './Logo.jsx';
 import Faq from './Faq.jsx';
 import './styles/LandingPage.css';
-import Footer from '../Footer/Footer.jsx';
 
 const LandingPage = ({setLandingModal}) => {
 

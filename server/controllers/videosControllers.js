@@ -5,9 +5,15 @@ export const videoOfTheDayController = async (req, res) => {
 	
 	try {
 	
-		const videosTitles = await videosModel.find().select('-data');
-		//now just random video - change to video of the day
-		const titleOfTheDay = videosTitles[Math.floor(Math.random()*videosTitles.length)]
+		const videosTitles = await videosModel.find({}).select('-data');
+		//this is for guaranteed different video on every day of the week
+
+		const today = new Date().getDay();
+		const monthDay = new Date().getDate();
+		const quantity = Math.floor(videosTitles.length / 7); console.log(videosTitles.length);
+		const whichOne = monthDay%quantity;
+
+		const titleOfTheDay = videosTitles[today+(whichOne*7)]
 		const videoOfTheDay = await videosModel.findById(titleOfTheDay.id)
 		
 		res.status(200).json({title: titleOfTheDay.title, data: videoOfTheDay.data, _id: titleOfTheDay.id});
