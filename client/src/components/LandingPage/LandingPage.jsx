@@ -5,6 +5,7 @@ import SignUp from './SignUp.jsx';
 import Logo from './Logo.jsx';
 import Faq from './Faq.jsx';
 import './styles/LandingPage.css';
+import Footer from '../Footer/Footer.jsx';
 
 const LandingPage = ({setLandingModal}) => {
 
@@ -50,10 +51,11 @@ const LandingPage = ({setLandingModal}) => {
 
     const [about, setAbout] = useState(false);
     const [contact, setContact] = useState(false);
-    const [signup, setSignUp] = useState(false);
+    const [signUp, setSignUp] = useState(false);
     const [faq, setFaq] = useState(false);
 
   return (
+    
     <div id="landing-page">
     <header>
         <h5 className='header-text'>
@@ -64,7 +66,7 @@ const LandingPage = ({setLandingModal}) => {
     <main style={{position: 'relative'}}>
     {about && <AboutUs setAbout={setAbout}/>}
     {contact && <Contact setContact={setContact} setLandingModal={setLandingModal}/>}
-    {signup && <SignUp setSignUp={setSignUp} setLandingModal={setLandingModal}/>}
+    {signUp && <SignUp setSignUp={setSignUp} setLandingModal={setLandingModal}/>}
     {faq && <Faq setFaq={setFaq} setLandingModal={setLandingModal}/>}
         <Logo/>
         <br /><br /><br />
@@ -75,10 +77,15 @@ const LandingPage = ({setLandingModal}) => {
                     <br />
                     <input id='midlane2' type="password" name='password' placeholder='Password'/>
                     <br />
-                    <input id='button-submit1' type="submit" value="Login" />
-                    <button id='button-submit2' type="button"><i className="fab fa-google"/>oogle</button>
                     <br />
-                <button id='button-submit3' type="button" onClick={()=>setSignUp(true)} >SignUp</button>
+                    <input id='button-submit1' type="submit" value="Login" />
+                    <br />
+                    <br />
+                    <br />
+
+                    <div className='Sign-up'><h1>No Account?:<span><button id='button-submit2' type="button" onClick={()=>setSignUp(true)} >SignUp</button></span></h1>
+                    </div>
+                     
                 
                 </form>
                 
@@ -86,9 +93,6 @@ const LandingPage = ({setLandingModal}) => {
         </section>
     </main>
     <br /><br /><br /><br />
-    {/* <section className="donate">
-        <button className="donate1">Donate</button>
-      </section> */}
        <div className='ftr'> 
             <span className='foot' onClick={()=>setAbout(true)} >About Us</span>
             <span className='foot' onClick={()=>setContact(true)} >Contact</span>
@@ -96,7 +100,6 @@ const LandingPage = ({setLandingModal}) => {
        </div>
         
     </div>
-    
   )
 }
 

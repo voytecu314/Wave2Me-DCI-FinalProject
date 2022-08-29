@@ -21,7 +21,7 @@ const TopUsers = ({topRef, topUsersIsOpen, getLevel}) => {
             .catch(console.log);
     },[topUsersIsOpen]);
 
-    const resizeTopUsersModal = () => {
+    const resizeTopUsersModal = (e) => {
         if(topRef.current) {
             topRef.current.style.height = '0vh';
             topRef.current.style.width = '0vw';
@@ -33,9 +33,9 @@ const TopUsers = ({topRef, topUsersIsOpen, getLevel}) => {
     <div id='top-users' ref={topRef}> <button onClick={resizeTopUsersModal}>X</button>
         <div>
             <h1>Top Users</h1>
-            {topUsersData.map(user=><h2 className='flex-top-users-list'>
+            {topUsersData.map((user,i)=><h2 key={`top_${i}`} className='flex-top-users-list'>
                 <span>{user.name}</span>
-                <span>Level: {getLevel(user.points).result}</span>
+                <span>Level: {getLevel(user.points).level}</span>
                 < span>Points: {user.points}</span>
                 </h2>)}
         </div>

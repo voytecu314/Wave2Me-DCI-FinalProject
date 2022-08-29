@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -50,7 +52,7 @@
 
   .comments {
     display: grid;
-    grid-template-columns: 2fr 4fr 3fr 16fr;
+    grid-template-columns: 3fr 4fr 4fr 16fr;
     border-bottom-left-radius: 9%;
   }
 
@@ -89,11 +91,19 @@
   .see-more {
     position: relative;
     bottom: 20%; left: 40%;
+    font-weight: 900;
+    font-family: 'Playfair Display SC', serif;
+  }
+  
+  .see-less {
+    font-weight: 900;
+    position: relative;
+    bottom: 0; left: 40%;
+    font-family: 'Playfair Display SC', serif;
   }
 
-  .see-less {
-    position: fixed;
-    bottom: 0; left: 40%;
+  .see-less:hover ,.see-more:hover {
+    font-size: 1.5rem;
   }
 
   .limitName {

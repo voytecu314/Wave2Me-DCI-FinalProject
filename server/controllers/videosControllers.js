@@ -23,7 +23,7 @@ export const videoOfTheDayController = async (req, res) => {
 export const searchVideos = async (req, res) => {
 	try {
 		
-		res.status(200).json(await videosModel.find({ title: {$regex: '^'+req.body.input, $options: 'i'} }).select('-data'));
+		res.status(200).json(await videosModel.find({ title: {$regex: '^'+req.body.input, $options: '-i'} }).select('-data'));
 		
 	
 	} catch(error) {
@@ -37,7 +37,7 @@ export const searchVideos = async (req, res) => {
 export const searchVideo = async (req, res) => {
 	try {
 		
-		res.status(200).json(await videosModel.findOne({ title: req.body.input }));
+		res.status(200).json(await videosModel.findOne({ title: {$regex: '^'+req.body.input, $options: '-i'} }));
 		
 	
 	} catch(error) {
@@ -59,5 +59,29 @@ export const getMyVideos = async (req, res) => {
 		console.log('Find video - searchVideo controller:',error);
 		res.status(500).json(error);
 	
+	}
+}
+
+export const quizController = async (req, res) => {
+	try {
+		const randomizedTitles = [];
+		const videosTitles = await videosModel.find().select('-data -__v');
+		const initialLength = videosTitles.length;
+		//now just random video
+		const quizVideoTitle = videosTitles[Math.floor(Math.random()*videosTitles.length)];
+		const quizVideoData = await videosModel.findById(quizVideoTitle.id);
+		const sanitized = videosTitles.filter(video=>video.title != quizVideoTitle.title);
+		for(let i=0; i<initialLength; i++) {
+			randomizedTitles.push(
+				...sanitized.splice(Math.floor(Math.random()*videosTitles.length,1))
+			);
+		}
+		
+		res.status(200).json({randomizedTitles,title: quizVideoTitle.title, data: quizVideoData.data});
+		
+	} catch (error) {
+			
+		res.status(500).json({quizControllerError: error.message});
+		
 	}
 }

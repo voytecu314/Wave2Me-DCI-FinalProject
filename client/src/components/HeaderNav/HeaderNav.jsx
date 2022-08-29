@@ -1,11 +1,12 @@
-import { Link } from 'react-router-dom';
 import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
 import './HeaderNav.css';
 
 const HeaderNav = ({setLandingModal}) => {
 
-  const {payload} = useContext(MyContext);
+  const {payload, setPointsPopup} = useContext(MyContext);
+  const navigate = useNavigate();
 
   return (
     <nav className="navbar">
@@ -37,7 +38,9 @@ const HeaderNav = ({setLandingModal}) => {
                   <li>
                     <Link to="/" onClick={()=>{
                                               localStorage.removeItem('W2M-JWT-Token');
-                                              setLandingModal(true)
+                                              navigate('/');
+                                              setPointsPopup(false);
+                                              setLandingModal(true);
                                               }}>Logout</Link>
                   </li>
                 </ul>
