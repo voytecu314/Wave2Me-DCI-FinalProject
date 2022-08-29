@@ -12,10 +12,21 @@
     z-index: 200;
 }
 
+
 #content-about-us {
     width: 50vw;
     padding: 1%;
 
+    border-radius: 15px;
+    filter: drop-shadow(10px 10px 5px rgba(30,30,30,0.5));
+/* overflow:hidden;
+    height: 30em;
+    line-height: 3em;
+    text-overflow: ellipsis; */ 
+}
+
+#content-about-us > h2 {
+    transition: all 2s;
 }
 
 h2 {
