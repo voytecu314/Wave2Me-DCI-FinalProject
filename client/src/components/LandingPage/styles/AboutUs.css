@@ -46,6 +46,13 @@ h3 {
     padding-top: 1rem;
 }
 
+.origin {
+    font-size: 1.4rem;
+    padding-top: 1rem;
+    color: #404756;
+    filter: drop-shadow(5px 5px 5px rgba(30,30,30,0.5))
+}
+
 section:hover .front{
     transform:
     rotateY(180deg);
@@ -133,21 +140,6 @@ section:hover .front{
     color: #404756;
     border-bottom: .5rem  solid rgba(30,30,30,0.5);
     filter: drop-shadow(5px 5px 5px rgba(30,30,30,0.5))
-}
-.last {
-    color: #404756;
-    padding-bottom: 2rem;
-    border-bottom: 4.5rem  solid rgba(30,30,30,0.5);
-    border-bottom-right-radius: 36px;
-    border-bottom-left-radius: 36px;
-    
-}
-.adjust {
-    color: #404756;
-    padding-bottom: .1rem;
-    border-bottom: 4rem  solid rgba(30,30,30,0.5);
-    border-bottom-right-radius: 36px;
-    border-bottom-left-radius: 36px;
 }
 
 /* Just add something to push */

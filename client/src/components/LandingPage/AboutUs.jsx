@@ -56,7 +56,10 @@ const AboutUs = ({setAbout}) => {
           <div className="back pallete1">
               <h1 className='color'>Vonn Ryann Cruz</h1>
           <h3>Frontend Developer</h3>
-          <h3 className='last'>Summary</h3>
+          <hr />
+          <h3 className='last'>Nationality</h3>
+          <h4 className='origin'>Philippines</h4>
+
           </div>
           
       </article>
@@ -67,7 +70,9 @@ const AboutUs = ({setAbout}) => {
           <div className="back pallete2">
               <h1 className='color'>Anne Mueni Musyoki</h1>
           <h3>Frontend Developer</h3>
-          <h3 className='last anne'>Summary</h3>
+          <hr />
+          <h3 className='last'>Nationality</h3>
+          <h4 className='origin'>Kenya</h4>
           </div>
           
       </article>
@@ -78,7 +83,9 @@ const AboutUs = ({setAbout}) => {
           <div className="back pallete3">
               <h1 className='color'>Wojtek Urbanski</h1>
           <h3>Fullstack Developer</h3>
-          <h3 className='last'>Summary</h3>
+          <hr />
+          <h3 className='last'>Nationality</h3>
+          <h4 className='origin'>Poland</h4>
           </div>
           
       </article>
@@ -89,7 +96,9 @@ const AboutUs = ({setAbout}) => {
           <div className="back pallete4">
               <h1 className='color'>Egle Jakonyte </h1>
           <h3>Presentation</h3>
-          <h3 className='last'>Summary</h3>
+          <hr />
+          <h3 className='last'>Nationality</h3>
+          <h4 className='origin'>Lithuania</h4>
           </div>
           
       </article>
@@ -100,7 +109,9 @@ const AboutUs = ({setAbout}) => {
           <div className="back pallete5">
               <h1 className='color'>Allan Lufunda Chiyangi</h1>
           <h3>Presentation</h3>
-          <h3 className='last adjust'>Summary</h3>
+          <hr />
+          <h3 className='last'>Nationality</h3>
+          <h4 className='origin'>Zambia</h4>
           </div>
           
       </article>
