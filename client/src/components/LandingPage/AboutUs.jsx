@@ -10,6 +10,7 @@ import allan from '../../assets/allan.JPG'
 
 
 
+
 const AboutUs = ({setAbout}) => {
   const [newText,setNewText] = useState(true) 
   
