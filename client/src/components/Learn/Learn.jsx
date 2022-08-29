@@ -251,7 +251,9 @@ const Learn = () => {
   const quizAnswer = (e) => {
     
     if(e.target.innerText===quizVideo.title) {
-      const points = level.level<15?getFibonacciNumber(level.level).next:getFibonacciNumber(level.level).previous;
+      const points = level.level<15?getFibonacciNumber(level.level).next:
+                     level.level<40?getFibonacciNumber(level.level).previous:
+                     getFibonacciNumber(level.level).next-getFibonacciNumber(level.level).previous;
       addPoints(points);
       const earnedQuizPoints = () => {
         return `\n For this answer you are receiving ${points} points!`

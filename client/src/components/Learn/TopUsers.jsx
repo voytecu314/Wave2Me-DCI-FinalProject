@@ -33,10 +33,12 @@ const TopUsers = ({topRef, topUsersIsOpen, getLevel}) => {
     <div id='top-users' ref={topRef}> <button onClick={resizeTopUsersModal}>X</button>
         <div>
             <h1>Top Users</h1>
-            {topUsersData.map((user,i)=><h2 key={`top_${i}`} className='flex-top-users-list'>
-                <span>{user.name}</span>
-                <span>Level: {getLevel(user.points).level}</span>
-                < span>Points: {user.points}</span>
+            {topUsersData.map((user,i)=><h2 key={`top_${i}`}>
+                <span style={{textAlign:'right'}}>{user.name}</span>
+                <span style={{textAlign:'center'}}>Level: {getLevel(user.points).level}</span>
+                <span style={{textAlign:'right'}}>Points: </span>
+                <span style={{textAlign:'right'}}>{user.points}</span>
+                <span></span>
                 </h2>)}
         </div>
     </div>

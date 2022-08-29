@@ -10,7 +10,7 @@ export const videoOfTheDayController = async (req, res) => {
 
 		const today = new Date().getDay();
 		const monthDay = new Date().getDate();
-		const quantity = Math.floor(videosTitles.length / 7); console.log(videosTitles.length);
+		const quantity = Math.floor(videosTitles.length / 7);
 		const whichOne = monthDay%quantity;
 
 		const titleOfTheDay = videosTitles[today+(whichOne*7)]
