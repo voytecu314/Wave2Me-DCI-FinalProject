@@ -1,0 +1,32 @@
+#alphabet-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    width: 50vw;
+    min-height: 70vh;
+    margin: auto;
+}
+
+#alphabet-container > p {
+    text-align: center;
+}
+
+#translate-section {
+    display: grid;
+    width: 100%;
+    min-height: 50vh;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid;
+}
+
+.asl-translate {
+font-size:xx-large;
+display: flex;
+    flex-wrap: wrap;
+}
+
+#asl-alphabet-generator {
+    
+}
+
+/* input:after {content: attr(title); color: black;}  */

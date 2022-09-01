@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import A from '../../assets/ASLalphabet/A.png';
 import B from '../../assets/ASLalphabet/B.png';
 import C from '../../assets/ASLalphabet/C.png';
@@ -25,6 +25,7 @@ import W from '../../assets/ASLalphabet/W.png';
 import X from '../../assets/ASLalphabet/X.png';
 import Y from '../../assets/ASLalphabet/Y.png';
 import Z from '../../assets/ASLalphabet/Z.png';
+import './Alphabet.css'
 
 const Alphabet = () => {
 
@@ -33,33 +34,56 @@ const Alphabet = () => {
         N: N, O: O, P: P, Q: Q, R: R, S: S, T: T, U: U, V: V, W: W, X: X, Y: Y, Z: Z
     }
 
-    const [letter, setLetter] = useState(alphabet['D']);
+    //const [letter, setLetter] = useState(alphabet['D']);
+    const [inputValue, setInputValue] = useState([<span></span>]);
+    const [ASLalphabet, setASLalphabet] = useState(null);
     
+
     const write = (e) => {
-        e.target.nextSibling.nextSibling.nextSibling.innerText = e.target.value;
-        if(e.target.value && e.target.value[e.target.value.length-1].match(/[a-z]/i)) 
-        setLetter(alphabet[e.target.value[e.target.value.length-1].toUpperCase()]);
+        const inputText = e.target.value.split('');
+        const letterSpans = inputText.map(letter=>{if(letter===' ')
+                                                    return <span>{'-'}</span>
+                                                      else if(!letter.match(/[a-z]/i))
+                                                        return <span></span>
+                                                          else return <span>{letter}</span>})
+        console.log(letterSpans);
+        setInputValue(letterSpans);
+        //if(e.target.value && e.target.value[e.target.value.length-1].match(/[a-z]/i)) 
+        //setLetter(alphabet[e.target.value[e.target.value.length-1].toUpperCase()]);
     }
 
-    const play = (e) => {
-        
-       /*  for(let i=0; i<10; i++){
-            console.log(i);
-            setTimeout(()=>console.log(e.target.parentElement.firstChild),1000);
-        } 
-        setInterval(()=>{let i=[0,1,2,3,4,5]
-            setLetter(e.target.parentElement.firstChild.value[i])},1000);*/
-    }
+    /* const play = (e) => {
+        console.log(e.target.parentElement.firstChild.value.length);
+        let i =0;
+        const playAlphabet = setInterval(()=>{ if(i<e.target.parentElement.firstChild.value.length)
+            setLetter(alphabet[e.target.parentElement.firstChild.value[i++].toUpperCase()])
+            else clearInterval(playAlphabet)
+        },1000);
+    } */
 
+    useEffect(()=>{
+        const inputText=inputValue.map(span=>{if(span.props.children) return span.props.children; else return '-'});
+        console.log(inputText);
+        const inputImages=inputText.map(letter=>letter && letter.match(/[a-z]/i) &&
+                                        <img src={alphabet[letter.toUpperCase()]} 
+                                             alt={`ASL letter ${letter}`}
+                                             width="20%"
+                                             height="20%"></img>)
+        setASLalphabet(inputImages);
+    },[inputValue]);
     
 
   return (
-    <div style={{textAlign: 'center', minHeight:'65vh'}}>
-        <input type="text" title='Only LETTERS from English alphabet will be translated' onChange={write}/>
+    <div id='alphabet-container'>
+        <input type="text" title='Only LETTERS from English alphabet will be translated' onChange={write} autoFocus/>
         <br />
-        <img src={letter} alt="ASL letter A"  width={200} height={300}/>    
+        {/* <img src={letter} alt={`ASL letter ${letter}` } width={200} height={300}/>  */}   
         <p style={{color: 'black', fontSize:'3rem', marginTop:'5%'}}>Insert phrase to translate to ASL alphabet</p>
-        <button onClick={play}><i className="fa fa-play"></i></button>
+        <section id='translate-section'>
+            <div id='asl-alphabet-generator' className='asl-translate'>{ASLalphabet}</div>
+            <div className='asl-translate'>{inputValue}</div>
+        </section>
+        <button /* onClick={play} */><i className="fa fa-play"></i></button>
     </div>
   )
 }
