@@ -36,36 +36,56 @@ const Alphabet = () => {
         SPACE: SPACE
     }
 
-    //const [letter, setLetter] = useState(alphabet['D']);
-    const [inputValue, setInputValue] = useState([<span></span>]);
-    const [ASLalphabet, setASLalphabet] = useState(null);
-    
+    const startSentence = [ <span>L</span>,<span>i</span>,<span>s</span>,<span>t</span>,<span>e</span>,<span>n</span>,
+                            <span style={{flexBasis:'3%'}}></span>,<span>t</span>,<span>o</span>,<span style={{flexBasis:'3%'}}></span>,
+                            <span>m</span>,<span>y</span>,<span style={{flexBasis:'3%'}}></span>,<span>h</span>,<span>a</span>,<span>n</span>,
+                            <span>d</span>,<span>s</span>,]
 
-    const write = (e) => {
+    const [inputValue, setInputValue] = useState(startSentence);
+    const [ASLalphabet, setASLalphabet] = useState(null);
+    const [letter, setLetter] = useState(alphabet['SPACE']);
+    const [displayLetter, setDisplayLetter] = useState(null);
+    const [displayPlayBtn, setDisplayPlayBtn] = useState(true);
+    const [displayModal, setDisplayModal] = useState(false);
+
+    const write = (e) => { 
+        if(e.target.value[e.target.value.length-1]!==' ' && !isNaN(+e.target.value[e.target.value.length-1])){
+            e.target.value=e.target.value.slice(0, -1);
+        }
         const inputText = e.target.value.split('');
         const letterSpans = inputText.map(letter=>{if(letter===' ')
                                                     return <span style={{flexBasis:'3%'}}></span>
                                                       else if(!letter.match(/[a-z]/i))
                                                         return <span></span>
                                                           else return <span>{letter}</span>})
-        console.log(letterSpans);
+        
         setInputValue(letterSpans);
         //if(e.target.value && e.target.value[e.target.value.length-1].match(/[a-z]/i)) 
         //setLetter(alphabet[e.target.value[e.target.value.length-1].toUpperCase()]);
     }
 
-    /* const play = (e) => {
-        console.log(e.target.parentElement.firstChild.value.length);
-        let i =0;
-        const playAlphabet = setInterval(()=>{ if(i<e.target.parentElement.firstChild.value.length)
-            setLetter(alphabet[e.target.parentElement.firstChild.value[i++].toUpperCase()])
-            else clearInterval(playAlphabet)
+    const play = (e) => {
+        setDisplayLetter(null);
+        setDisplayModal(true);
+        setDisplayPlayBtn(false);
+        const letters = inputValue.map(obj=>{if(obj?.props?.children) return obj.props.children
+                                                else return ' '});
+        let i =-1;
+        const playAlphabet = setInterval(()=>{ if(i<letters.length-1){
+            inputValue[++i]?.props.children &&
+            setLetter(alphabet[letters[i].toUpperCase()]);
+            setDisplayLetter(letters[i].toUpperCase())}
+            else {clearInterval(playAlphabet); setDisplayPlayBtn(true)}
         },1000);
-    } */
+    }
+
+    const closeModal = (e) => {
+        setDisplayModal(false);
+    }
 
     useEffect(()=>{
         const inputText=inputValue.map(span=>{if(span.props.children) return span.props.children; else return '-'});
-        console.log(inputText);
+        
         const inputImages=inputText.map(letter=>{ if(letter && letter.match(/[a-z]/i)){
                                                     return (<img src={alphabet[letter.toUpperCase()]} 
                                                         alt={`ASL letter ${letter}`}
@@ -79,25 +99,37 @@ const Alphabet = () => {
                                                                 height="20%"></img>
                                         })
         setASLalphabet(inputImages);
+        inputValue[0]?.props?.children && 
+        inputValue[0]?.props?.children.match(/[a-z]/i) &&
+        setLetter(alphabet[inputValue[0].props.children.toUpperCase()]);
     },[inputValue]);
     
 
   return (
     <div id='alphabet-container'>
+        <p style={{color: 'black', fontSize:'3rem', marginTop:'5%'}}>Insert a phrase to generate ASL alphabet</p>
         <input 
             type="text" 
+            placeholder='Insert a phrase to generate ASL alphabet'
             title='Max 20 characters - only LETTERS from English alphabet will be translated' 
-            onChange={write} 
-            maxlength = "20"
+            onChange={write}
+            maxLength = "20"
             autoFocus/>
-        <br />
-        {/* <img src={letter} alt={`ASL letter ${letter}` } width={200} height={300}/>  */}   
-        <p style={{color: 'black', fontSize:'3rem', marginTop:'5%'}}>Insert phrase to translate to ASL alphabet</p>
+        <br />   
         <section id='translate-section'>
             <div id='asl-alphabet-generator' className='asl-translate'>{ASLalphabet}</div>
             <div id='asl-text' className='asl-translate'>{inputValue}</div>
         </section>
-        <button /* onClick={play} */><i className="fa fa-play"></i></button>
+
+        {displayPlayBtn && <button onClick={play}><i className="fa fa-play"></i></button>}
+        
+        {displayModal &&
+        <div id='play-asl-modal'>
+            <button id='close-asl-modal' onClick={closeModal}>X</button>
+            <img src={letter} alt={`ASL letter ${letter}` } width={'35%'} height={'55%'}/>
+            <h1 style={{color: 'black', fontSize:'7rem', flexBasis:'7rem'}}>{displayLetter}</h1>
+            {displayPlayBtn && <button onClick={play}>Play again</button>}
+        </div>}
     </div>
   )
 }

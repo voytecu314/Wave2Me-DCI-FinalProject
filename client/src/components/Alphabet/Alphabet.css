@@ -33,4 +33,23 @@
     align-self: center;
 }
 
+#play-asl-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    width: 60vw;
+    height: 80vh;
+    background-color: aliceblue;
+}
+
+#close-asl-modal{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 /* input:after {content: attr(title); color: black;}  */
