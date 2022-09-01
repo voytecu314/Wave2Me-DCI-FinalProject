@@ -1,0 +1,57 @@
+#alphabet-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    width: 70vw;
+    min-height: 70vh;
+    margin: auto;
+}
+
+#alphabet-container > p {
+    text-align: center;
+}
+
+#translate-section {
+    display: grid;
+    width: 100%;
+    height: 70vh;
+    grid-template-columns: 2fr 1fr;
+    border: 1px solid;
+}
+
+.asl-translate {
+    font-size:xx-large;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#asl-alphabet-generator {
+    padding: 2%;
+    align-items: flex-start;
+}
+
+#asl-text{
+    align-self: center;
+    padding: 1%;
+}
+
+#play-asl-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    width: 60vw;
+    height: 80vh;
+    background-color: aliceblue;
+}
+
+#close-asl-modal{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* input:after {content: attr(title); color: black;}  */
