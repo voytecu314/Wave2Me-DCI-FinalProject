@@ -25,13 +25,15 @@ import W from '../../assets/ASLalphabet/W.png';
 import X from '../../assets/ASLalphabet/X.png';
 import Y from '../../assets/ASLalphabet/Y.png';
 import Z from '../../assets/ASLalphabet/Z.png';
+import SPACE from '../../assets/ASLalphabet/empty.png';
 import './Alphabet.css'
 
 const Alphabet = () => {
 
     const alphabet = {
         A: A, B: B, C: C, D: D, E: E, F: F, G: G, H: H, I: I, J: J, K: K, L: L, M: M, 
-        N: N, O: O, P: P, Q: Q, R: R, S: S, T: T, U: U, V: V, W: W, X: X, Y: Y, Z: Z
+        N: N, O: O, P: P, Q: Q, R: R, S: S, T: T, U: U, V: V, W: W, X: X, Y: Y, Z: Z,
+        SPACE: SPACE
     }
 
     //const [letter, setLetter] = useState(alphabet['D']);
@@ -42,7 +44,7 @@ const Alphabet = () => {
     const write = (e) => {
         const inputText = e.target.value.split('');
         const letterSpans = inputText.map(letter=>{if(letter===' ')
-                                                    return <span>{'-'}</span>
+                                                    return <span style={{flexBasis:'3%'}}></span>
                                                       else if(!letter.match(/[a-z]/i))
                                                         return <span></span>
                                                           else return <span>{letter}</span>})
@@ -64,24 +66,36 @@ const Alphabet = () => {
     useEffect(()=>{
         const inputText=inputValue.map(span=>{if(span.props.children) return span.props.children; else return '-'});
         console.log(inputText);
-        const inputImages=inputText.map(letter=>letter && letter.match(/[a-z]/i) &&
-                                        <img src={alphabet[letter.toUpperCase()]} 
-                                             alt={`ASL letter ${letter}`}
-                                             width="20%"
-                                             height="20%"></img>)
+        const inputImages=inputText.map(letter=>{ if(letter && letter.match(/[a-z]/i)){
+                                                    return (<img src={alphabet[letter.toUpperCase()]} 
+                                                        alt={`ASL letter ${letter}`}
+                                                        width="20%"
+                                                        height="15%"></img>)
+                                                     } else if(letter && letter==='-')
+                                                       return <img 
+                                                                src={alphabet.SPACE} 
+                                                                alt='Empty space character'
+                                                                width="10%"
+                                                                height="20%"></img>
+                                        })
         setASLalphabet(inputImages);
     },[inputValue]);
     
 
   return (
     <div id='alphabet-container'>
-        <input type="text" title='Only LETTERS from English alphabet will be translated' onChange={write} autoFocus/>
+        <input 
+            type="text" 
+            title='Max 20 characters - only LETTERS from English alphabet will be translated' 
+            onChange={write} 
+            maxlength = "20"
+            autoFocus/>
         <br />
         {/* <img src={letter} alt={`ASL letter ${letter}` } width={200} height={300}/>  */}   
         <p style={{color: 'black', fontSize:'3rem', marginTop:'5%'}}>Insert phrase to translate to ASL alphabet</p>
         <section id='translate-section'>
             <div id='asl-alphabet-generator' className='asl-translate'>{ASLalphabet}</div>
-            <div className='asl-translate'>{inputValue}</div>
+            <div id='asl-text' className='asl-translate'>{inputValue}</div>
         </section>
         <button /* onClick={play} */><i className="fa fa-play"></i></button>
     </div>

@@ -14,19 +14,23 @@
 #translate-section {
     display: grid;
     width: 100%;
-    min-height: 50vh;
+    height: 70vh;
     grid-template-columns: 1fr 1fr;
     border: 1px solid;
 }
 
 .asl-translate {
-font-size:xx-large;
-display: flex;
+    font-size:xx-large;
+    display: flex;
     flex-wrap: wrap;
 }
 
 #asl-alphabet-generator {
     
+}
+
+#asl-text{
+    align-self: center;
 }
 
 /* input:after {content: attr(title); color: black;}  */
