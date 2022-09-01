@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-items: center;
-    width: 50vw;
+    width: 70vw;
     min-height: 70vh;
     margin: auto;
 }
@@ -15,7 +15,7 @@
     display: grid;
     width: 100%;
     height: 70vh;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     border: 1px solid;
 }
 
@@ -26,11 +26,13 @@
 }
 
 #asl-alphabet-generator {
-    
+    padding: 2%;
+    align-items: flex-start;
 }
 
 #asl-text{
     align-self: center;
+    padding: 1%;
 }
 
 #play-asl-modal{

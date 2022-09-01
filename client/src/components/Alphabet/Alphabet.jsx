@@ -65,16 +65,17 @@ const Alphabet = () => {
     }
 
     const play = (e) => {
+        setLetter(alphabet['SPACE']);
         setDisplayLetter(null);
         setDisplayModal(true);
         setDisplayPlayBtn(false);
         const letters = inputValue.map(obj=>{if(obj?.props?.children) return obj.props.children
-                                                else return ' '});
+                                                else return 'SPACE'});
         let i =-1;
         const playAlphabet = setInterval(()=>{ if(i<letters.length-1){
-            inputValue[++i]?.props.children &&
+            inputValue[++i]?.props?.children &&
             setLetter(alphabet[letters[i].toUpperCase()]);
-            setDisplayLetter(letters[i].toUpperCase())}
+            setDisplayLetter(letters[i]!=='SPACE'?letters[i].toUpperCase():'-')}
             else {clearInterval(playAlphabet); setDisplayPlayBtn(true)}
         },1000);
     }
@@ -89,31 +90,31 @@ const Alphabet = () => {
         const inputImages=inputText.map(letter=>{ if(letter && letter.match(/[a-z]/i)){
                                                     return (<img src={alphabet[letter.toUpperCase()]} 
                                                         alt={`ASL letter ${letter}`}
-                                                        width="20%"
-                                                        height="15%"></img>)
+                                                        width="10%"
+                                                        height="13%"></img>)
                                                      } else if(letter && letter==='-')
                                                        return <img 
                                                                 src={alphabet.SPACE} 
                                                                 alt='Empty space character'
                                                                 width="10%"
-                                                                height="20%"></img>
+                                                                height="13%"></img>
                                         })
         setASLalphabet(inputImages);
-        inputValue[0]?.props?.children && 
+        /* inputValue[0]?.props?.children && 
         inputValue[0]?.props?.children.match(/[a-z]/i) &&
-        setLetter(alphabet[inputValue[0].props.children.toUpperCase()]);
+        setLetter(alphabet[inputValue[0].props.children.toUpperCase()]); */
     },[inputValue]);
     
 
   return (
     <div id='alphabet-container'>
-        <p style={{color: 'black', fontSize:'3rem', marginTop:'5%'}}>Insert a phrase to generate ASL alphabet</p>
+        <p style={{color: 'black', fontSize:'3rem'}}>Insert a phrase to generate ASL alphabet</p>
         <input 
             type="text" 
             placeholder='Insert a phrase to generate ASL alphabet'
-            title='Max 20 characters - only LETTERS from English alphabet will be translated' 
+            title='Max 40 characters - only LETTERS from English alphabet will be translated' 
             onChange={write}
-            maxLength = "20"
+            maxLength='40'
             autoFocus/>
         <br />   
         <section id='translate-section'>
