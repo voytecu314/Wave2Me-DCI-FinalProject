@@ -6,6 +6,10 @@ import uploadingVid from '../../assets/uploading_bar.mp4';
 import notFound from '../../assets/404pagenotfound.mp4';
 import updateUserData from '../../helpers/updateUserData';
 import fetchMyVideos, { fetchMyQuiz } from '../../helpers/fetchMyVideos.js';
+import logo from '../../assets/dcilogo.png'
+import fish from '../../assets/fish.png'
+import logo2 from '../../assets/logo2.png'
+import logo3 from '../../assets/annelogo.jpeg'
 
 
 const Learn = () => {
@@ -98,14 +102,15 @@ const Learn = () => {
                               </div>
 
                               <div className="fav-delete">
-                                <i className="fa fa-trash-o" 
+                                <br />
+                                <i className="fa fa-trash-o del" 
                                   title='Remove this video from favorites' 
                                   onClick={(e)=>{setIsLiked(!isLiked);
                                     removeVid('favorites',vidData._id);
                                     fetchMyVideos(setChosenVideosData,{...userData,favorites:userData.favorites.filter(id=>id!==vidData._id)},chosenVideosData,'favorites');
                                                   }}
                                   style={{cursor:'pointer', color: '#404756'}}></i>
-                                <i className="fa fa-arrow-up" 
+                                <i className="fa fa-arrow-up del" 
                                   title='Remove this video from favorites' 
                                   onClick={(e)=>{setIsLiked(!isLiked);
                                     removeVid('favorites',vidData._id);
@@ -140,14 +145,14 @@ const Learn = () => {
                               </div>
 
                               <div className="fav-delete">
-                                <i className="fa fa-trash-o" 
+                                <i className="fa fa-trash-o del" 
                                   title='Remove this video from workOnIt' 
                                   onClick={(e)=>{
                                     removeVid('workOnIt',vidData._id);
                                     fetchMyVideos(setChosenVideosData,{...userData,workOnIt:userData.workOnIt.filter(id=>id!==vidData._id)},chosenVideosData,'workOnIt');
                                                   }}
                                   style={{cursor:'pointer', color: '#404756'}}></i>
-                                <i className="fa fa-arrow-up" 
+                                <i className="fa fa-arrow-up del" 
                                   title='Remove this video from workOnIt' 
                                   onClick={(e)=>{
                                     removeVid('workOnIt',vidData._id);
@@ -472,7 +477,6 @@ const Learn = () => {
 
   return (
     <div id="learn-container">
-
         <div id="first-page">
             <form id="search-container" onSubmit={submitHandler}>
               <div id='search-div'>
@@ -497,11 +501,16 @@ const Learn = () => {
 			
             <div className="text">
               <h2> 
-                {submitted || videoData.title==='Video not found.' ? videoData.title.toUpperCase() : 'Video of the day: '+videoData.title.toUpperCase()}
+                {submitted || videoData.title==='Video not found.' ? videoData.title.toUpperCase() : 'Video of the day: ' +videoData.title.toUpperCase()}
               </h2>
             </div>
                   
             <div className="img-container">
+                    <aside className='aside-box'>
+                      <img className='flip' src={logo} alt="dci" />
+                      <img src={logo2} alt="fish" />
+                      <div className='ads'>Sponsors Ads</div>
+                      </aside>
                       <video 
                             src={videoData.data} 
                             type="video/mp4"
@@ -511,6 +520,10 @@ const Learn = () => {
                             autoPlay 
                             loop>
                 Your browser does not support the video tag.</video> 
+                    <aside className='aside-box'>
+                    <img src={logo3} alt="anne" />
+                    <img src={fish} alt="fish" />
+                    </aside>
             </div>
             
             {videoData.videoID &&

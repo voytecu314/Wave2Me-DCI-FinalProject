@@ -1,41 +1,69 @@
 #blog-grid-container {
     display: grid;
     width: 90vw;
-    margin: 1% auto;
-    grid-template-columns: repeat(2, 1fr);
+    margin: 5% auto;
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
     justify-items: center;
+    
 }
 
 #blog-grid-item {
-    width: 100%;
-    margin: 5%;
-    padding: 1%;
-    text-align: justify;
+    width: 400px;
+    height: 600px;
+    margin: 10px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #595e6b;
+    border: 1px dotted;
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 50px;
+    filter: drop-shadow(5px 5px 5px rgba(30,30,30,0.5))
 }
 
-#blog-grid-item > * {
-    margin-bottom: 1%;
-
-}
 
 #blog-grid-item > h1 {
-    text-align: center;
-    font-size: 3rem;
+    text-align: left;
+    padding-left: 1rem;
+    font-size: 1.7rem;
+    width: 100%;
+    background-color: #404756;
+    border-top-left-radius: 50px;
+
+    /* border-top-left-radius: 50px; */
 }
 
-#blog-grid-item > h1,#blog-grid-item > h2,#blog-grid-item > p,#blog-grid-item > a {
-    margin: 2%
+.title {
+    padding: 2rem 0 2rem;
 }
+
+/* #blog-grid-item > h1,#blog-grid-item > h3,#blog-grid-item > p,#blog-grid-item > a {
+    margin: 2%;
+} */
 
 #blog-grid-item > img {
-    width: 600px;
-    height: 400px;
+    width: 100%;
+    height: 230px;
     display: block;
     margin: auto;
-    border-radius: 15px;
-    filter: drop-shadow(8px 8px 5px rgba(30,30,30,0.5));
+    background-color: #595e6b;
 }
+
+#blog-grid-item > h2 {
+    width: 100%;
+    padding: 1rem 1rem;
+    background-color: #595e6b;
+    font-size: 1.3rem;
+}
+
+.article, .article2, .article3 {
+    width: 100%;
+    display: block;
+    padding: 0 1rem;
+}
+
+
+
 
 .post-image {
     font-size: 2rem;
@@ -45,13 +73,6 @@ a {
     color: #f9f871;
 }
 
-.language {
-    width: 96%;
-    font-size: 1.7rem;
-    text-align: end;
-    margin-top: 2rem;
-}
-
 @media only screen and (max-width: 1230px) {
 
     #blog-grid-container {
@@ -59,10 +80,11 @@ a {
     }
 
     #blog-grid-item > img {
-        width: 350px;
-        height: 200px;
+        width: 100%;
         display: block;
         margin: auto;
     }
+
+
     
 }

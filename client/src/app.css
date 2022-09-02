@@ -74,7 +74,6 @@ input {
 }
 
 input:hover {
-    margin: 1.1%;
     filter: drop-shadow(0px 2px 0px rgba(30,30,30,0.3));
     text-shadow: 3px 6px rgba(0,0,0,0.2);
 }
@@ -113,6 +112,3 @@ input:hover {
     cursor: pointer;
 }
 
-.back-home:hover, button:hover, input:hover {
-    font-size: 1.7rem;
-}

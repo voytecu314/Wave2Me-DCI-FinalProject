@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Qwitcher+Grypen:wght@700&display=swap');
+
 .navbar {
     display: grid;
     grid-template-columns: 40% 50%;
@@ -6,22 +8,17 @@
     width: 100%;
     align-content: center;
     background-color: #404756;
-    text-align: center;
-    font-size: 1.6rem;
+    justify-content: center;
     font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-weight: 500;
     position: sticky;
     top: 0%;
     z-index: 5; 
-  }
-
-  .navbar div {
-      width: 100%;
-      height: 7vh;
+    height: 12vh;
   }
 
   .navbar-brand {
-    font-size: 1.6rem;
+    font-size: 2rem;
     width: 100%;
     text-decoration: none;
     color: white;

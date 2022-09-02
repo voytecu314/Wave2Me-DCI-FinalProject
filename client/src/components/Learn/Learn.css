@@ -1,5 +1,6 @@
 #learn-container {
     position: relative;
+	padding-top: 3%;
 }
 
 #level-indicator {
@@ -67,9 +68,16 @@
 	max-height: 100px;
 }
 
+.img-container {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+}
+
 #favorites-modal, #work-on-it-modal, #quiz-modal {
     position: fixed;
-    top: 8%;
+	margin-top: 2%;
+	top: 7%;
 	z-index: 100;
     transition: all .75s;
 }
@@ -82,12 +90,12 @@
 
 #work-on-it-modal {
     width: 97%;
-    background-color: #9168a1;
+	background-color: #d9a21b;
 }
 
 #quiz-modal {
-    width: 94%;
-    background-color: #d9a21b;
+	width: 94%;
+	background-color: #9168a1;
 }
 
 .videos-container {
@@ -110,6 +118,16 @@
     font-size: 1.6rem;
     cursor:pointer;
     pointer-events: auto;
+}
+
+.text {
+	font-size: 3rem;
+}
+
+.del {
+	height: 25px;
+	width: 25px;
+	font-size: 20px;
 }
 
 #video-likes {
@@ -147,6 +165,23 @@
 	margin: auto;
 }
 
+.aside-box {
+	height: 400px;
+	width: 400px;
+}
+
+.aside-box > img {
+	width: 400px;
+	height: auto;
+	padding-top: 5rem;
+	
+}
+
+.ads {
+	font-size: 5rem;
+	padding-top: 5rem;
+}
+
 @keyframes shake {
 	25% {
 		transform: rotate(-15deg);
@@ -166,7 +201,8 @@
 
  @media screen and (max-width: 1024px){ 
 	#favorites-modal, #work-on-it-modal, #quiz-modal{
-		top: 7%;
+		margin-top: 2%;
+		top: 10%;
 	}
 
 	#level {

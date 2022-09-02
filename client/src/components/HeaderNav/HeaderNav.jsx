@@ -11,7 +11,7 @@ const HeaderNav = ({setLandingModal}) => {
   return (
     <nav className="navbar">
         <div>
-            <span className="navbar-brand">Welcome {payload && payload.name}! </span>
+            <span className="navbar-brand">Welcome {payload && payload.name}</span>
             
         </div>
             
