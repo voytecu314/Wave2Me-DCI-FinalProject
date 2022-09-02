@@ -25,8 +25,8 @@ const Learn = () => {
   const [chosenVideosData, setChosenVideosData] = useState({favorites:[], workOnIt: []});
   const [selectSearch, setSelectSearch] = useState('');  
   const [submitted, setSubmitted] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);  
-  const [toWorkOnIt, setToWorkOnIt] = useState(false);
+  const [isLiked, setIsLiked] = useState();  
+  const [toWorkOnIt, setToWorkOnIt] = useState();
   const [level, setLevel] = useState({level: 0, levelName: 'NOVICE'});
   const [topUsersIsOpen, setTopUsersIsOpen] = useState(false);
   const [quizVideo, setQuizVideo] = useState(null);
@@ -52,6 +52,7 @@ const Learn = () => {
                      'PROGRESSING INTERMEDIATE',
                      'GAINING ADVANCED',
                      'ADVANCED',
+                     'PROGRESSING ADVANCED',
                      'PROFESSIONAL',
                      'EXPERT',
                      'MASTER',
