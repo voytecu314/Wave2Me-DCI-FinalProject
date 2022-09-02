@@ -34,6 +34,7 @@ const TopUsers = ({topRef, topUsersIsOpen, getLevel}) => {
         <div>
             <h1>Top Users</h1>
             {topUsersData.map((user,i)=><h2 key={`top_${i}`}>
+                <span style={{textAlign:'right'}}>{`${i+1}.`}</span>
                 <span style={{textAlign:'right'}}>{user.name}</span>
                 <span style={{textAlign:'center'}}>Level: {getLevel(user.points).level}</span>
                 <span style={{textAlign:'right'}}>Points: </span>
