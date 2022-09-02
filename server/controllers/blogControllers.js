@@ -26,7 +26,8 @@ export const blogPosts = (req, res) => {
         urlToImage: "https://live.staticflickr.com/1050/1358592888_63e3fad0d3_z.jpg",
         url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
         content: "There was a problem with our database, please refresh the page",
-        createdAt: new Date()
+        publishedAt: new Date().toLocaleDateString()+'....'
+
     }];
     
     blogModel.find({})

@@ -33,6 +33,9 @@ const HeaderNav = ({setLandingModal}) => {
                     <Link to="/learn">Learn</Link>
                   </li>
                   <li>
+                    <Link to="/alphabet-generator">Alphabet</Link>
+                  </li>
+                  <li>
                     <Link to="/blog">Blog</Link>
                   </li>
                   <li>

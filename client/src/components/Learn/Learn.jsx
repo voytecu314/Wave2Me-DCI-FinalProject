@@ -52,6 +52,7 @@ const Learn = () => {
                      'PROGRESSING INTERMEDIATE',
                      'GAINING ADVANCED',
                      'ADVANCED',
+                     'PROFESSIONAL',
                      'EXPERT',
                      'MASTER',
                      'MAESTRO',
