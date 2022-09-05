@@ -98,4 +98,6 @@ const Contact = ({setContact}) => {
   );
 };
 
+
+
 export default Contact;

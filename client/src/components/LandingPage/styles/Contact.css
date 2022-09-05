@@ -16,8 +16,8 @@
     gap: 5%;
 }
 
-#contact-form > input, #contact-form textarea {
-    color: #404756;
+.title3 {
+    background-color: burlywood;
 }
 
 #contact-form > input {
@@ -60,6 +60,8 @@ hr {
     border: 2px solid greenyellow;
     margin: 5% auto;
 }
+
+/* just for adding */
 
 /* fieldset {
     width: 70%;

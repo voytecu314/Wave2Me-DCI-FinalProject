@@ -21,8 +21,8 @@ const SignUp = ({setSignUp, setLandingModal}) => {
         }
 
   return (
-    <div id="contact">
-      <form id="contact-form">
+    <div id="contact1">
+      <form id="contact-form1">
            <input
           className='same-input'
           type='text'
