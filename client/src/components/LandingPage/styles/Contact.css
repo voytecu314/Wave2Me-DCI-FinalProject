@@ -9,19 +9,155 @@
     left: 0;
     z-index: 200;
 }
-
-.form {
-    border: 1px solid white;
-    display: block;
-    margin: auto;
-    text-align: center;
-    border-radius: 20px;
-}
-#title, .title2 {
-    color: black;
+/*
+#contact-form {
+    display: grid;
+    place-items: center;
+    gap: 5%;
 }
 
 .title3 {
     background-color: burlywood;
 }
 
+#contact-form > input {
+    font-weight: 600;   
+} */
+
+.holder {
+background-image: url(../../../assets/L.jpg);
+ background-size: cover;
+ background-position: center;
+ width: 100%;  
+ font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+ font-weight: 500;
+
+}
+
+
+
+/* .form-holder {
+
+    width: 80%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.781);
+    padding: 2% 5%;
+    align-content: center;
+    margin: 5% auto; 
+    display: grid;
+    grid-template-columns: 90%;
+    grid-template-rows: auto;   
+} */
+
+.title {
+    color: white;
+    text-align: center;
+    margin-top: auto;
+}
+
+hr {
+    width: 20%;
+    border: 2px solid greenyellow;
+    margin: 5% auto;
+}
+
+/* just for adding */
+
+/* fieldset {
+    width: 70%;
+    margin: 10% auto;
+    padding: 10%;
+    border: 2px solid white;
+    border-radius: 2rem;
+} */
+
+/* legend {
+    font-size: 1.6rem;
+    color: whitesmoke;
+} */
+
+
+.form {
+    margin: auto;
+    padding: 1%;
+    border: 2px solid white;
+    border-radius: 2rem;
+}
+
+label {
+    color: rgb(255, 255, 255);
+    font-size: 1.6rem;
+    font-weight: bolder;
+}
+
+form label span {
+    color:rgb(255, 47, 113);
+}
+
+.form select {
+    width: 20%;
+    margin: 2% 0;
+    font-size: 1.6rem;
+    color: black;
+}
+
+.form option {
+    width: 10%;
+    
+}
+
+.name {
+    border: none;
+    background: none;
+    border-bottom: 1px solid white;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 3% 0; 
+    color: tomato;
+    font-size: 18px;
+    
+  }
+
+  .gender div {
+      display: inline-block;
+      margin: 15px;
+      color: white;
+      
+  }
+  textarea {
+      color: black;
+      width: 100%;
+      font-size: 18px;
+      border-radius: 10px;
+  }
+
+  /* button {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bolder;
+      margin: 10px;
+      float: right;
+  } */
+
+
+
+@media screen and (min-width: 769px) and (max-width:1023px){
+
+   
+    .title {
+        font-size: 2rem;
+    }
+
+    
+}
+
+@media screen and (min-width: 1024px) {
+ 
+
+.title {
+    font-size: 3rem;
+}
+  
+}

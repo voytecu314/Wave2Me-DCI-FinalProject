@@ -22,7 +22,7 @@
 
 #top-users > button {
     position: fixed;
-    top: 5%;
+    top: 8%;
     right: 8%;
     cursor: initial;
 }
@@ -36,7 +36,7 @@
 
 #top-users h2 {
     display: grid;
-    grid-template-columns: 3fr 4fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 2fr 1fr 1fr 1fr;
     width: 100%;
 }
 
@@ -49,3 +49,9 @@
 #top-users h2:nth-child(2n) {
     background-image: linear-gradient(90deg, white, #00b9ca, white);
 }
+
+@media screen and (max-width: 1150px){ 
+	#top-users > button {
+        top: 12%;
+    }
+ }
