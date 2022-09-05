@@ -10,16 +10,18 @@
     z-index: 200;
 }
 
-#contact-form {
-    display: grid;
-    place-items: center;
-    gap: 5%;
+.form {
+    border: 1px solid white;
+    display: block;
+    margin: auto;
+    text-align: center;
+    border-radius: 20px;
+}
+#title, .title2 {
+    color: black;
 }
 
-#contact-form > input, #contact-form textarea {
-    color: #404756;
+.title3 {
+    background-color: burlywood;
 }
 
-#contact-form > input {
-    font-weight: 600;   
-}
