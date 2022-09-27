@@ -1,4 +1,5 @@
 # Wave2Me-DCI-FinalProject
+https://wave2me.netlify.app/
 Idea of the Project:
 The project Idea is to create a Page, which will help to learn Sign Language for People, who can hear but cannot understand Sign Language. Sign Language will help to communicate between People, who cannot hear and between People who can hear and cannot hear. Learning and knowing Sign Language is very important in this modern world. It is couple things why: young people are creating some Sign Language, which they are using to talk with each other; some signs we are using in daily life (for example traffic light, a ban on using the phone in one place or another and etc.). So, Sign Language is helping us to contact each other. And it is part of our social life which is very important for us.
 Name of the Project:
